@@ -44,6 +44,9 @@ dependencies:
   lottie:
   webview_flutter: ^3.0.4
   carousel_slider: ^4.2.1
+  fluttertoast: ^8.2.4
+  dio: ^5.4.1
+
 
 
 dev_dependencies:

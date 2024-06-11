@@ -1,13 +1,10 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/PATIENTS/Update-acount.dart';
 
-import '../components.dart';
-class Acount extends StatelessWidget {
+import '../constant.dart';
 
+class Acount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +12,9 @@ class Acount extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              SizedBox(height: 10.0,),
+              SizedBox(
+                height: 10.0,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
@@ -24,9 +23,14 @@ class Acount extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Welcome,',style: Theme.of(context).textTheme.bodyMedium),
-                        SizedBox(height: 5.0,),
-                        Text('${patient["first"]} ${patient["second"]}',style: Theme.of(context).textTheme.bodyLarge),
+                        Text('Welcome,',
+                            style: Theme.of(context).textTheme.bodyMedium),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Text(
+                            '${model!.data!.firstName} ${model!.data!.lastName}',
+                            style: Theme.of(context).textTheme.bodyLarge),
                       ],
                     ),
                     CircleAvatar(
@@ -39,7 +43,12 @@ class Acount extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(30.0),
-                child: Container(child: CircleAvatar(radius: 100,backgroundImage: AssetImage('asset/image/1.jpg'),),),
+                child: Container(
+                  child: CircleAvatar(
+                    radius: 100,
+                    backgroundImage: AssetImage('asset/image/1.jpg'),
+                  ),
+                ),
               ),
               Container(
                   padding: EdgeInsets.all(13),
@@ -47,47 +56,72 @@ class Acount extends StatelessWidget {
                     color: HexColor('ffe0f4'),
                     borderRadius: BorderRadius.circular(15),
                   ),
-
-                  child:Text('User Name is : ${patient["first"]} ${patient["second"]}',style: TextStyle(fontSize: 19,color:HexColor('32313a'),fontWeight: FontWeight.bold),)),
-              SizedBox(height: 10,),
+                  child: Text(
+                    'User Name is : ${model!.data!.firstName} ${model!.data!.lastName}',
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: HexColor('32313a'),
+                        fontWeight: FontWeight.bold),
+                  )),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                   padding: EdgeInsets.all(13),
                   decoration: BoxDecoration(
                     color: HexColor('ffe0f4'),
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child:Text('User Email is : ${patient["email"]} ',style: TextStyle(fontSize: 19,color:HexColor('32313a'),fontWeight: FontWeight.bold),)),
-              SizedBox(height: 10,),
+                  child: Text(
+                    'User Email is : ${model!.data!.email} ',
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: HexColor('32313a'),
+                        fontWeight: FontWeight.bold),
+                  )),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                   padding: EdgeInsets.all(13),
                   decoration: BoxDecoration(
                     color: HexColor('ffe0f4'),
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child:Text('User Phone is : ${patient["phone"]}',style: TextStyle(fontSize: 19,color:HexColor('32313a'),fontWeight: FontWeight.bold),)),
-              SizedBox(height: 10,),
+                  child: Text(
+                    'User Phone is : ${model!.data!.phone}',
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: HexColor('32313a'),
+                        fontWeight: FontWeight.bold),
+                  )),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                   padding: EdgeInsets.all(13),
                   decoration: BoxDecoration(
                     color: HexColor('ffe0f4'),
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child:Text('User Country is : Egypt',style: TextStyle(fontSize: 19,color:HexColor('32313a'),fontWeight: FontWeight.bold),)),
-
-
-
+                  child: Text(
+                    'User Country is : Egypt',
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: HexColor('32313a'),
+                        fontWeight: FontWeight.bold),
+                  )),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context)=> update_acount()));
-
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => update_acount()));
         },
         child: Icon(Icons.edit),
       ),
     );
-
   }
 }
