@@ -22,7 +22,7 @@ class Login_Manager extends StatelessWidget {
         listener: (context, state) {
           if (state is LoginManSuccessState) {
             if (state.loginModel!.success!) {
-              if (state.loginModel.data!.firstName == "admin") {
+              if (state.loginModel.data!.roleId == 3) {
                 patient_model = state.loginModel!;
                 token =
                     "${state.loginModel.tokenType!}${state.loginModel.accessToken!}";

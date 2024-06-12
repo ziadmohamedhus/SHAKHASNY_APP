@@ -23,16 +23,21 @@ class Login extends StatelessWidget {
         listener: (context, state) {
           if (state is LoginSuccessState) {
             if (state.loginModel!.success!) {
-              token =
-                  "${state.loginModel.tokenType!}${state.loginModel.accessToken!}";
-              patient_model = state.loginModel!;
-              showToast(
-                  text: state.loginModel!.message!, state: ToastStates.SUCCESS);
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => Home_bage()));
+              if (state.loginModel.data!.roleId == 1) {
+                patient_model = state.loginModel!;
+                token =
+                    "${state.loginModel.tokenType!}${state.loginModel.accessToken!}";
+                showToast(
+                    text: state.loginModel.message!,
+                    state: ToastStates.SUCCESS);
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => Home_bage()));
+              } else {
+                showToast(text: "Unathorized", state: ToastStates.ERROR);
+              }
             } else {
               showToast(
-                  text: state.loginModel!.message!, state: ToastStates.ERROR);
+                  text: state.loginModel.message!, state: ToastStates.ERROR);
             }
           } else if (state is LoginFauilreState) {
             showToast(text: state.error, state: ToastStates.ERROR);
