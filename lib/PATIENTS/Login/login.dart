@@ -23,6 +23,8 @@ class Login extends StatelessWidget {
         listener: (context, state) {
           if (state is LoginSuccessState) {
             if (state.loginModel!.success!) {
+              token =
+                  "${state.loginModel.tokenType!}${state.loginModel.accessToken!}";
               patient_model = state.loginModel!;
               showToast(
                   text: state.loginModel!.message!, state: ToastStates.SUCCESS);
