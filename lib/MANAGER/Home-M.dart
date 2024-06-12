@@ -8,7 +8,7 @@ import 'package:lottie/lottie.dart';
 import '../PATIENTS/Department_of_doc/List-Doctor6.dart';
 import 'Accounts.dart';
 
-import 'Add_doctors/Add-doctor.dart';
+import 'Add_doctors/add_doctor.dart';
 import 'Doctors.dart';
 import 'all_patient.dart';
 
