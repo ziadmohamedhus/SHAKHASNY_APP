@@ -47,9 +47,15 @@ Map Ziad ={};
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('FILL OUT,',style: Theme.of(context).textTheme.bodyMedium),
+                                Text('FILL OUT,',style: TextStyle(
+                                    color: HexColor('32313a'),
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold)),
                                 SizedBox(height: 5.0,),
-                                Text('Patient Form',style: Theme.of(context).textTheme.bodyLarge),
+                                Text('Patient Form',style: TextStyle(
+                                    color: HexColor('32313a'),
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold)),
                               ],
                             ),
                             Icon(Icons.format_list_bulleted_outlined,size: 35.0,)

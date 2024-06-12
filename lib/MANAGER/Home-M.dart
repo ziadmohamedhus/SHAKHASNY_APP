@@ -7,7 +7,8 @@ import 'package:lottie/lottie.dart';
 
 import '../PATIENTS/Department_of_doc/List-Doctor6.dart';
 import 'Accounts.dart';
-import 'Add-doctor.dart';
+
+import 'Add_doctors/Add-doctor.dart';
 import 'Doctors.dart';
 import 'all_patient.dart';
 
@@ -39,13 +40,19 @@ class HomeManager extends StatelessWidget {
                             children: [
                               Text(
                                 'HELLO,',
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: TextStyle(
+                                    color: HexColor('32313a'),
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 height: 5.0,
                               ),
                               Text('Mr.Ziad Ahmed',
-                                  style: Theme.of(context).textTheme.bodyLarge),
+                                  style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold)),
                             ],
                           ),
                           CircleAvatar(
@@ -292,7 +299,10 @@ class HomeManager extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('Top Employees',
-                                  style: Theme.of(context).textTheme.bodyLarge),
+                                  style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold)),
                             ],
                           ),
                           Column(

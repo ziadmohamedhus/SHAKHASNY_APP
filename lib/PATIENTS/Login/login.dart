@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/PATIENTS/Home-bage.dart';
 import 'package:hospital/PATIENTS/Login/preseentation/views_model/login_cubit.dart';
 import 'package:hospital/constant.dart';
@@ -70,16 +71,18 @@ class Login extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('FILL OUT,',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium),
+                                        style: TextStyle(
+                 color: HexColor('32313a'),
+                fontSize: 15.0,
+                 fontWeight: FontWeight.bold)),
                                     SizedBox(
                                       height: 5.0,
                                     ),
                                     Text('Login Form',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium),
+                                        style: TextStyle(
+                 color: HexColor('32313a'),
+                fontSize: 15.0,
+                 fontWeight: FontWeight.bold)),
                                   ],
                                 ),
                                 Icon(

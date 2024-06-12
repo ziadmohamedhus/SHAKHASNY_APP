@@ -38,16 +38,20 @@ class HomeDoctor extends StatelessWidget {
                                   Text(
                                     'HELLO,',
                                     style:
-                                        Theme.of(context).textTheme.bodyMedium,
+                                        TextStyle(
+                                            color: HexColor('32313a'),
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
                                     height: 5.0,
                                   ),
                                   Text(
                                       'Dr.${patient_model!.data!.firstName} ${patient_model!.data!.lastName}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge),
+                                      style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold)),
                                 ],
                               ),
                               // CircleAvatar(
@@ -306,9 +310,10 @@ class HomeDoctor extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text('The patients',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge),
+                                      style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold)),
                                 ],
                               ),
                               Column(

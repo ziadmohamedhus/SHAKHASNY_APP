@@ -31,22 +31,22 @@ int cur_step=0;
           steps: [
             Step(
               isActive: cur_step==0,
-                title: Text('Patient',style: TextStyle(color: Colors.deepPurple),),
+                title: Text('Patient',style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold,fontSize: 20),),
                 content:Text('Login as a patient',style: TextStyle(color: Colors.pink[200]),)
             ),
             Step(
                 isActive: cur_step==1,
-                title: Text('Doctor',style: TextStyle(color: Colors.deepPurple),),
+                title: Text('Doctor',style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold,fontSize: 20),),
                 content:Text('Login as a Doctor',style: TextStyle(color: Colors.pink[200]),)
             ),
             Step(
                 isActive: cur_step==2,
-                title: Text('Manager',style: TextStyle(color: Colors.deepPurple)),
+                title: Text('Manager',style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold,fontSize: 20)),
                 content:Text('Login as a Manager',style: TextStyle(color: Colors.pink[200]),)
             ),
             Step(
                 isActive: cur_step==3,
-                title: Text('Receptionist',style: TextStyle(color: Colors.deepPurple)),
+                title: Text('Receptionist',style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold,fontSize: 20)),
                 content:Text('Login as a Receptionist',style: TextStyle(color: Colors.pink[200]),)
             ),
           ],

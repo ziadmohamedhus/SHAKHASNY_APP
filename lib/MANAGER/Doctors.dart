@@ -151,9 +151,15 @@ List<Widget> pages=[
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('SHOW,',style: Theme.of(context).textTheme.bodyMedium,),
+                              Text('SHOW,',style: TextStyle(
+                                  color: HexColor('32313a'),
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold),),
                               SizedBox(height: 5.0,),
-                              Text('All Doctors',style: Theme.of(context).textTheme.bodyLarge),
+                              Text('All Doctors',style: TextStyle(
+                                  color: HexColor('32313a'),
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.bold)),
                             ],
                           ),
                           CircleAvatar(

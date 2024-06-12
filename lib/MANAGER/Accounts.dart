@@ -22,13 +22,19 @@ class Accounts extends StatelessWidget {
                         children: [
                           Text(
                             'HELLO,',
-                            style: Theme.of(context).textTheme.bodyMedium,
+                            style: TextStyle(
+                                color: HexColor('32313a'),
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 5.0,
                           ),
                           Text('Hospital Accounts',
-                              style: Theme.of(context).textTheme.bodyLarge),
+                              style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold)),
                         ],
                       ),
                       CircleAvatar(
@@ -52,7 +58,10 @@ class Accounts extends StatelessWidget {
                     children: [
                       Text(
                         'Statistics for the year',
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 20,),
                       Row(
@@ -60,7 +69,10 @@ class Accounts extends StatelessWidget {
                         children: [
                           Text(
                             'Revenues',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style:  TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '230%',
@@ -77,7 +89,10 @@ class Accounts extends StatelessWidget {
                         children: [
                           Text(
                             'Expenses',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '-98%',
@@ -94,7 +109,10 @@ class Accounts extends StatelessWidget {
                         children: [
                           Text(
                             'Salaries',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '-60%',
@@ -111,7 +129,10 @@ class Accounts extends StatelessWidget {
                         children: [
                           Text(
                             'Finances',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style:  TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '150%',
@@ -128,7 +149,10 @@ class Accounts extends StatelessWidget {
                         children: [
                           Text(
                             'Equipment ',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style:  TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '-30%',
@@ -145,7 +169,10 @@ class Accounts extends StatelessWidget {
                         children: [
                           Text(
                             'Pharmacy',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style:  TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '110%',
@@ -162,7 +189,10 @@ class Accounts extends StatelessWidget {
                         children: [
                           Text(
                             'Tools ',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '-10%',

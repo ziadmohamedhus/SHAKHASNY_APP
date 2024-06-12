@@ -28,9 +28,15 @@ class cancel_appointment extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Appointments,',style: Theme.of(context).textTheme.bodyMedium),
+                        Text('Appointments,',style: TextStyle(
+                            color: HexColor('32313a'),
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold)),
                         SizedBox(height: 5.0,),
-                        Text('Canceled',style: Theme.of(context).textTheme.bodyLarge),
+                        Text('Canceled',style: TextStyle(
+                            color: HexColor('32313a'),
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold)),
                       ],
                     ),
                     CircleAvatar(

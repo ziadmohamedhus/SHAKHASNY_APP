@@ -203,14 +203,21 @@ class Home extends StatelessWidget {
                           children: [
                             Text(
                               'HELLO,',
-                              style: Theme.of(context).textTheme.bodyMedium,
+                              style: TextStyle(
+                                  color: HexColor('32313a'),
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(
                               height: 5.0,
                             ),
                             Text(
                                 '${patient_model!.data!.firstName} ${patient_model!.data!.lastName}',
-                                style: Theme.of(context).textTheme.bodyLarge),
+                                style: TextStyle(
+               color: HexColor('32313a'),
+               fontSize: 25.0,
+               fontWeight: FontWeight.bold,
+             )),
                           ],
                         ),
                         CircleAvatar(
@@ -699,7 +706,11 @@ class Home extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Top Doctors',
-                                style: Theme.of(context).textTheme.bodyLarge),
+                                style: TextStyle(
+               color: HexColor('32313a'),
+               fontSize: 25.0,
+               fontWeight: FontWeight.bold,
+             )),
                           ],
                         ),
                         Column(

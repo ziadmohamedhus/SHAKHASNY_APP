@@ -25,7 +25,10 @@ class View_patient_Manager extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
 
-                      Text('Doctor profile,',style: Theme.of(context).textTheme.bodyLarge),
+                      Text('Doctor profile,',style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold)),
                     ],
                   ),
                   Icon(Icons.format_list_bulleted_outlined,size: 35.0,)
@@ -42,15 +45,30 @@ class View_patient_Manager extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20,),
-            Text('Patient Name : ${map['name']} ',style: Theme.of(context).textTheme.bodyLarge),
+            Text('Patient Name : ${map['name']} ',style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 25.0,
+                fontWeight: FontWeight.bold)),
             SizedBox(height: 10,),
-            Text('Phone : ${map['phone']}',style: Theme.of(context).textTheme.bodyMedium),
+            Text('Phone : ${map['phone']}',style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 15.0,
+                fontWeight: FontWeight.bold)),
             SizedBox(height: 10,),
-            Text('Country : ${map['country']}',style: Theme.of(context).textTheme.bodyMedium),
+            Text('Country : ${map['country']}',style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 15.0,
+                fontWeight: FontWeight.bold)),
             SizedBox(height: 10,),
-            Text('Date is : ${map['date']}',style: Theme.of(context).textTheme.bodyMedium),
+            Text('Date is : ${map['date']}',style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 15.0,
+                fontWeight: FontWeight.bold)),
             SizedBox(height: 10,),
-            Text('Time : ${map['time']} ',style: Theme.of(context).textTheme.bodyMedium),
+            Text('Time : ${map['time']} ',style: TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 15.0,
+                fontWeight: FontWeight.bold)),
             SizedBox(height: 10,),
           ],
         ),

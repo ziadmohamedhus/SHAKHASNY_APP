@@ -24,13 +24,19 @@ class Acount extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Welcome,',
-                            style: Theme.of(context).textTheme.bodyMedium),
+                            style: TextStyle(
+                                color: HexColor('32313a'),
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold)),
                         SizedBox(
                           height: 5.0,
                         ),
                         Text(
                             '${patient_model!.data!.firstName} ${patient_model!.data!.lastName}',
-                            style: Theme.of(context).textTheme.bodyLarge),
+                            style: TextStyle(
+                                color: HexColor('32313a'),
+                                fontSize: 25.0,
+                                fontWeight: FontWeight.bold)),
                       ],
                     ),
                     CircleAvatar(

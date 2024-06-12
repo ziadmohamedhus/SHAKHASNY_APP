@@ -40,6 +40,21 @@ class AppDeleteDatabaseState_App extends AppStates {}
 
  class AppUpdateDatabaseState_App  extends AppStates {}
 
+//=====================================
+class RegisterLoadingState extends AppStates {}
+
+class RegisterSuccessState extends AppStates {
+ final Register_model loginModel;
+
+ RegisterSuccessState({required this.loginModel});
+}
+
+class RegisterFauilreState extends AppStates {
+ final String error;
+
+ RegisterFauilreState({required this.error});
+}
+
 
 
 

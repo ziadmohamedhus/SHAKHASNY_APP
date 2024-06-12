@@ -24,9 +24,15 @@ class teeth extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Department of,',style: Theme.of(context).textTheme.bodyMedium),
+                      Text('Department of,',style: TextStyle(
+                          color: HexColor('32313a'),
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.bold)),
                       SizedBox(height: 5.0,),
-                      Text('Dentist',style: Theme.of(context).textTheme.bodyLarge),
+                      Text('Dentist',style: TextStyle(
+                          color: HexColor('32313a'),
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ],

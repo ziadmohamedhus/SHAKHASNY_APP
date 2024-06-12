@@ -33,7 +33,10 @@ class Top_Patient extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 5.0,),
-                            Text('All Patients',style: Theme.of(context).textTheme.bodyLarge),
+                            Text('All Patients',style: TextStyle(
+                                color: HexColor('32313a'),
+                                fontSize: 25.0,
+                                fontWeight: FontWeight.bold)),
                           ],
                         ),
                         CircleAvatar(

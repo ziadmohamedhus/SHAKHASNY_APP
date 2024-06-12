@@ -35,7 +35,10 @@ class _View_mediceneState extends State<View_medicene> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
 
-                      Text('Medicine,',style: Theme.of(context).textTheme.bodyLarge),
+                      Text('Medicine,',style: TextStyle(
+                 color: HexColor('32313a'),
+                 fontSize: 25.0,
+                 fontWeight: FontWeight.bold)),
                     ],
                   ),
                   Icon(Icons.format_list_bulleted_outlined,size: 35.0,)
@@ -49,11 +52,20 @@ class _View_mediceneState extends State<View_medicene> {
               radius: 75.0,
             ),
             SizedBox(height: 20,),
-            Text('${widget.map['name']}',style: Theme.of(context).textTheme.bodyLarge),
+            Text('${widget.map['name']}',style: TextStyle(
+                 color: HexColor('32313a'),
+                 fontSize: 25.0,
+                 fontWeight: FontWeight.bold)),
             SizedBox(height: 10,),
-            Text('${widget.map['years']}',style: Theme.of(context).textTheme.bodyMedium),
+            Text('${widget.map['years']}',style: TextStyle(
+                 color: HexColor('32313a'),
+                 fontSize: 15.0,
+                 fontWeight: FontWeight.bold)),
             SizedBox(height: 10,),
-            Text('\$${widget.map['money']}',style: Theme.of(context).textTheme.bodyMedium),
+            Text('\$${widget.map['money']}',style: TextStyle(
+                 color: HexColor('32313a'),
+                 fontSize: 15.0,
+                 fontWeight: FontWeight.bold)),
             SizedBox(height: 30,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

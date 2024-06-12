@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
 
@@ -37,13 +38,19 @@ class update_acount extends StatelessWidget {
                         children: [
                           Text(
                             'PLEASE,',
-                            style: Theme.of(context).textTheme.bodyMedium,
+                            style: TextStyle(
+                                color: HexColor('32313a'),
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 5.0,
                           ),
                           Text('Enter new data',
-                              style: Theme.of(context).textTheme.bodyLarge),
+                              style: TextStyle(
+                                  color: HexColor('32313a'),
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.bold)),
                         ],
                       ),
                       CircleAvatar(

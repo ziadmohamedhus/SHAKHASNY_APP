@@ -32,9 +32,15 @@ class Appointment_done extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('FILLED OUT,',style: Theme.of(context).textTheme.bodyMedium),
+                        Text('FILLED OUT,',style: TextStyle(
+                            color: HexColor('32313a'),
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold)),
                         SizedBox(height: 5.0,),
-                        Text('Patient Form',style: Theme.of(context).textTheme.bodyLarge),
+                        Text('Patient Form',style: TextStyle(
+                 color: HexColor('32313a'),
+                fontSize: 25.0,
+                 fontWeight: FontWeight.bold)),
                       ],
                     ),
                     Icon(Icons.format_list_bulleted_outlined,size: 35.0,)
@@ -90,7 +96,10 @@ class Appointment_done extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text('YOUR TICKET',style: Theme.of(context).textTheme.bodyLarge),
+                        Text('YOUR TICKET',style: TextStyle(
+                 color: HexColor('32313a'),
+                fontSize: 25.0,
+                 fontWeight: FontWeight.bold)),
                         SizedBox(height: 15,),
                         BarcodeWidget(data: name, barcode: Barcode.qrCode(),color: Colors.deepPurple,height: 220,),
                         SizedBox(height: 20,),

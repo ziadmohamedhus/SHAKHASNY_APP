@@ -89,9 +89,15 @@ class All_doctor extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('DOCTORS,',style: Theme.of(context).textTheme.bodyMedium),
+                        Text('DOCTORS,',style: TextStyle(
+                            color: HexColor('32313a'),
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold)),
                         SizedBox(height: 5.0,),
-                        Text('Top Rated',style: Theme.of(context).textTheme.bodyLarge),
+                        Text('Top Rated',style: TextStyle(
+                            color: HexColor('32313a'),
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold)),
                       ],
                     ),
                     CircleAvatar(

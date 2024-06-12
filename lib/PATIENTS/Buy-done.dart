@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../components.dart';
+import '../constant.dart';
 import 'Home-bage.dart';
 
 class Buy_done extends StatelessWidget {
@@ -45,9 +46,9 @@ class Buy_done extends StatelessWidget {
               SizedBox(height: 35,),
               Image.asset('asset/icon/10.png',height: 200,),
               SizedBox(height: 20,),
-              Text('name : ${patient["first"]} ${patient["second"]}',style: TextStyle(color: HexColor('8a86e2'),fontSize: 25.0,fontWeight: FontWeight.bold),),
+              Text('name : ${patient_model!.data!.firstName} ${patient_model!.data!.lastName}',style: TextStyle(color: HexColor('8a86e2'),fontSize: 25.0,fontWeight: FontWeight.bold),),
               SizedBox(height: 10,),
-              Text('phone :  ${patient["phone"]}',style: TextStyle(color: Colors.pink[200],fontSize:20.0,fontWeight: FontWeight.bold),),
+              Text('phone :  ${patient_model!.data!.phone}',style: TextStyle(color: Colors.pink[200],fontSize:20.0,fontWeight: FontWeight.bold),),
               SizedBox(height: 20,),
               Text('Purchases : $name',style: TextStyle(color: HexColor('8a86e2'),fontSize: 25.0,fontWeight: FontWeight.bold),),
               SizedBox(height: 10,),

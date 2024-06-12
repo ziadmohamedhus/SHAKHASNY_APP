@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/COMPONENTS/styles/custom_flutter_toast.dart';
 import 'package:hospital/MANAGER/views_model/login_man_cubit.dart';
 import 'package:hospital/constant.dart';
@@ -65,13 +66,19 @@ class Login_Manager extends StatelessWidget {
                               children: [
                                 Text('FILL OUT,',
                                     style:
-                                        Theme.of(context).textTheme.bodyMedium),
+                                        TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 15.0,
+                fontWeight: FontWeight.bold)),
                                 SizedBox(
                                   height: 5.0,
                                 ),
                                 Text('Login Form',
                                     style:
-                                        Theme.of(context).textTheme.bodyMedium),
+                                        TextStyle(
+                color: HexColor('32313a'),
+                 fontSize: 15.0,
+                fontWeight: FontWeight.bold)),
                               ],
                             ),
                             Icon(
