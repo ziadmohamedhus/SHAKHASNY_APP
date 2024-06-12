@@ -1,7 +1,12 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hospital/DATABASE/states.dart';
+import 'package:hospital/constant.dart';
 import 'package:sqflite/sqflite.dart';
+import '../Api/api_service.dart';
+import '../MANAGER/Add_doctors/Data/add_doctor_model.dart';
 import '../PATIENTS/Acount.dart';
 import '../PATIENTS/Home.dart';
 import '../PATIENTS/Pharmacy.dart';
@@ -341,8 +346,57 @@ class AppCubit extends Cubit<AppStates> {
       getDataFromDatabase_Appo(database_Appo) ;
     });
   }
+
+  //==============================================
+  Add_doctor_model? add_doctor_model;
+  void Add_doctor({
+    required String email,
+    required String password,
+    required String phone,
+    required String first_name,
+    required String last_name,
+    required String birth_date,
+    required String specialization,
+     String department_id='1',
+  }) {
+    emit(AddDoctorLoadingState());
+    DioHelper.postData(
+      url: 'https://abdelrahman.in/api/register',
+      data: {
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': email,
+        'password': password,
+        'phone': phone,
+        'birth_date': birth_date,
+        'specialization': specialization,
+        'department_id': department_id,
+      },
+      token: token,
+    ).then((value) {
+      if (value.statusCode! >= 200 && value.statusCode! < 300) {
+        add_doctor_model = Add_doctor_model.fromJson(value.data);
+        print(add_doctor_model!.message);
+        print(add_doctor_model!.success);
+        emit(AddDoctorSuccessState(add_doctor_model: add_doctor_model!));
+      } else {
+        if (value.statusCode == 401) {
+          emit(AddDoctorFauilreState(error: value.data["message"]));
+          print(value.data["message"]);
+          print(value.data);
+        } else {
+          emit(AddDoctorFauilreState(error: value.data["message"]));
+          print(value.data["message"]);
+          print(value.data);
+        }
+      }
+    }).catchError((error) {
+      //log(error.toString());
+      emit(AddDoctorFauilreState(error: error));
+    });
+  }
+
 }
 
 
 
-//==============================================
