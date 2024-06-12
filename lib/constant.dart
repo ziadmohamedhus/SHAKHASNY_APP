@@ -5,4 +5,4 @@ String Kprimaryfont = "Inter";
 Color Kprimarycolor = Colors.deepOrange;
 dynamic? OnBoarding;
 String? token;
-Login_model? model;
+Login_model? patient_model;

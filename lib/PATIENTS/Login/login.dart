@@ -23,7 +23,7 @@ class Login extends StatelessWidget {
         listener: (context, state) {
           if (state is LoginSuccessState) {
             if (state.loginModel!.success!) {
-              model = state.loginModel!;
+              patient_model = state.loginModel!;
               showToast(
                   text: state.loginModel!.message!, state: ToastStates.SUCCESS);
               Navigator.pushReplacement(context,
@@ -114,8 +114,16 @@ class Login extends StatelessWidget {
                               if (value!.isEmpty)
                                 return 'You have to enter the password';
                             },
+                            obscureText: !LoginCubit.get(context).obsecure,
                             decoration: InputDecoration(
                                 labelText: 'PASSWORD',
+                                suffixIcon: InkWell(
+                                    onTap: () {
+                                      LoginCubit.get(context).cahngeicon();
+                                    },
+                                    child: LoginCubit.get(context).obsecure
+                                        ? Icon(Icons.visibility_off)
+                                        : Icon(Icons.visibility)),
                                 hintText: 'Enter your Password',
                                 prefixIcon: Icon(Icons.lock),
                                 border: OutlineInputBorder(

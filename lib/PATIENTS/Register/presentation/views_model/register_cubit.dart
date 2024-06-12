@@ -11,6 +11,11 @@ part 'register_state.dart';
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
   static RegisterCubit get(context) => BlocProvider.of(context);
+  bool obsecure = false;
+  void cahngeicon() {
+    obsecure = !obsecure;
+    emit(RegisterChangeIconState());
+  }
 
   Register_model? registermodel;
   void UserRegister({

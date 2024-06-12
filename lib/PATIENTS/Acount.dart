@@ -29,7 +29,7 @@ class Acount extends StatelessWidget {
                           height: 5.0,
                         ),
                         Text(
-                            '${model!.data!.firstName} ${model!.data!.lastName}',
+                            '${patient_model!.data!.firstName} ${patient_model!.data!.lastName}',
                             style: Theme.of(context).textTheme.bodyLarge),
                       ],
                     ),
@@ -57,7 +57,7 @@ class Acount extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Text(
-                    'User Name is : ${model!.data!.firstName} ${model!.data!.lastName}',
+                    'User Name is : ${patient_model!.data!.firstName} ${patient_model!.data!.lastName}',
                     style: TextStyle(
                         fontSize: 19,
                         color: HexColor('32313a'),
@@ -73,7 +73,7 @@ class Acount extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Text(
-                    'User Email is : ${model!.data!.email} ',
+                    'User Email is : ${patient_model!.data!.email} ',
                     style: TextStyle(
                         fontSize: 19,
                         color: HexColor('32313a'),
@@ -89,7 +89,7 @@ class Acount extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Text(
-                    'User Phone is : ${model!.data!.phone}',
+                    'User Phone is : ${patient_model!.data!.phone}',
                     style: TextStyle(
                         fontSize: 19,
                         color: HexColor('32313a'),

@@ -11,6 +11,11 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
   static LoginCubit get(context) => BlocProvider.of(context);
+  bool obsecure = false;
+  void cahngeicon() {
+    obsecure = !obsecure;
+    emit(LoginChangeIconState());
+  }
 
   Login_model? login_model;
   void UserLogin({

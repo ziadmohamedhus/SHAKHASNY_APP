@@ -139,8 +139,15 @@ class Register extends StatelessWidget {
                           }
                           return null;
                         },
-                        obscureText: false,
+                        obscureText: !RegisterCubit.get(context).obsecure,
                         decoration: InputDecoration(
+                            suffixIcon: InkWell(
+                                onTap: () {
+                                  RegisterCubit.get(context).cahngeicon();
+                                },
+                                child: RegisterCubit.get(context).obsecure
+                                    ? Icon(Icons.visibility_off)
+                                    : Icon(Icons.visibility)),
                             labelText: 'PASSWORD',
                             hintText: 'Enter your Password',
                             prefixIcon: Icon(Icons.lock),

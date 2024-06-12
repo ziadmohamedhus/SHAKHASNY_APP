@@ -5,6 +5,8 @@ abstract class RegisterState {}
 
 class RegisterInitial extends RegisterState {}
 
+class RegisterChangeIconState extends RegisterState {}
+
 class changeiconstate extends RegisterState {}
 
 class RegisterInitialState extends RegisterState {}

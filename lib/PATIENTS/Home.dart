@@ -65,8 +65,8 @@ class Home extends StatelessWidget {
                 children: [
                   UserAccountsDrawerHeader(
                     accountName: Text(
-                        '${model!.data!.firstName} ${model!.data!.lastName}'),
-                    accountEmail: Text('${model!.data!.email}'),
+                        '${patient_model!.data!.firstName} ${patient_model!.data!.lastName}'),
+                    accountEmail: Text('${patient_model!.data!.email}'),
                     currentAccountPicture: const CircleAvatar(
                       backgroundImage: AssetImage('asset/image/1.jpg'),
                     ),
@@ -209,7 +209,7 @@ class Home extends StatelessWidget {
                               height: 5.0,
                             ),
                             Text(
-                                '${model!.data!.firstName} ${model!.data!.lastName}',
+                                '${patient_model!.data!.firstName} ${patient_model!.data!.lastName}',
                                 style: Theme.of(context).textTheme.bodyLarge),
                           ],
                         ),
