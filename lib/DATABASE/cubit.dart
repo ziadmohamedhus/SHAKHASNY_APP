@@ -1,46 +1,40 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hospital/DATABASE/states.dart';
 import 'package:hospital/constant.dart';
 import 'package:sqflite/sqflite.dart';
+
 import '../Api/api_service.dart';
-import '../MANAGER/Add_doctors/Data/add_doctor_model.dart';
+import '../MANAGER/Add_doctors/Data/all_doctor_model.dart';
 import '../PATIENTS/Acount.dart';
 import '../PATIENTS/Home.dart';
 import '../PATIENTS/Pharmacy.dart';
 import '../components.dart';
+
 class AppCubit extends Cubit<AppStates> {
-  AppCubit():super(AppInitialState());
+  AppCubit() : super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
-  int current_index=0;
+  int current_index = 0;
 
-  List<BottomNavigationBarItem>bottomItems=
-  [
-    BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Home'),
-    BottomNavigationBarItem(icon: Icon(Icons.medication_sharp),label: 'Pharmacy'),
-    BottomNavigationBarItem(icon: Icon(Icons.account_circle),label: 'Acount'),
-
+  List<BottomNavigationBarItem> bottomItems = [
+    BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+    BottomNavigationBarItem(
+        icon: Icon(Icons.medication_sharp), label: 'Pharmacy'),
+    BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: 'Acount'),
   ];
-  List<Widget>screans=
-  [
+  List<Widget> screans = [
     Home(),
     Pharmacy(),
     Acount(),
-
   ];
 
-  void changebottomnav(int index)
-  {
-    current_index=index;
+  void changebottomnav(int index) {
+    current_index = index;
     emit(bottomnav_state());
   }
 
-
-
-  bool textt = true ;
-  IconData  ic = Icons.remove_red_eye;
+  bool textt = true;
+  IconData ic = Icons.remove_red_eye;
   late Database database;
 
   void createDatabase() {
@@ -48,18 +42,17 @@ class AppCubit extends Cubit<AppStates> {
       'patients.db',
       version: 1,
       onCreate: (database, version) {
-
         print('database created');
-        database.execute(
-            'CREATE TABLE patient (id INTEGER PRIMARY KEY, first TEXT, second TEXT, email TEXT, password TEXT , phone TEXT)')
+        database
+            .execute(
+                'CREATE TABLE patient (id INTEGER PRIMARY KEY, first TEXT, second TEXT, email TEXT, password TEXT , phone TEXT)')
             .then((value) {
           print('table created');
         }).catchError((error) {
           print('Error When Creating Table ${error.toString()}');
         });
       },
-      onOpen: (database)
-      {
+      onOpen: (database) {
         getDataFromDatabase(database);
         print('database opened');
       },
@@ -75,9 +68,8 @@ class AppCubit extends Cubit<AppStates> {
     required String email,
     required String password,
     required String phone,
-
   }) async {
-    database.transaction((txn)async {
+    database.transaction((txn) async {
       txn
           .rawInsert(
         'INSERT INTO patient(first, second, email, password, phone) VALUES("$first", "$second", "$email", "$password" , "$phone")',
@@ -94,11 +86,10 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  void getDataFromDatabase(database)
-  {
+  void getDataFromDatabase(database) {
     //patientlist = [];
     database.rawQuery('SELECT * FROM patient').then((value) {
-      patientlist = value ;
+      patientlist = value;
       print(patientlist);
       print(patientlist.length);
       emit(AppGetDatabaseState());
@@ -107,38 +98,35 @@ class AppCubit extends Cubit<AppStates> {
 
   void deleteData({
     required int id,
-  }) async
-  {
-    database.rawDelete('DELETE FROM patient WHERE id = ?', [id])
-        .then((value)
-    {
+  }) async {
+    database.rawDelete('DELETE FROM patient WHERE id = ?', [id]).then((value) {
       getDataFromDatabase(database);
       emit(AppDeleteDatabaseState());
     });
   }
+
   void updateData({
     required String fname,
     required String lname,
     required String email,
     required String phone,
     required int id,
-  }) async
-  {
+  }) async {
     database.rawUpdate(
       'UPDATE patient SET first = ?, second = ?, email = ?, phone = ? WHERE id = ?',
-      ['$fname','$lname','$email','$phone', id],
-    ).then((value)
-    {
+      ['$fname', '$lname', '$email', '$phone', id],
+    ).then((value) {
       emit(AppUpdateDatabaseState());
-      getDataFromDatabase(database) ;
+      getDataFromDatabase(database);
     });
   }
-  void obsecuree ()
-  {
-    textt=!textt ;
-    textt? ic = Icons.visibility : ic = Icons.visibility_off;
+
+  void obsecuree() {
+    textt = !textt;
+    textt ? ic = Icons.visibility : ic = Icons.visibility_off;
     emit(Text_Obsecure_State());
   }
+
   late Database database_doctor;
 
   void createDatabase_doctor() {
@@ -146,18 +134,17 @@ class AppCubit extends Cubit<AppStates> {
       'doctors.db',
       version: 1,
       onCreate: (database_doctor, version) {
-
         print('database created');
-        database_doctor.execute(
-            'CREATE TABLE doctor (id INTEGER PRIMARY KEY, first TEXT, second TEXT, email TEXT, password TEXT , phone TEXT , specification TEXT , experience TEXT , image TEXT )')
+        database_doctor
+            .execute(
+                'CREATE TABLE doctor (id INTEGER PRIMARY KEY, first TEXT, second TEXT, email TEXT, password TEXT , phone TEXT , specification TEXT , experience TEXT , image TEXT )')
             .then((value) {
           print('table created');
         }).catchError((error) {
           print('Error When Creating Table ${error.toString()}');
         });
       },
-      onOpen: (database_doctor)
-      {
+      onOpen: (database_doctor) {
         getDataFromDatabase_doctor(database_doctor);
         print('database opened');
       },
@@ -177,7 +164,7 @@ class AppCubit extends Cubit<AppStates> {
     required String experience,
     required String image,
   }) async {
-    database_doctor.transaction((txn)async {
+    database_doctor.transaction((txn) async {
       txn
           .rawInsert(
         'INSERT INTO doctor(first, second, email, password, phone ,specification ,experience ,image) VALUES("$first", "$second", "$email", "$password" , "$phone","$specific","$experience","$image")',
@@ -194,30 +181,26 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  void getDataFromDatabase_doctor(database_doctor)
-  {
+  void getDataFromDatabase_doctor(database_doctor) {
     //patientlist = [];
-    doctorlist_Dentist=[];
-    doctorlist_Cardiolo=[];
-    doctorlist_Orthopedi=[];
-    doctorlist_Nephrologist=[];
-    doctorlist_Ophthalmologist=[];
+    doctorlist_Dentist = [];
+    doctorlist_Cardiolo = [];
+    doctorlist_Orthopedi = [];
+    doctorlist_Nephrologist = [];
+    doctorlist_Ophthalmologist = [];
     database_doctor.rawQuery('SELECT * FROM doctor').then((value) {
-      value.forEach((element)
-      {
-        if(element["specification"]=="dentist")
+      value.forEach((element) {
+        if (element["specification"] == "dentist")
           doctorlist_Dentist.add(element);
-        else if (element["specification"]=="cardiologist")
-          doctorlist_Cardiolo.add(element) ;
-        else if (element["specification"]=="orthopedic")
-          doctorlist_Orthopedi.add(element) ;
-        else if (element["specification"]=="nephrologist")
-          doctorlist_Nephrologist.add(element) ;
+        else if (element["specification"] == "cardiologist")
+          doctorlist_Cardiolo.add(element);
+        else if (element["specification"] == "orthopedic")
+          doctorlist_Orthopedi.add(element);
+        else if (element["specification"] == "nephrologist")
+          doctorlist_Nephrologist.add(element);
         else
-          doctorlist_Ophthalmologist.add(element) ;
-
-      }
-      );
+          doctorlist_Ophthalmologist.add(element);
+      });
       print(value);
       print(value.length);
       emit(AppGetDatabaseState_doctor());
@@ -226,11 +209,9 @@ class AppCubit extends Cubit<AppStates> {
 
   void deleteData_doctor({
     required int id,
-  }) async
-  {
-    database_doctor.rawDelete('DELETE FROM doctor WHERE id = ?', [id])
-        .then((value)
-    {
+  }) async {
+    database_doctor
+        .rawDelete('DELETE FROM doctor WHERE id = ?', [id]).then((value) {
       getDataFromDatabase_doctor(database_doctor);
       emit(AppDeleteDatabaseState_doctor());
     });
@@ -244,18 +225,17 @@ class AppCubit extends Cubit<AppStates> {
       'appointmentsssssss.db',
       version: 1,
       onCreate: (database_Appo, version) {
-
         print('database created');
-        database_Appo.execute(
-            'CREATE TABLE appointment (id INTEGER PRIMARY KEY, name TEXT, phone TEXT, doctor TEXT, date TEXT , time TEXT , country TEXT , status TEXT)')
+        database_Appo
+            .execute(
+                'CREATE TABLE appointment (id INTEGER PRIMARY KEY, name TEXT, phone TEXT, doctor TEXT, date TEXT , time TEXT , country TEXT , status TEXT)')
             .then((value) {
           print('table created');
         }).catchError((error) {
           print('Error When Creating Table ${error.toString()}');
         });
       },
-      onOpen: (database_Appo)
-      {
+      onOpen: (database_Appo) {
         getDataFromDatabase_Appo(database_Appo);
         print('database opened');
       },
@@ -273,7 +253,7 @@ class AppCubit extends Cubit<AppStates> {
     required String time,
     required String country,
   }) async {
-    database_Appo.transaction((txn)async {
+    database_Appo.transaction((txn) async {
       txn
           .rawInsert(
         'INSERT INTO appointment(name, phone ,doctor ,date ,time,country ,status) VALUES("$name", "$phone", "$doctor", "$date" , "$time","$country" ,"new")',
@@ -290,31 +270,24 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  void getDataFromDatabase_Appo(database_Appo)
-  {
-    Appointement_list=[];
-    new_Appointement_list=[];
-    done_Appointement_list=[];
-   cancel_Appointement_list=[];
+  void getDataFromDatabase_Appo(database_Appo) {
+    Appointement_list = [];
+    new_Appointement_list = [];
+    done_Appointement_list = [];
+    cancel_Appointement_list = [];
     database_Appo.rawQuery('SELECT * FROM appointment').then((value) {
-      value.forEach((element)
-      {
-        if(element["status"]=="new")
-        {
+      value.forEach((element) {
+        if (element["status"] == "new") {
           Appointement_list.add(element);
           new_Appointement_list.add(element);
-        }
-        else if (element["status"]=="done") {
+        } else if (element["status"] == "done") {
           Appointement_list.add(element);
           done_Appointement_list.add(element);
-        }
-        else {
+        } else {
           Appointement_list.add(element);
           cancel_Appointement_list.add(element);
         }
-
-      }
-      );
+      });
       print(value);
       print(value.length);
       emit(AppGetDatabaseState_App());
@@ -322,63 +295,60 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void deleteData_Appo({
-  required int id,
-  }) async
-  {
-    database_Appo.rawDelete('DELETE FROM appointment WHERE id = ?', [id])
-        .then((value)
-    {
+    required int id,
+  }) async {
+    database_Appo
+        .rawDelete('DELETE FROM appointment WHERE id = ?', [id]).then((value) {
       getDataFromDatabase_Appo(database_Appo);
       emit(AppInsertDatabaseState_App());
     });
   }
+
   void updateData_Appo({
-     required String status,
+    required String status,
     required int id,
-  }) async
-  {
+  }) async {
     database_Appo.rawUpdate(
       'UPDATE appointment SET status = ? WHERE id = ?',
       ['$status', id],
-    ).then((value)
-    {
+    ).then((value) {
       emit(AppUpdateDatabaseState_App());
-      getDataFromDatabase_Appo(database_Appo) ;
+      getDataFromDatabase_Appo(database_Appo);
     });
   }
 
   //==============================================
-  Add_doctor_model? add_doctor_model;
+
   void Add_doctor({
     required String email,
     required String password,
+    required String password_confirmation,
     required String phone,
     required String first_name,
     required String last_name,
     required String birth_date,
     required String specialization,
-     String department_id='1',
   }) {
     emit(AddDoctorLoadingState());
     DioHelper.postData(
-      url: 'https://abdelrahman.in/api/register',
+      url: 'https://abdelrahman.in/api/doctor/store',
       data: {
         'first_name': first_name,
         'last_name': last_name,
         'email': email,
         'password': password,
+        'password_confirmation': password_confirmation,
         'phone': phone,
         'birth_date': birth_date,
         'specialization': specialization,
-        'department_id': department_id,
+        'department_id': "1",
       },
       token: token,
     ).then((value) {
       if (value.statusCode! >= 200 && value.statusCode! < 300) {
-        add_doctor_model = Add_doctor_model.fromJson(value.data);
-        print(add_doctor_model!.message);
-        print(add_doctor_model!.success);
-        emit(AddDoctorSuccessState(add_doctor_model: add_doctor_model!));
+        print(value.data["message"]);
+        getalldoctor();
+        emit(AddDoctorSuccessState(message: value.data["message"]));
       } else {
         if (value.statusCode == 401) {
           emit(AddDoctorFauilreState(error: value.data["message"]));
@@ -396,7 +366,39 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  void getalldoctor() async {
+    emit(GetAllDoctorLoadingState());
+    await DioHelper.getData(
+      url: 'https://abdelrahman.in/api/doctors',
+      token: token,
+    ).then((value) {
+      all_doctor_model = All_Doctor_Model.fromJson(value.data);
+      Cardiologistlist = [];
+      Neproistlist = [];
+      Ortholist = [];
+      Dentistlist = [];
+      eyeslist = [];
+      for (int i = 0; i < all_doctor_model!.data!.length; i++) {
+        if (all_doctor_model!.data![i].doctor!.specialization == "dentist") {
+          Dentistlist!.add(all_doctor_model!.data![i]);
+        } else if (all_doctor_model!.data![i].doctor!.specialization ==
+            "cardiologist") {
+          Cardiologistlist!.add(all_doctor_model!.data![i]);
+        } else if (all_doctor_model!.data![i].doctor!.specialization ==
+            "orthopedic") {
+          Ortholist!.add(all_doctor_model!.data![i]);
+        } else if (all_doctor_model!.data![i].doctor!.specialization ==
+            "nephrologist") {
+          Neproistlist!.add(all_doctor_model!.data![i]);
+        } else if (all_doctor_model!.data![i].doctor!.specialization ==
+            "ophthalmologist") {
+          eyeslist!.add(all_doctor_model!.data![i]);
+        }
+      }
+      print(all_doctor_model);
+      emit(GetAllDoctorSuccessState());
+    }).catchError((error) {
+      emit(GetAllDoctorFauilreState(error: error.toString()));
+    });
+  }
 }
-
-
-

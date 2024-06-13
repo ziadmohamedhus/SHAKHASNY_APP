@@ -48,7 +48,7 @@ class Home extends StatelessWidget {
     // TODO: implement build
 
     return BlocProvider(
-      create: (context) => AppCubit(),
+      create: (context) => AppCubit()..getalldoctor(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) => Scaffold(
@@ -214,10 +214,10 @@ class Home extends StatelessWidget {
                             Text(
                                 '${patient_model!.data!.firstName} ${patient_model!.data!.lastName}',
                                 style: TextStyle(
-               color: HexColor('32313a'),
-               fontSize: 25.0,
-               fontWeight: FontWeight.bold,
-             )),
+                                  color: HexColor('32313a'),
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.bold,
+                                )),
                           ],
                         ),
                         CircleAvatar(
@@ -707,10 +707,10 @@ class Home extends StatelessWidget {
                           children: [
                             Text('Top Doctors',
                                 style: TextStyle(
-               color: HexColor('32313a'),
-               fontSize: 25.0,
-               fontWeight: FontWeight.bold,
-             )),
+                                  color: HexColor('32313a'),
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.bold,
+                                )),
                           ],
                         ),
                         Column(
@@ -720,7 +720,9 @@ class Home extends StatelessWidget {
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          All_doctor()));
+                                          All_doctor(
+                                            model: all_doctor_model!,
+                                          )));
                                 },
                                 child: Text(
                                   'See more',

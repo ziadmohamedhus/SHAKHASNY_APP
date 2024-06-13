@@ -1,5 +1,3 @@
-import '../MANAGER/Add_doctors/Data/add_doctor_model.dart';
-
 abstract class AppStates {}
 
 class AppInitialState extends AppStates {}
@@ -14,11 +12,11 @@ class AppInsertDatabaseState extends AppStates {}
 
 class AppDeleteDatabaseState extends AppStates {}
 
-class AppUpdateDatabaseState  extends AppStates {}
+class AppUpdateDatabaseState extends AppStates {}
 
 class Text_Obsecure_State extends AppStates {}
 
-class bottomnav_state extends AppStates{}
+class bottomnav_state extends AppStates {}
 
 class AppCreateDatabaseState_doctor extends AppStates {}
 
@@ -40,25 +38,29 @@ class AppInsertDatabaseState_App extends AppStates {}
 
 class AppDeleteDatabaseState_App extends AppStates {}
 
- class AppUpdateDatabaseState_App  extends AppStates {}
+class AppUpdateDatabaseState_App extends AppStates {}
 
 //=====================================
 class AddDoctorLoadingState extends AppStates {}
 
 class AddDoctorSuccessState extends AppStates {
- final Add_doctor_model add_doctor_model;
+  final String message;
 
- AddDoctorSuccessState({required this.add_doctor_model});
+  AddDoctorSuccessState({required this.message});
 }
 
 class AddDoctorFauilreState extends AppStates {
- final String error;
+  final String error;
 
- AddDoctorFauilreState({required this.error});
+  AddDoctorFauilreState({required this.error});
 }
 
+class GetAllDoctorLoadingState extends AppStates {}
 
+class GetAllDoctorSuccessState extends AppStates {}
 
+class GetAllDoctorFauilreState extends AppStates {
+  final String error;
 
-
-
+  GetAllDoctorFauilreState({required this.error});
+}

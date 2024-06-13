@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -12,136 +11,137 @@ import 'Doctor-parts/kedny.dart';
 import 'Doctor-parts/poon.dart';
 
 class Doctors_for_manager extends StatelessWidget {
-List<Widget> icons=[
-  Tab(
-    height: 80,
-    child: Container(
-      padding: EdgeInsets.all(6),
-      decoration: BoxDecoration(
-        
-        color:Colors.deepPurple[100],
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.pinkAccent[100]!.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 0), // changes position of shadow
-          ),
-        ],
+  List<Widget> icons = [
+    Tab(
+      height: 80,
+      child: Container(
+        padding: EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: Colors.deepPurple[100],
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.pinkAccent[100]!.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 0), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Image.asset(
+          'asset/icon/mh.png',
+        ),
       ),
-      child: Image.asset('asset/icon/mh.png',),
     ),
-
-  ),
-  Tab(
-    height: 80,
-    child: Container(
-      padding: EdgeInsets.all(6),
-      decoration: BoxDecoration(
-
-        color:Colors.deepPurple[100],
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.pinkAccent[100]!.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 0), // changes position of shadow
-          ),
-        ],
+    Tab(
+      height: 80,
+      child: Container(
+        padding: EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: Colors.deepPurple[100],
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.pinkAccent[100]!.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 0), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Image.asset(
+          'asset/icon/mk.png',
+        ),
       ),
-      child: Image.asset('asset/icon/mk.png',),
     ),
-  ),
-  Tab(
-    height: 80,
-    child: Container(
-      padding: EdgeInsets.all(6),
-      decoration: BoxDecoration(
-
-        color:Colors.deepPurple[100],
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.pinkAccent[100]!.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 0), // changes position of shadow
-          ),
-        ],
+    Tab(
+      height: 80,
+      child: Container(
+        padding: EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: Colors.deepPurple[100],
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.pinkAccent[100]!.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 0), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Image.asset(
+          'asset/icon/mp.png',
+        ),
       ),
-      child: Image.asset('asset/icon/mp.png',),
     ),
-  ),
-  Tab(
-    height: 80,
-    child: Container(
-      padding: EdgeInsets.all(6),
-      decoration: BoxDecoration(
-
-        color:Colors.deepPurple[100],
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.pinkAccent[100]!.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 0), // changes position of shadow
-          ),
-        ],
+    Tab(
+      height: 80,
+      child: Container(
+        padding: EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: Colors.deepPurple[100],
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.pinkAccent[100]!.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 0), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Image.asset(
+          'asset/icon/mt.png',
+        ),
       ),
-      child: Image.asset('asset/icon/mt.png',),
     ),
-  ),
-  Tab(
-    height: 80,
-    child: Container(
-      padding: EdgeInsets.all(6),
-      decoration: BoxDecoration(
-
-        color:Colors.deepPurple[100],
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.pinkAccent[100]!.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 0), // changes position of shadow
-          ),
-        ],
+    Tab(
+      height: 80,
+      child: Container(
+        padding: EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: Colors.deepPurple[100],
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.pinkAccent[100]!.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 0), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Image.asset(
+          'asset/icon/me.png',
+        ),
       ),
-      child: Image.asset('asset/icon/me.png',),
     ),
-  ),
-
-];
-List<Widget> pages=[
-
-  hart(),
-  kedny(),
-  poon(),
-  teeth(),
-  eye(),
-
-
-];
+  ];
+  List<Widget> pages = [
+    hart(),
+    kedny(),
+    poon(),
+    teeth(),
+    eye(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:(context)=> AppCubit()..createDatabase_doctor(),
-      child: BlocConsumer<AppCubit,AppStates>(
-        listener: (context,state){},
-        builder: (context , state)=>DefaultTabController(
+      create: (context) => AppCubit()..createDatabase_doctor(),
+      child: BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {},
+        builder: (context, state) => DefaultTabController(
           length: icons.length,
           child: Scaffold(
               appBar: AppBar(),
               body: SafeArea(
-
                 child: Column(
                   children: [
-                    SizedBox(height: 10.0,),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     //الشريط الاعلي
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -151,15 +151,21 @@ List<Widget> pages=[
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('SHOW,',style: TextStyle(
-                                  color: HexColor('32313a'),
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.bold),),
-                              SizedBox(height: 5.0,),
-                              Text('All Doctors',style: TextStyle(
-                                  color: HexColor('32313a'),
-                                  fontSize: 25.0,
-                                  fontWeight: FontWeight.bold)),
+                              Text(
+                                'SHOW,',
+                                style: TextStyle(
+                                    color: HexColor('32313a'),
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 5.0,
+                              ),
+                              Text('All Doctors',
+                                  style: TextStyle(
+                                      color: HexColor('32313a'),
+                                      fontSize: 25.0,
+                                      fontWeight: FontWeight.bold)),
                             ],
                           ),
                           CircleAvatar(
@@ -170,20 +176,16 @@ List<Widget> pages=[
                         ],
                       ),
                     ),
-                    SizedBox(height: 20.0,),
+                    SizedBox(
+                      height: 20.0,
+                    ),
                     //القوائم
                     TabBar(tabs: icons),
                     //عرض القوائم
                     Expanded(child: TabBarView(children: pages))
-
-
-
-
                   ],
                 ),
-
-              )
-          ),
+              )),
         ),
       ),
     );

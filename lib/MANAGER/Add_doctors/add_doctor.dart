@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hospital/COMPONENTS/styles/custom_flutter_toast.dart';
 import 'package:intl/intl.dart';
 
 import '../../DATABASE/cubit.dart';
@@ -12,6 +13,7 @@ class Add_doctor extends StatelessWidget {
   TextEditingController lname = TextEditingController(); //lname
   TextEditingController email = TextEditingController(); //email
   TextEditingController pass = TextEditingController(); //pass
+  TextEditingController password_confirmation = TextEditingController(); //pass
   TextEditingController phone = TextEditingController(); //phone
   TextEditingController specifacation = TextEditingController(); //specifacation
   TextEditingController date = TextEditingController(); //date
@@ -21,9 +23,17 @@ class Add_doctor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit()..createDatabase_doctor(),
+      create: (context) => AppCubit(),
       child: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is AddDoctorSuccessState) {
+            showToast(text: state.message, state: ToastStates.SUCCESS);
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => HomeManager()));
+          } else if (state is AddDoctorFauilreState) {
+            showToast(text: state.error, state: ToastStates.ERROR);
+          }
+        },
         builder: (context, state) => Scaffold(
           body: SafeArea(
             child: SingleChildScrollView(
@@ -151,6 +161,33 @@ class Add_doctor extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30.0))),
                       ),
                       SizedBox(
+                        height: 15.0,
+                      ),
+                      TextFormField(
+                        controller: password_confirmation,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'please enter your password_confirmation';
+                          }
+                          return null;
+                        },
+                        obscureText: AppCubit.get(context).textt,
+                        decoration: InputDecoration(
+                            labelText: 'password_confirmation',
+                            hintText: 'Enter your Password_confirmation',
+                            prefixIcon: Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                AppCubit.get(context).ic,
+                              ),
+                              onPressed: () {
+                                AppCubit.get(context).obsecuree();
+                              },
+                            ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30.0))),
+                      ),
+                      SizedBox(
                         height: 15,
                       ),
                       TextFormField(
@@ -184,10 +221,10 @@ class Add_doctor extends StatelessWidget {
                         onTap: () {
                           //لاظهار ساعة لتحديد الوقت
                           showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime.parse('1950-01-01'),
-                              lastDate: DateTime.now())
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.parse('1950-01-01'),
+                                  lastDate: DateTime.now())
                               .then((value) {
                             date.text = DateFormat.yMMMd().format(value!);
                           });
@@ -247,29 +284,6 @@ class Add_doctor extends StatelessWidget {
                         children: [
                           Expanded(
                             child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              controller: a7,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'please enter your Experience';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                  labelText: 'Experience',
-                                  hintText: 'Enter The Experience',
-                                  prefixIcon:
-                                  Icon(Icons.format_list_numbered_outlined),
-                                  border: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(30.0))),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: TextFormField(
                               controller: a8,
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -283,7 +297,7 @@ class Add_doctor extends StatelessWidget {
                                   prefixIcon: Icon(Icons.image),
                                   border: OutlineInputBorder(
                                       borderRadius:
-                                      BorderRadius.circular(30.0))),
+                                          BorderRadius.circular(30.0))),
                             ),
                           ),
                         ],
@@ -294,11 +308,20 @@ class Add_doctor extends StatelessWidget {
                       MaterialButton(
                         onPressed: () {
                           if (Register_Key.currentState!.validate()) {
-                            AppCubit.get(context).Add_doctor(email: email.text, password: pass.text, phone: phone.text, first_name: fname.text, last_name: lname.text, birth_date: date.text, specialization: specifacation.text);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeManager()));
+                            AppCubit.get(context).Add_doctor(
+                                password_confirmation:
+                                    password_confirmation.text,
+                                email: email.text,
+                                password: pass.text,
+                                phone: phone.text,
+                                first_name: fname.text,
+                                last_name: lname.text,
+                                birth_date: date.text,
+                                specialization: specifacation.text);
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => HomeManager()));
                           }
                         },
                         child: Text(

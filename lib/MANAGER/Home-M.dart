@@ -1,13 +1,15 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
+import 'package:hospital/START/Start.dart';
 import 'package:lottie/lottie.dart';
 
 import '../PATIENTS/Department_of_doc/List-Doctor6.dart';
+import '../constant.dart';
 import 'Accounts.dart';
-
 import 'Add_doctors/add_doctor.dart';
 import 'Doctors.dart';
 import 'all_patient.dart';
@@ -16,9 +18,7 @@ class HomeManager extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => AppCubit()
-          ..createDatabase_doctor()
-          ..createDatabase_Appo(),
+        create: (context) => AppCubit()..getalldoctor(),
         child: BlocConsumer<AppCubit, AppStates>(
           listener: (context, state) {},
           builder: (context, state) => Scaffold(
@@ -50,16 +50,24 @@ class HomeManager extends StatelessWidget {
                               ),
                               Text('Mr.Ziad Ahmed',
                                   style: TextStyle(
-                color: HexColor('32313a'),
-                 fontSize: 25.0,
-                fontWeight: FontWeight.bold)),
+                                      color: HexColor('32313a'),
+                                      fontSize: 25.0,
+                                      fontWeight: FontWeight.bold)),
                             ],
                           ),
                           CircleAvatar(
                             backgroundColor: Colors.grey[400],
                             backgroundImage: AssetImage('asset/image/1.jpg'),
                             radius: 25.0,
-                          )
+                          ),
+                          InkWell(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Start()));
+                              },
+                              child: Icon(Icons.exit_to_app)),
                         ],
                       ),
                     ),
@@ -298,11 +306,11 @@ class HomeManager extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Top Employees',
+                              Text('Doctors',
                                   style: TextStyle(
-                color: HexColor('32313a'),
-                 fontSize: 25.0,
-                fontWeight: FontWeight.bold)),
+                                      color: HexColor('32313a'),
+                                      fontSize: 25.0,
+                                      fontWeight: FontWeight.bold)),
                             ],
                           ),
                           Column(
@@ -313,7 +321,9 @@ class HomeManager extends StatelessWidget {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (BuildContext context) =>
-                                                All_doctor()));
+                                                All_doctor(
+                                                  model: all_doctor_model!,
+                                                )));
                                   },
                                   child: Text(
                                     'See more',
@@ -328,148 +338,96 @@ class HomeManager extends StatelessWidget {
                       ),
                     ),
                     // الدكاترة
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.pinkAccent[100]!.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  Stack(
-                                    alignment:
-                                        AlignmentDirectional.bottomCenter,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 65.0,
-                                        backgroundImage:
-                                            AssetImage('asset/image/2.jpg'),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey,
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.yellowAccent,
-                                                size: 20,
-                                              ),
-                                              SizedBox(
-                                                width: 5.0,
-                                              ),
-                                              Text(
-                                                '9.7',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 15.0,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
+                    ConditionalBuilder(
+                      condition: all_doctor_model != null,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  color:
+                                      Colors.pinkAccent[100]!.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Stack(
+                                      alignment:
+                                          AlignmentDirectional.bottomCenter,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 65.0,
+                                          backgroundImage:
+                                              AssetImage('asset/image/2.jpg'),
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                  Text(
-                                    'DR.Ziad mohamed',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    'Surgeon',
-                                    style: TextStyle(
-                                        color: Colors.grey[800],
-                                        fontSize: 10.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                    Text(
+                                      'DR.${all_doctor_model!.data![0].firstName} ${all_doctor_model!.data![0].lastName}',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      '${all_doctor_model!.data![0].doctor!.specialization}',
+                                      style: TextStyle(
+                                          color: Colors.grey[800],
+                                          fontSize: 10.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.pinkAccent[100]!.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  Stack(
-                                    alignment:
-                                        AlignmentDirectional.bottomCenter,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 65.0,
-                                        backgroundImage:
-                                            AssetImage('asset/image/3.jpg'),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey,
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.yellowAccent,
-                                                size: 20,
-                                              ),
-                                              SizedBox(
-                                                width: 5.0,
-                                              ),
-                                              Text(
-                                                '9.5',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 15.0,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color:
+                                      Colors.pinkAccent[100]!.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Stack(
+                                      alignment:
+                                          AlignmentDirectional.bottomCenter,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 65.0,
+                                          backgroundImage:
+                                              AssetImage('asset/image/3.jpg'),
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                  Text(
-                                    'DR.Ahmed Hussie',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    'Dentist',
-                                    style: TextStyle(
-                                        color: Colors.grey[800],
-                                        fontSize: 10.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                    Text(
+                                      'DR.${all_doctor_model!.data![1].firstName} ${all_doctor_model!.data![1].lastName}',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      '${all_doctor_model!.data![1].doctor!.specialization}',
+                                      style: TextStyle(
+                                          color: Colors.grey[800],
+                                          fontSize: 10.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    )
+                      fallback: (context) => CircularProgressIndicator(
+                        color: Colors.deepPurple,
+                      ),
+                    ),
                   ],
                 ),
               ),
