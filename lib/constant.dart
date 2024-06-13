@@ -14,3 +14,9 @@ List<DataDoctor>? Neproistlist = [];
 List<DataDoctor>? Ortholist = [];
 List<DataDoctor>? Dentistlist = [];
 List<DataDoctor>? eyeslist = [];
+
+//Cardiologist
+//Orthopedic
+//Nephrologist
+
+//Ophthalmologist
