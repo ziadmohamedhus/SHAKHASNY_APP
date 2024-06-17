@@ -468,4 +468,42 @@ class AppCubit extends Cubit<AppStates> {
       }
     });
   }
+
+
+  void MakeAppointment({
+    required String doctor_id,
+    required String date,
+    required String time,
+    required String reason,
+  }) {
+    emit(MakeAppointmentLoadingState());
+    DioHelper.postData(
+        url: 'https://abdelrahman.in/api/doctor/working/hours/appointments',
+        data: {
+          'doctor_id': doctor_id,
+          'date': date,
+          'time': time,
+          'reason': reason,
+        },
+        token: token)
+        .then((value) {
+      if (value.statusCode! >= 200 && value.statusCode! < 300) {
+        emit(MakeAppointmentSuccessState(message: value.data["message"]));
+      } else {
+        if (value.statusCode == 401) {
+          emit(MakeAppointmentFauilreState(error: value.data["message"]));
+          print(value.data["message"]);
+          print(value.data);
+        } else {
+          emit(MakeAppointmentFauilreState(error: value.data["message"]));
+          print(value.data["message"]);
+          print(value.data);
+        }
+      }
+    }).catchError((error) {
+      log(error.toString());
+      emit(GetworkDoctorFauilreState(error: error));
+    });
+  }
+
 }

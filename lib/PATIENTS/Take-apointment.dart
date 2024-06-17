@@ -15,12 +15,11 @@ Map Ziad ={};
 {
   Ziad = t ;
 }
-  TextEditingController a1=TextEditingController(); // name
-  TextEditingController a2=TextEditingController(); // phone
-  TextEditingController a3=TextEditingController(); // doctor name
-  TextEditingController a4=TextEditingController(); // date
-  TextEditingController a5=TextEditingController(); // time
-  TextEditingController a6=TextEditingController(); // country
+
+  TextEditingController doctor_name=TextEditingController(); // doctor_name
+  TextEditingController date=TextEditingController(); // date
+  TextEditingController time=TextEditingController(); // time
+  TextEditingController country=TextEditingController(); // country
 
   @override
   Widget build(BuildContext context) {
@@ -63,47 +62,12 @@ Map Ziad ={};
                         ),
                       ),
                       SizedBox(height: 35,),
-                      TextFormField(
-                        validator:
-                            ( value){
-                          if (value!.isEmpty) {
-                            return'please enter your Name';
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.text,
-                        controller: a1,
-                        decoration: InputDecoration(
-                            labelText: 'Name',
-                            hintText: 'Enter your Name',
-                            prefixIcon: Icon(Icons.person),
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0))
 
-                        ),
-                      ),
-                      SizedBox(height: 15,),
+
                       TextFormField(
-                        validator:
-                            ( value){
-                          if (value!.isEmpty) {
-                            return'please enter your Name';
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.phone,
-                        controller: a2,
-                        decoration: InputDecoration(
-                            labelText: 'PHONE',
-                            hintText: 'Enter your Phone',
-                            prefixIcon: Icon(Icons.phone),
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0))
-                        ),
-                      ),
-                      SizedBox(height: 15,),
-                      TextFormField(
-                        controller: a3,
+                        controller: doctor_name,
                         onTap: (){
-                          a3.text=Ziad["first"]+" "+Ziad["second"] ;
+                          doctor_name.text=Ziad["first"]+" "+Ziad["second"] ;
                         },
                         readOnly:true ,
                         decoration: InputDecoration(
@@ -121,7 +85,7 @@ Map Ziad ={};
                           }
                           return null;
                         },
-                        controller: a4,
+                        controller: date,
                         onTap: ()
                         {
                           //لاظهار ساعة لتحديد الوقت
@@ -129,7 +93,7 @@ Map Ziad ={};
                               firstDate: DateTime.now(),
                               lastDate: DateTime.parse('2024-12-29')).then((value)
                           {
-                            a4.text=DateFormat.yMMMd().format(value!);
+                            date.text=DateFormat.yMMMd().format(value!);
                           });
                           //لاظهار نتيجة للتاريخ
                           // showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime.parse('2023-12-01'), lastDate: DateTime.parse('2000-01-01'));
@@ -150,14 +114,14 @@ Map Ziad ={};
                           }
                           return null;
                         },
-                        controller: a5,
+                        controller: time,
                         onTap: ()
                         {
                           //لاظهار ساعة لتحديد الوقت
                           showTimePicker(context: context, initialTime: TimeOfDay.now()).then((value)
                           {
                             // لطباعة الوقت في صندوق الادخال
-                            a5.text=value!.format(context).toString();
+                            time.text=value!.format(context).toString();
                           });
                           //لاظهار نتيجة للتاريخ
                           // showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime.parse('2023-12-01'), lastDate: DateTime.parse('2000-01-01'));
@@ -178,11 +142,11 @@ Map Ziad ={};
                           }
                           return null;
                         },
-                        controller: a6,
+                        controller: country,
                         decoration: InputDecoration(
-                            labelText: 'COUNTRY',
-                            hintText: 'Enter your Country',
-                            prefixIcon: Icon(Icons.location_city_rounded),
+                            labelText: 'REASON',
+                            hintText: 'Enter your REASON',
+                            prefixIcon: Icon(Icons.question_mark_outlined),
                             border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0))
                         ),
                       ),
@@ -191,8 +155,8 @@ Map Ziad ={};
                       {
                         if(form_key.currentState!.validate())
                         {
-                           AppCubit.get(context).insertToDatabase_Appo(name: a1.text, phone: a2.text, doctor: Ziad["id"].toString(), date: a4.text, time: a5.text, country: a6.text) ;
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Appointment_done(name: a1.text,phone: a2.text,doctor: a3.text,date: a4.text,time: a5.text,country: a6.text,)));
+                           AppCubit.get(context).insertToDatabase_Appo(name: a1.text, phone: a2.text, doctor: Ziad["id"].toString(), date: date.text, time: time.text, country: country.text) ;
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Appointment_done(name: a1.text,phone: a2.text,doctor: doctor_name.text,date: date.text,time: time.text,country: country.text,)));
                         }
                       },child: Text('SUBMIT',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
                     ],
