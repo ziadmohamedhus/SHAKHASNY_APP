@@ -72,17 +72,17 @@ class Login extends StatelessWidget {
                                   children: [
                                     Text('FILL OUT,',
                                         style: TextStyle(
-                 color: HexColor('32313a'),
-                fontSize: 15.0,
-                 fontWeight: FontWeight.bold)),
+                                            color: HexColor('32313a'),
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold)),
                                     SizedBox(
                                       height: 5.0,
                                     ),
                                     Text('Login Form',
                                         style: TextStyle(
-                 color: HexColor('32313a'),
-                fontSize: 15.0,
-                 fontWeight: FontWeight.bold)),
+                                            color: HexColor('32313a'),
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold)),
                                   ],
                                 ),
                                 Icon(

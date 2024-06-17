@@ -120,8 +120,14 @@ class All_doctor extends StatelessWidget {
           ),
           for (int i = 0; i < model.data!.length; i++)
             InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen(doc: model.data![i],)));
+              onTap: () {
+                print(model.data![i].workingHours);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfileScreen(
+                              doc: model.data![i],
+                            )));
               },
               child: Card(
                 color: HexColor('8a86e2'),

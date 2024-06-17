@@ -17,8 +17,10 @@ class poon extends StatelessWidget {
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) => ConditionalBuilder(
-          fallback: (context) => CircularProgressIndicator(
-            color: Colors.deepPurple,
+          fallback: (context) => Center(
+            child: CircularProgressIndicator(
+              color: Colors.deepPurple,
+            ),
           ),
           condition: Ortholist!.isNotEmpty,
           builder: (context) => ListView(

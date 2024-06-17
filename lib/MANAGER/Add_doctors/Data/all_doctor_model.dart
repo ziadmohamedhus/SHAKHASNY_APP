@@ -39,7 +39,7 @@ class DataDoctor {
   String? createdAt;
   String? updatedAt;
   Doctor? doctor;
-  Null? image;
+  Image? image;
   List<WorkingHours>? workingHours;
 
   DataDoctor(
@@ -70,7 +70,7 @@ class DataDoctor {
     updatedAt = json['updated_at'];
     doctor =
         json['doctor'] != null ? new Doctor.fromJson(json['doctor']) : null;
-    image = json['image'];
+    image = json['image'] != null ? new Image.fromJson(json['image']) : null;
     if (json['working_hours'] != null) {
       workingHours = <WorkingHours>[];
       json['working_hours'].forEach((v) {
@@ -94,7 +94,9 @@ class DataDoctor {
     if (this.doctor != null) {
       data['doctor'] = this.doctor!.toJson();
     }
-    data['image'] = this.image;
+    if (this.image != null) {
+      data['image'] = this.image!.toJson();
+    }
     if (this.workingHours != null) {
       data['working_hours'] =
           this.workingHours!.map((v) => v.toJson()).toList();
@@ -108,6 +110,7 @@ class Doctor {
   int? userId;
   String? specialization;
   String? departmentId;
+  String? fee;
   String? createdAt;
   String? updatedAt;
 
@@ -116,6 +119,7 @@ class Doctor {
       this.userId,
       this.specialization,
       this.departmentId,
+      this.fee,
       this.createdAt,
       this.updatedAt});
 
@@ -124,6 +128,7 @@ class Doctor {
     userId = json['user_id'];
     specialization = json['specialization'];
     departmentId = json['department_id'];
+    fee = json['fee'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -134,6 +139,44 @@ class Doctor {
     data['user_id'] = this.userId;
     data['specialization'] = this.specialization;
     data['department_id'] = this.departmentId;
+    data['fee'] = this.fee;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    return data;
+  }
+}
+
+class Image {
+  int? id;
+  String? path;
+  String? imageableType;
+  int? imageableId;
+  String? createdAt;
+  String? updatedAt;
+
+  Image(
+      {this.id,
+      this.path,
+      this.imageableType,
+      this.imageableId,
+      this.createdAt,
+      this.updatedAt});
+
+  Image.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    path = json['path'];
+    imageableType = json['imageable_type'];
+    imageableId = json['imageable_id'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['path'] = this.path;
+    data['imageable_type'] = this.imageableType;
+    data['imageable_id'] = this.imageableId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;

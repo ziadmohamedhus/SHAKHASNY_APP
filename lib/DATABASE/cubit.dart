@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hospital/DATABASE/states.dart';
@@ -328,6 +330,7 @@ class AppCubit extends Cubit<AppStates> {
     required String last_name,
     required String birth_date,
     required String specialization,
+    required String fees,
   }) {
     emit(AddDoctorLoadingState());
     DioHelper.postData(
@@ -342,6 +345,7 @@ class AppCubit extends Cubit<AppStates> {
         'birth_date': birth_date,
         'specialization': specialization,
         'department_id': "1",
+        "fee": fees
       },
       token: token,
     ).then((value) {
@@ -372,6 +376,8 @@ class AppCubit extends Cubit<AppStates> {
       url: 'https://abdelrahman.in/api/doctors',
       token: token,
     ).then((value) {
+      print(value.data["success"]);
+      print("sucess  token:${token}");
       all_doctor_model = All_Doctor_Model.fromJson(value.data);
       Cardiologistlist = [];
       Neproistlist = [];
@@ -395,10 +401,71 @@ class AppCubit extends Cubit<AppStates> {
           eyeslist!.add(all_doctor_model!.data![i]);
         }
       }
-      print(all_doctor_model);
       emit(GetAllDoctorSuccessState());
     }).catchError((error) {
+      print(error);
+      print("fal  token:${token}");
       emit(GetAllDoctorFauilreState(error: error.toString()));
+    });
+  }
+
+  void workhourdoctor({
+    required String day,
+    required String id,
+    required String start_date,
+    required String end_date,
+  }) {
+    emit(GetworkDoctorLoadingState());
+    DioHelper.postData(
+            url: 'https://abdelrahman.in/api/doctor/working/hours/${id}',
+            data: {
+              'day': day,
+              'start_date': start_date,
+              'end_date': end_date,
+            },
+            token: token)
+        .then((value) {
+      if (value.statusCode! >= 200 && value.statusCode! < 300) {
+        getalldoctor();
+        emit(GetworkDoctorSuccessState(message: value.data["message"]));
+      } else {
+        if (value.statusCode == 401) {
+          emit(GetworkDoctorFauilreState(error: value.data["message"]));
+          print(value.data["message"]);
+          print(value.data);
+        } else {
+          emit(GetworkDoctorFauilreState(error: value.data["message"]));
+          print(value.data["message"]);
+          print(value.data);
+        }
+      }
+    }).catchError((error) {
+      log(error.toString());
+      emit(GetworkDoctorFauilreState(error: error));
+    });
+  }
+
+  void deletedoctor({required int id}) async {
+    emit(DeleteDoctorLoadingState());
+    await DioHelper.deleteData(
+      url: 'https://abdelrahman.in/api/destroy/$id',
+      token: token,
+    ).then((value) {
+      if (value.statusCode! >= 200 && value.statusCode! < 300) {
+        print(value.data["message"]);
+        getalldoctor();
+        emit(DeleteDoctorSuccessState(message: value.data["message"]));
+      } else {
+        if (value.statusCode == 401) {
+          emit(DeleteDoctorFauilreState(error: value.data["message"]));
+          print(value.data["message"]);
+          print(value.data);
+        } else {
+          emit(DeleteDoctorFauilreState(error: value.data["message"]));
+          print(value.data["message"]);
+          print(value.data);
+        }
+      }
     });
   }
 }

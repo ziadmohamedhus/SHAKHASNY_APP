@@ -64,3 +64,30 @@ class GetAllDoctorFauilreState extends AppStates {
 
   GetAllDoctorFauilreState({required this.error});
 }
+
+class GetworkDoctorLoadingState extends AppStates {}
+
+class GetworkDoctorSuccessState extends AppStates {
+  final String message;
+
+  GetworkDoctorSuccessState({required this.message});
+}
+
+class GetworkDoctorFauilreState extends AppStates {
+  final String error;
+
+  GetworkDoctorFauilreState({required this.error});
+}
+
+class DeleteDoctorLoadingState extends AppStates {}
+
+class DeleteDoctorSuccessState extends AppStates {
+  final String message;
+  DeleteDoctorSuccessState({required this.message});
+}
+
+class DeleteDoctorFauilreState extends AppStates {
+  final String error;
+
+  DeleteDoctorFauilreState({required this.error});
+}

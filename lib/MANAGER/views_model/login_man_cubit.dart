@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -22,6 +20,8 @@ class LoginManCubit extends Cubit<LoginManState> {
     required String email,
     required String password,
   }) {
+    print(email);
+    print(password);
     emit(LoginManLoadingState());
     DioHelper.postData(url: 'https://abdelrahman.in/api/login', data: {
       'email': email,
@@ -44,7 +44,7 @@ class LoginManCubit extends Cubit<LoginManState> {
         }
       }
     }).catchError((error) {
-      log(error.toString());
+      //log(error.toString());
       emit(LoginManFauilreState(error: error));
     });
   }

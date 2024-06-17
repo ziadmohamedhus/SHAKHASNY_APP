@@ -19,6 +19,7 @@ class Add_doctor extends StatelessWidget {
   TextEditingController date = TextEditingController(); //date
   TextEditingController a7 = TextEditingController(); //experience
   TextEditingController a8 = TextEditingController(); //image
+  TextEditingController fees = TextEditingController(); //image
   var Register_Key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -241,7 +242,6 @@ class Add_doctor extends StatelessWidget {
                       SizedBox(
                         height: 15,
                       ),
-
                       DropdownButtonFormField(
                         items: [
                           DropdownMenuItem(
@@ -300,6 +300,25 @@ class Add_doctor extends StatelessWidget {
                                           BorderRadius.circular(30.0))),
                             ),
                           ),
+                          Expanded(
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              controller: fees,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter your Fees';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Fess',
+                                  hintText: 'Enter The Fess',
+                                  prefixIcon: Icon(Icons.money),
+                                  border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(30.0))),
+                            ),
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -309,6 +328,7 @@ class Add_doctor extends StatelessWidget {
                         onPressed: () {
                           if (Register_Key.currentState!.validate()) {
                             AppCubit.get(context).Add_doctor(
+                                fees: fees.text,
                                 password_confirmation:
                                     password_confirmation.text,
                                 email: email.text,

@@ -16,112 +16,116 @@ class eye extends StatelessWidget {
       create: (context) => AppCubit()..createDatabase_doctor(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
-        builder: (context, state) => ConditionalBuilder(
-          fallback: (context) => CircularProgressIndicator(
-            color: Colors.deepPurple,
-          ),
-          condition: eyeslist!.isNotEmpty,
-          builder: (context) => ListView(
-            children: [
-              SizedBox(
-                height: 10.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Department of,',
-                            style: TextStyle(
-                                color: HexColor('32313a'),
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold)),
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        Text('Ophthalmologist',
-                            style: TextStyle(
-                                color: HexColor('32313a'),
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                  ],
+        builder: (context, state) => Center(
+          child: ConditionalBuilder(
+            fallback: (context) => CircularProgressIndicator(
+              color: Colors.deepPurple,
+            ),
+            condition: eyeslist!.isNotEmpty,
+            builder: (context) => ListView(
+              children: [
+                SizedBox(
+                  height: 10.0,
                 ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              for (int i = 0; i < eyeslist!.length; i++)
-                Dismissible(
-                  key: Key("${eyeslist![i].firstName!}"),
-                  onDismissed: (direction) {
-                    showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                              actions: [
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text(
-                                      'OK',
-                                      style: TextStyle(color: Colors.purple),
-                                    )),
-                              ],
-                              title: Text('Delete Doctor'),
-                              contentPadding: EdgeInsets.all(20),
-                              content: Text('This doctor has been removed'),
-                            ));
-                    AppCubit.get(context).deleteData_doctor(
-                        id: doctorlist_Ophthalmologist[i]["id"]);
-                  },
-                  child: Card(
-                    color: HexColor('8a86e2'),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    shadowColor: Colors.black,
-                    elevation: 30.0,
-                    child: ListTile(
-                      title: Text(
-                        '${eyeslist![i].firstName!} ${eyeslist![i].lastName!}',
-                        style: TextStyle(
-                          color: HexColor('32313a'),
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w600,
-                        ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Department of,',
+                              style: TextStyle(
+                                  color: HexColor('32313a'),
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold)),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          Text('Ophthalmologist',
+                              style: TextStyle(
+                                  color: HexColor('32313a'),
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.bold)),
+                        ],
                       ),
-                      subtitle: Text(
-                        'Phone ${eyeslist![i].phone!}',
-                        style: TextStyle(
-                          color: Colors.grey[800],
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      //الصورة في الاول
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.grey[400],
-                        backgroundImage: AssetImage(
-                          'asset/image/1.jpg',
-                        ),
-                        radius: 25.0,
-                      ),
-                      //ايقونة في الاخر
-                      trailing: Icon(Icons.more_horiz_outlined),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => ProfileScreen(
-                                  doc: eyeslist![i],
-                                )));
-                      },
-                    ),
+                    ],
                   ),
                 ),
-            ],
+                SizedBox(
+                  height: 10.0,
+                ),
+                for (int i = 0; i < eyeslist!.length; i++)
+                  Dismissible(
+                    key: Key("${eyeslist![i].firstName!}"),
+                    onDismissed: (direction) {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        AppCubit.get(context).deleteData_doctor(
+                                            id: eyeslist![i].id!);
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text(
+                                        'OK',
+                                        style: TextStyle(color: Colors.purple),
+                                      )),
+                                ],
+                                title: Text('Delete Doctor'),
+                                contentPadding: EdgeInsets.all(20),
+                                content: Text('This doctor has been removed'),
+                              ));
+                      AppCubit.get(context).deleteData_doctor(
+                          id: doctorlist_Ophthalmologist[i]["id"]);
+                    },
+                    child: Card(
+                      color: HexColor('8a86e2'),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      shadowColor: Colors.black,
+                      elevation: 30.0,
+                      child: ListTile(
+                        title: Text(
+                          '${eyeslist![i].firstName!} ${eyeslist![i].lastName!}',
+                          style: TextStyle(
+                            color: HexColor('32313a'),
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        subtitle: Text(
+                          'Phone ${eyeslist![i].phone!}',
+                          style: TextStyle(
+                            color: Colors.grey[800],
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        //الصورة في الاول
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.grey[400],
+                          backgroundImage: AssetImage(
+                            'asset/image/1.jpg',
+                          ),
+                          radius: 25.0,
+                        ),
+                        //ايقونة في الاخر
+                        trailing: Icon(Icons.more_horiz_outlined),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) => ProfileScreen(
+                                    doc: eyeslist![i],
+                                  )));
+                        },
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),
