@@ -21,6 +21,7 @@ import 'Department_of_doc/List-Doctor6.dart';
 import 'Facebook.dart';
 import 'Pharmacy.dart';
 import 'Youtube.dart';
+import 'all_appointment/views/all_appointment.dart';
 
 class Home extends StatelessWidget {
   List<Widget> addvertsment_images = [
@@ -49,7 +50,9 @@ class Home extends StatelessWidget {
     // TODO: implement build
 
     return BlocProvider(
-      create: (context) => AppCubit()..getalldoctor(),
+      create: (context) => AppCubit()
+        ..getalldoctor()
+        ..Getappopatient(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) => Scaffold(
@@ -302,7 +305,7 @@ class Home extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Service and care 24 hours a day.',
+                                      'Booking dates',
                                       style: TextStyle(
                                           color: HexColor('32313a'),
                                           fontSize: 20.0,
@@ -312,7 +315,7 @@ class Home extends StatelessWidget {
                                       height: 4,
                                     ),
                                     Text(
-                                      'all the means of safety and comfort..',
+                                      'Know the status of your order',
                                       style: TextStyle(
                                           color: HexColor('32313a'),
                                           fontSize: 15.0,
@@ -327,11 +330,11 @@ class Home extends StatelessWidget {
                                             (context),
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    facebook()));
+                                                    AppointmentStatus()));
                                       },
                                       color: HexColor('ffe0f4'),
                                       child: Text(
-                                        'Join us now!',
+                                        'GO to Know!',
                                         style: TextStyle(
                                             color: HexColor('8a86e2'),
                                             fontSize: 15.0,

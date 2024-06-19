@@ -11,6 +11,7 @@ import '../MANAGER/Add_doctors/Data/all_doctor_model.dart';
 import '../PATIENTS/Acount.dart';
 import '../PATIENTS/Home.dart';
 import '../PATIENTS/Pharmacy.dart';
+import '../PATIENTS/all_appointment/data/appointment_model.dart';
 import '../components.dart';
 import '../work_hour/data/timedoctor.dart';
 
@@ -514,6 +515,61 @@ class AppCubit extends Cubit<AppStates> {
       emit(GettimedoctorSuccessState());
     }).catchError((error) {
       emit(GettimedoctorFauilreState(error: error.toString()));
+    });
+  }
+
+  patient_info_model? patientinfo;
+  void Getappopatient() async {
+    emit(GetAppPatientLoadingState());
+    await DioHelper.getData(
+      url: 'https://abdelrahman.in/api/appointments?paid=0',
+      token: token,
+    ).then((value) {
+      print(value.data);
+      patientinfo = patient_info_model.fromJson(value.data);
+      print(patientinfo!.data!.length);
+      emit(GetAppPatientSuccessState());
+    }).catchError((error) {
+      emit(GetAppPatientFauilreState(error: error.toString()));
+    });
+  }
+
+  void PayMoney({
+    required String card_name,
+    required String card_number,
+    required String exp_month,
+    required String exp_year,
+    required String id,
+    required String cvc,
+  }) {
+    emit(BuyMoneyLoadingState());
+    DioHelper.postData(
+            url: 'https://abdelrahman.in/api/stripe/checkout/${id}',
+            data: {
+              'card_name': card_name,
+              'card_number': card_number,
+              'exp_month': exp_month,
+              'exp_year': exp_year,
+              'cvc': cvc,
+            },
+            token: token)
+        .then((value) {
+      if (value.statusCode! >= 200 && value.statusCode! < 300) {
+        emit(BuyMoneySuccessState(message: value.data["message"]));
+      } else {
+        if (value.statusCode == 401) {
+          emit(BuyMoneyFauilreState(error: value.data["message"]));
+          print(value.data["message"]);
+          print(value.data);
+        } else {
+          emit(BuyMoneyFauilreState(error: value.data["message"]));
+          print(value.data["message"]);
+          print(value.data);
+        }
+      }
+    }).catchError((error) {
+      log(error.toString());
+      emit(BuyMoneyFauilreState(error: error));
     });
   }
 }

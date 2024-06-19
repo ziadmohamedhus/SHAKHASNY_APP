@@ -115,3 +115,27 @@ class GettimedoctorFauilreState extends AppStates {
 
   GettimedoctorFauilreState({required this.error});
 }
+
+class GetAppPatientLoadingState extends AppStates {}
+
+class GetAppPatientSuccessState extends AppStates {}
+
+class GetAppPatientFauilreState extends AppStates {
+  final String error;
+
+  GetAppPatientFauilreState({required this.error});
+}
+
+class BuyMoneyLoadingState extends AppStates {}
+
+class BuyMoneySuccessState extends AppStates {
+  final String message;
+
+  BuyMoneySuccessState({required this.message});
+}
+
+class BuyMoneyFauilreState extends AppStates {
+  final String error;
+
+  BuyMoneyFauilreState({required this.error});
+}

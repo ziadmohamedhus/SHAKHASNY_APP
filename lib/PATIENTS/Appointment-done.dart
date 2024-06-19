@@ -4,8 +4,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/constant.dart';
 
 import '../MANAGER/Add_doctors/Data/all_doctor_model.dart';
-import '../payment/views/payment.dart';
 import 'Home-bage.dart';
+import 'all_appointment/views/all_appointment.dart';
 
 class Appointment_done extends StatelessWidget {
   var scaffold_key = GlobalKey<ScaffoldState>();
@@ -148,7 +148,7 @@ class Appointment_done extends StatelessWidget {
               MaterialButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => CustomCreditCard()));
+                      builder: (BuildContext context) => AppointmentStatus()));
                 },
                 child: Text(
                   'Payment',
