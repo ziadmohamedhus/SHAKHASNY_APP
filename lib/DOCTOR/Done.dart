@@ -13,7 +13,7 @@ class done_appointment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=>AppCubit()..createDatabase_Appo(),
+      create: (context)=>AppCubit(),
       child: BlocConsumer<AppCubit,AppStates>(
         listener: (context,state){},
         builder: (context , state)=>Scaffold(

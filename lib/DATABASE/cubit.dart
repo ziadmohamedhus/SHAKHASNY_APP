@@ -7,6 +7,7 @@ import 'package:hospital/constant.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../Api/api_service.dart';
+import '../DOCTOR/Models/appointments_model.dart';
 import '../MANAGER/Add_doctors/Data/all_doctor_model.dart';
 import '../PATIENTS/Acount.dart';
 import '../PATIENTS/Home.dart';
@@ -571,6 +572,46 @@ class AppCubit extends Cubit<AppStates> {
     }).catchError((error) {
       log(error.toString());
       emit(BuyMoneyFauilreState(error: error));
+    });
+  }
+
+
+  All_appointments_doctor_model? all_appointments_doctor_model;
+  List<Date_appointment> new_appointments = [];
+  List<Date_appointment> accept_appointments = [];
+  List<Date_appointment> reject_appointments = [];
+
+  void getallappointments() async {
+    emit(AppointmentsDoctorLoadingState());
+    await DioHelper.getData(
+      url: 'https://abdelrahman.in/api/doctor/appointments',
+      token: token,
+    ).then((value) {
+      print(value.data["success"]);
+      print("sucess  token:${token}");
+      all_appointments_doctor_model = All_appointments_doctor_model.fromJson(value.data);
+
+      new_appointments = [];
+      accept_appointments = [];
+      reject_appointments = [];
+
+      for (int i = 0; i < all_appointments_doctor_model!.data!.length; i++) {
+
+        if (all_appointments_doctor_model!.data![i].status == "rejected") {
+          reject_appointments!.add(all_appointments_doctor_model!.data![i]);
+        }
+        else if (all_appointments_doctor_model!.data![i].status == "accepted") {
+          accept_appointments!.add(all_appointments_doctor_model!.data![i]);
+        }
+        else {
+          new_appointments!.add(all_appointments_doctor_model!.data![i]);
+
+      }
+      emit(AppointmentsDoctorSuccessState(message: value.data["message"]));
+    }}).catchError((error) {
+      print(error);
+      print("fal  token:${token}");
+      emit(AppointmentsDoctorFauilreState(error: error.toString()));
     });
   }
 }

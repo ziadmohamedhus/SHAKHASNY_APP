@@ -139,3 +139,18 @@ class BuyMoneyFauilreState extends AppStates {
 
   BuyMoneyFauilreState({required this.error});
 }
+
+
+class AppointmentsDoctorLoadingState extends AppStates {}
+
+class AppointmentsDoctorSuccessState extends AppStates {
+  final String message;
+
+  AppointmentsDoctorSuccessState({required this.message});
+}
+
+class AppointmentsDoctorFauilreState extends AppStates {
+  final String error;
+
+  AppointmentsDoctorFauilreState({required this.error});
+}
