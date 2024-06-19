@@ -575,7 +575,6 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-
   All_appointments_doctor_model? all_appointments_doctor_model;
   List<Date_appointment> new_appointments = [];
   List<Date_appointment> accept_appointments = [];
@@ -588,27 +587,29 @@ class AppCubit extends Cubit<AppStates> {
       token: token,
     ).then((value) {
       print(value.data["success"]);
+      print(value.data);
       print("sucess  token:${token}");
-      all_appointments_doctor_model = All_appointments_doctor_model.fromJson(value.data);
+      all_appointments_doctor_model =
+          All_appointments_doctor_model.fromJson(value.data);
 
       new_appointments = [];
       accept_appointments = [];
       reject_appointments = [];
 
       for (int i = 0; i < all_appointments_doctor_model!.data!.length; i++) {
-
         if (all_appointments_doctor_model!.data![i].status == "rejected") {
           reject_appointments!.add(all_appointments_doctor_model!.data![i]);
-        }
-        else if (all_appointments_doctor_model!.data![i].status == "accepted") {
+        } else if (all_appointments_doctor_model!.data![i].status ==
+            "accepted") {
           accept_appointments!.add(all_appointments_doctor_model!.data![i]);
-        }
-        else {
+        } else if (all_appointments_doctor_model!.data![i].status ==
+            "pending") {
           new_appointments!.add(all_appointments_doctor_model!.data![i]);
-
+        }
       }
+      print(new_appointments.length);
       emit(AppointmentsDoctorSuccessState(message: value.data["message"]));
-    }}).catchError((error) {
+    }).catchError((error) {
       print(error);
       print("fal  token:${token}");
       emit(AppointmentsDoctorFauilreState(error: error.toString()));
