@@ -724,6 +724,7 @@ class Home extends StatelessWidget {
                           children: [
                             InkWell(
                                 onTap: () {
+                                  AppCubit.get(context).getalldoctor();
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                           All_doctor(

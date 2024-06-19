@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:hospital/COMPONENTS/styles/custom_flutter_toast.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
+import 'package:hospital/PATIENTS/Home.dart';
 
 import '../../COMPONENTS/components/default_bottom.dart';
 
@@ -28,7 +30,13 @@ class _CustomCreditCardState extends State<CustomCreditCard> {
       create: (context) => AppCubit(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
-          // TODO: implement listener
+          if (state is BuyMoneySuccessState) {
+            showToast(text: state.message, state: ToastStates.SUCCESS);
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Home()));
+          } else if (state is BuyMoneyFauilreState) {
+            showToast(text: state.error, state: ToastStates.ERROR);
+          }
         },
         builder: (context, state) {
           return Scaffold(
@@ -67,6 +75,8 @@ class _CustomCreditCardState extends State<CustomCreditCard> {
                     child: DefaultButton(
                       title: "Pay",
                       onPressed: () {
+                        cardNumber = cardNumber.replaceAll(RegExp(r'\s+'), '');
+                        print(cardNumber);
                         String day = expiryDate.substring(0, 2);
                         String year = "20";
                         year += expiryDate.substring(expiryDate.length - 2);

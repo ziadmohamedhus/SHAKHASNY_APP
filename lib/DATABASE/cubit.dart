@@ -379,6 +379,7 @@ class AppCubit extends Cubit<AppStates> {
       token: token,
     ).then((value) {
       print(value.data["success"]);
+      print(value.data);
       print("sucess  token:${token}");
       all_doctor_model = All_Doctor_Model.fromJson(value.data);
       Cardiologistlist = [];
@@ -522,7 +523,7 @@ class AppCubit extends Cubit<AppStates> {
   void Getappopatient() async {
     emit(GetAppPatientLoadingState());
     await DioHelper.getData(
-      url: 'https://abdelrahman.in/api/appointments?paid=0',
+      url: 'https://abdelrahman.in/api/appointments',
       token: token,
     ).then((value) {
       print(value.data);

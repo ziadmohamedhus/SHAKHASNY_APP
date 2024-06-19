@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hospital/DATABASE/cubit.dart';
+import 'package:hospital/DATABASE/states.dart';
 import 'package:hospital/PATIENTS/Take-apointment.dart';
 import 'package:hospital/chat/presentation/views/chat.dart';
 
@@ -16,106 +17,114 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => cubit..getalldoctor(),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          actions: [
-            patient_model!.data!.roleId == 3
-                ? Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => BlocProvider.value(
-                                        value: cubit,
-                                        child: WorkHourScreen(
-                                          doc: doc,
-                                        ),
-                                      )));
-                        },
-                        icon: Icon(Icons.add),
-                        color: Colors.deepPurple,
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          AppCubit.get(context)
-                              .deletedoctor(id: doc.id.toString()!);
-                        },
-                        icon: Icon(Icons.delete),
-                        color: Colors.deepPurple,
-                      ),
-                    ],
-                  )
-                : Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ChatScreen(
-                                        doc_id: doc.id.toString(),
-                                      )));
-                        },
-                        icon: Icon(Icons.chat),
-                        color: Colors.green,
-                      ),
-                    ],
-                  )
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                CircleAvatar(
-                  radius: 70,
-                  backgroundImage: AssetImage("asset/image/1.jpg"),
-                ),
-                const SizedBox(height: 20),
-                itemProfile(
-                    "DR :", '${doc.firstName} ${doc.lastName}', Icons.person),
-                const SizedBox(height: 10),
-                itemProfile("Phone Number", '${doc.phone}', Icons.phone),
-                const SizedBox(height: 10),
-                itemProfile("Specialization", '${doc.doctor!.specialization}',
-                    Icons.science),
-                const SizedBox(height: 10),
-                itemProfile("Email", '${doc.email}', Icons.mail),
-                const SizedBox(
-                  height: 10,
-                ),
-                itemProfile("Birthday", '${doc.birthDate}', Icons.date_range),
-                const SizedBox(
-                  height: 10,
-                ),
-                itemProfile("Fees", '${doc.doctor!.fee} EG', Icons.money),
-                const SizedBox(
-                  height: 20,
-                ),
-                itemProfile(
-                    "Day Work", "<in our Hospital>", Icons.calendar_month),
-                const SizedBox(
-                  height: 20,
-                ),
-                ListView.separated(
-                    separatorBuilder: (context, index) => SizedBox(
-                          height: 5,
-                        ),
-                    shrinkWrap: true, // Add this line
-                    physics: NeverScrollableScrollPhysics(), // A
-                    itemCount: doc.workingHours!.length,
-                    itemBuilder: (context, index) => DayWork(context,
-                        day: doc.workingHours![index].dayName!,
-                        start_time: doc.workingHours![index].startTime!,
-                        end_time: doc.workingHours![index].endTime!))
+      child: BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              actions: [
+                patient_model!.data!.roleId == 3
+                    ? Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => BlocProvider.value(
+                                            value: cubit,
+                                            child: WorkHourScreen(
+                                              doc: doc,
+                                            ),
+                                          )));
+                            },
+                            icon: Icon(Icons.add),
+                            color: Colors.deepPurple,
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              AppCubit.get(context)
+                                  .deletedoctor(id: doc.id.toString()!);
+                            },
+                            icon: Icon(Icons.delete),
+                            color: Colors.deepPurple,
+                          ),
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChatScreen(
+                                            doc_id: doc.id.toString(),
+                                          )));
+                            },
+                            icon: Icon(Icons.chat),
+                            color: Colors.green,
+                          ),
+                        ],
+                      )
               ],
             ),
-          ),
-        ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 70,
+                      backgroundImage: AssetImage("asset/image/1.jpg"),
+                    ),
+                    const SizedBox(height: 20),
+                    itemProfile("DR :", '${doc.firstName} ${doc.lastName}',
+                        Icons.person),
+                    const SizedBox(height: 10),
+                    itemProfile("Phone Number", '${doc.phone}', Icons.phone),
+                    const SizedBox(height: 10),
+                    itemProfile("Specialization",
+                        '${doc.doctor!.specialization}', Icons.science),
+                    const SizedBox(height: 10),
+                    itemProfile("Email", '${doc.email}', Icons.mail),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    itemProfile(
+                        "Birthday", '${doc.birthDate}', Icons.date_range),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    itemProfile("Fees", '${doc.doctor!.fee} EG', Icons.money),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    itemProfile(
+                        "Day Work", "<in our Hospital>", Icons.calendar_month),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ListView.separated(
+                        separatorBuilder: (context, index) => SizedBox(
+                              height: 5,
+                            ),
+                        shrinkWrap: true, // Add this line
+                        physics: NeverScrollableScrollPhysics(), // A
+                        itemCount: doc.workingHours!.length,
+                        itemBuilder: (context, index) => DayWork(context,
+                            day: doc.workingHours![index].dayName!,
+                            start_time: doc.workingHours![index].startTime!,
+                            end_time: doc.workingHours![index].endTime!))
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

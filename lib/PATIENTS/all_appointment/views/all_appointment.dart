@@ -97,7 +97,13 @@ class AppointmentStatus extends StatelessWidget {
               ),
               Text(
                 "Status : ${data.status}",
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: data.status == "accepted"
+                        ? Colors.green
+                        : data.status == "rejected"
+                            ? Colors.red
+                            : Colors.black),
               ),
               SizedBox(
                 height: 5,
