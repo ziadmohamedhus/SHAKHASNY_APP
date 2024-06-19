@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
-import 'package:hospital/components.dart';
+import 'package:hospital/DOCTOR/Home.dart';
+
+import '../COMPONENTS/styles/custom_flutter_toast.dart';
 
 class new_appointment extends StatelessWidget {
   @override
@@ -13,12 +15,19 @@ class new_appointment extends StatelessWidget {
       create: (context) => AppCubit()..getallappointments(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
-          // if (state is AppointmentsDoctorSuccessState) {
-          //   showToast(text: state.message, state: ToastStates.SUCCESS);
-          //
-          // } else if (state is AppointmentsDoctorFauilreState) {
-          //   showToast(text: state.error, state: ToastStates.ERROR);
-          // }
+          if (state is AcceptAppointmentsDoctorSuccessState) {
+            showToast(text: state.message, state: ToastStates.SUCCESS);
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomeDoctor()));
+          } else if (state is RejectAppointmentsDoctorSuccessState) {
+            showToast(text: state.message, state: ToastStates.SUCCESS);
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomeDoctor()));
+          } else if (state is AcceptAppointmentsDoctorFauilreState) {
+            showToast(text: state.error, state: ToastStates.ERROR);
+          } else if (state is RejectAppointmentsDoctorFauilreState) {
+            showToast(text: state.error, state: ToastStates.ERROR);
+          }
         },
         builder: (context, state) => Scaffold(
           body: ConditionalBuilder(
@@ -127,7 +136,11 @@ class new_appointment extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () {
-                                AppCubit.get(context).accept_appointment(id: AppCubit.get(context).new_appointments[i].id.toString());
+                                AppCubit.get(context).accept_appointment(
+                                    id: AppCubit.get(context)
+                                        .new_appointments[i]
+                                        .id
+                                        .toString());
                               },
                               icon: Icon(
                                 Icons.check_box_sharp,
@@ -136,8 +149,11 @@ class new_appointment extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () {
-                                AppCubit.get(context).reject_appointment(id: AppCubit.get(context).new_appointments[i].id.toString());
-
+                                AppCubit.get(context).reject_appointment(
+                                    id: AppCubit.get(context)
+                                        .new_appointments[i]
+                                        .id
+                                        .toString());
                               },
                               icon: Icon(
                                 Icons.archive,

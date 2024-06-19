@@ -622,15 +622,14 @@ class AppCubit extends Cubit<AppStates> {
     emit(AcceptAppointmentsDoctorLoadingState());
     DioHelper.postData(
       url: 'https://abdelrahman.in/api/doctor/appointments/${id}/accept',
-      data: {
-        "_method":"PUT"
-      },
+      data: {"_method": "PUT"},
       token: token,
     ).then((value) {
       print("value ${value.data}");
       print("status ${value.statusCode}");
 
-      emit(AcceptAppointmentsDoctorSuccessState(message: value.data['data']));
+      emit(
+          AcceptAppointmentsDoctorSuccessState(message: value.data['message']));
       getallappointments();
     }).catchError((error) {
       print("error $error");
@@ -644,15 +643,14 @@ class AppCubit extends Cubit<AppStates> {
     emit(RejectAppointmentsDoctorLoadingState());
     DioHelper.postData(
       url: 'https://abdelrahman.in/api/doctor/appointments/${id}/reject',
-      data: {
-        "_method":"PUT"
-      },
+      data: {"_method": "PUT"},
       token: token,
     ).then((value) {
       print("value ${value.data}");
       print("status ${value.statusCode}");
 
-      emit(RejectAppointmentsDoctorSuccessState(message: value.data['data']));
+      emit(
+          RejectAppointmentsDoctorSuccessState(message: value.data['message']));
       getallappointments();
     }).catchError((error) {
       print("error $error");
