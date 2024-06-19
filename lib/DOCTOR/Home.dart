@@ -53,11 +53,16 @@ class HomeDoctor extends StatelessWidget {
                                           fontWeight: FontWeight.bold)),
                                 ],
                               ),
-                              // CircleAvatar(
-                              //   backgroundColor: Colors.grey[400],
-                              //   backgroundImage: AssetImage('asset/image/${Doc['image']}'),
-                              //   radius: 25.0,
-                              // )
+                              CircleAvatar(
+                                backgroundColor: Colors.grey[400],
+                                backgroundImage: patient_model!.data!.image !=
+                                        null
+                                    ? NetworkImage(
+                                        "${imagebase}${patient_model!.data!.image?.path}")
+                                    : NetworkImage(
+                                        "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
+                                radius: 25.0,
+                              )
                             ],
                           ),
                         ),

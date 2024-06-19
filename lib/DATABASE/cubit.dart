@@ -636,7 +636,7 @@ class AppCubit extends Cubit<AppStates> {
   }) {
     emit(BuyMoneyLoadingState());
     DioHelper.postData(
-            url: 'https://abdelrahman.in/api/stripe/checkout/${id}',
+            url: 'https://abdelrahman.in/api/appointments/${id}/pay',
             data: {
               'card_name': card_name,
               'card_number': card_number,
