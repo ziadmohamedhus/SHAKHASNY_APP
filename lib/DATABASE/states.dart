@@ -154,3 +154,32 @@ class AppointmentsDoctorFauilreState extends AppStates {
 
   AppointmentsDoctorFauilreState({required this.error});
 }
+
+class AcceptAppointmentsDoctorLoadingState extends AppStates {}
+
+class AcceptAppointmentsDoctorSuccessState extends AppStates {
+  final String message;
+
+  AcceptAppointmentsDoctorSuccessState({required this.message});
+}
+
+class AcceptAppointmentsDoctorFauilreState extends AppStates {
+  final String error;
+
+  AcceptAppointmentsDoctorFauilreState({required this.error});
+}
+
+
+class RejectAppointmentsDoctorLoadingState extends AppStates {}
+
+class RejectAppointmentsDoctorSuccessState extends AppStates {
+  final String message;
+
+  RejectAppointmentsDoctorSuccessState({required this.message});
+}
+
+class RejectAppointmentsDoctorFauilreState extends AppStates {
+  final String error;
+
+  RejectAppointmentsDoctorFauilreState({required this.error});
+}

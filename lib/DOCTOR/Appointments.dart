@@ -127,9 +127,7 @@ class new_appointment extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () {
-                                AppCubit.get(context).updateData_Appo(
-                                    status: 'done',
-                                    id: new_Appointement_list[i]['id']);
+                                AppCubit.get(context).accept_appointment(id: AppCubit.get(context).new_appointments[i].id.toString());
                               },
                               icon: Icon(
                                 Icons.check_box_sharp,
@@ -138,9 +136,8 @@ class new_appointment extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () {
-                                AppCubit.get(context).updateData_Appo(
-                                    status: "cancel",
-                                    id: new_Appointement_list[i]['id']);
+                                AppCubit.get(context).reject_appointment(id: AppCubit.get(context).new_appointments[i].id.toString());
+
                               },
                               icon: Icon(
                                 Icons.archive,
