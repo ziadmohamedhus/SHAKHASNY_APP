@@ -461,7 +461,7 @@ class Home extends StatelessWidget {
                                             (context),
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Chat_bot()));
+                                                    ChatBot()));
                                       },
                                       color: HexColor('ffe0f4'),
                                       child: Text(

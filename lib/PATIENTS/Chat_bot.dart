@@ -1,11 +1,17 @@
-
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class Chat_bot extends StatelessWidget {
+import '../Api/api_service.dart';
 
+class ChatBot extends StatefulWidget {
+  @override
+  State<ChatBot> createState() => _ChatBotState();
+}
 
+class _ChatBotState extends State<ChatBot> {
+  List<Map> chat = [];
 
+  TextEditingController message = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,78 +40,85 @@ class Chat_bot extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Expanded(
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView(children: [
-                  build_My_Message('Hi doctor'),
-                  build_doctor_Message('Hello Ziad how are you?!'),
-                  build_My_Message('i feel bad 🤒'),
-                  build_My_Message('i feel pain in my foot'),
-                  build_doctor_Message('oh sorry! '),
-                  build_My_Message('ok iok iok iok iok i'),
-                  build_doctor_Message('ok iokvsfvs'),
-
-                ],),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: chat.length,
+                itemBuilder: (context, index) {
+                  return chat[index]["sender"] == "patient"
+                      ? buildMyMessage(chat[index]["message"])
+                      : buildDoctorMessage(chat[index]["message"]);
+                },
               ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey.shade500,
-                    width: 1.0,
-                  ),
-                  borderRadius: BorderRadius.circular(
-                    15.0,
-                  ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.shade500,
+                  width: 1.0,
                 ),
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 15.0,
-                        ),
-                        child: TextFormField(
-                          //controller: messageController,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'type your message here ...',
-                          ),
-                        ),
+                borderRadius: BorderRadius.circular(
+                  15.0,
+                ),
+              ),
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0,
                       ),
-                    ),
-                    Container(
-                      height: 50.0,
-                      color: HexColor('8a86e2'),
-                      child: MaterialButton(
-                        onPressed: () {
-
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'please enter message';
+                          }
+                          return null;
                         },
-                        minWidth: 1.0,
-                        child: Icon(
-                          Icons.send,
-                          size: 16.0,
-                          color: Colors.white,
+                        controller: message,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'type your message here ...',
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  Container(
+                    height: 50.0,
+                    color: HexColor('8a86e2'),
+                    child: MaterialButton(
+                      onPressed: () {
+                        if (message.text.isNotEmpty) {
+                          setState(() {
+                            chat.add({"sender": 'patient', "message": message.text});
+                          });
+                          callModel(msg: message.text);
+                          setState(() {
+
+                          });
+                          message.clear();
+                        }
+                      },
+                      minWidth: 1.0,
+                      child: Icon(
+                        Icons.send,
+                        size: 16.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-
-
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-
-
-  Widget build_doctor_Message(String s) => Padding(
+  Widget buildDoctorMessage(String s) => Padding(
     padding: const EdgeInsets.all(3.0),
     child: Align(
       alignment: AlignmentDirectional.centerStart,
@@ -141,7 +154,7 @@ class Chat_bot extends StatelessWidget {
               horizontal: 20.0,
             ),
             child: Text(
-              s,style: TextStyle(fontSize: 17,),
+              s, style: TextStyle(fontSize: 17,),
             ),
           ),
         ],
@@ -149,7 +162,7 @@ class Chat_bot extends StatelessWidget {
     ),
   );
 
-  Widget build_My_Message(String s) => Padding(
+  Widget buildMyMessage(String s) => Padding(
     padding: const EdgeInsets.all(3.0),
     child: Align(
       alignment: AlignmentDirectional.centerEnd,
@@ -157,10 +170,9 @@ class Chat_bot extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-
           Container(
             decoration: BoxDecoration(
-              color:HexColor('ffe0f4').withOpacity(.9,),
+              color: HexColor('ffe0f4').withOpacity(.9,),
               borderRadius: BorderRadiusDirectional.only(
                 bottomStart: Radius.circular(
                   20.0,
@@ -178,7 +190,7 @@ class Chat_bot extends StatelessWidget {
               horizontal: 20.0,
             ),
             child: Text(
-              s,style: TextStyle(fontSize: 17,),
+              s, style: TextStyle(fontSize: 17,),
             ),
           ),
           SizedBox(
@@ -190,9 +202,30 @@ class Chat_bot extends StatelessWidget {
               'asset/image/1.jpg',
             ),
           ),
-
         ],
       ),
     ),
   );
+
+  void callModel({required String msg}) {
+    print(msg);
+    DioHelper.postData(
+      url: 'http://127.0.0.1:5000/get',
+      data: {
+        "msg": msg
+      },
+    ).then((value) {
+      print(value.statusCode);
+      print(value.statusMessage);
+      print(value.data);
+
+      print(value.data["message"]);
+      setState(() {
+        chat.add({"sender": 'ai', "message": value.data["message"]});
+      });
+    }).catchError((error) {
+      print("error $error");
+      setState(() {});
+    });
+  }
 }
