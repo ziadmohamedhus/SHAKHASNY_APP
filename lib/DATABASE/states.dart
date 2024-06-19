@@ -70,7 +70,6 @@ class DeleteDoctorLoadingState extends AppStates {}
 class DeleteDoctorSuccessState extends AppStates {
   final String message;
   DeleteDoctorSuccessState({required this.message});
-
 }
 
 class DeleteDoctorFauilreState extends AppStates {
@@ -93,7 +92,6 @@ class GetworkDoctorFauilreState extends AppStates {
   GetworkDoctorFauilreState({required this.error});
 }
 
-
 class MakeAppointmentLoadingState extends AppStates {}
 
 class MakeAppointmentSuccessState extends AppStates {
@@ -108,4 +106,12 @@ class MakeAppointmentFauilreState extends AppStates {
   MakeAppointmentFauilreState({required this.error});
 }
 
+class GettimedoctorLoadingState extends AppStates {}
 
+class GettimedoctorSuccessState extends AppStates {}
+
+class GettimedoctorFauilreState extends AppStates {
+  final String error;
+
+  GettimedoctorFauilreState({required this.error});
+}

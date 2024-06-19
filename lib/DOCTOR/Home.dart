@@ -8,8 +8,8 @@ import 'package:lottie/lottie.dart';
 
 import 'Appointments.dart';
 import 'Done.dart';
-import 'Top_doc.dart';
 import 'canceled.dart';
+import 'chat/presentation/views/chat_doctor.dart';
 
 class HomeDoctor extends StatelessWidget {
   @override
@@ -37,11 +37,10 @@ class HomeDoctor extends StatelessWidget {
                                 children: [
                                   Text(
                                     'HELLO,',
-                                    style:
-                                        TextStyle(
-                                            color: HexColor('32313a'),
-                                            fontSize: 15.0,
-                                            fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        color: HexColor('32313a'),
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
                                     height: 5.0,
@@ -49,9 +48,9 @@ class HomeDoctor extends StatelessWidget {
                                   Text(
                                       'Dr.${patient_model!.data!.firstName} ${patient_model!.data!.lastName}',
                                       style: TextStyle(
-                color: HexColor('32313a'),
-                 fontSize: 25.0,
-                fontWeight: FontWeight.bold)),
+                                          color: HexColor('32313a'),
+                                          fontSize: 25.0,
+                                          fontWeight: FontWeight.bold)),
                                 ],
                               ),
                               // CircleAvatar(
@@ -297,133 +296,75 @@ class HomeDoctor extends StatelessWidget {
                                   ],
                                 ),
                               ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: HexColor('8a86e2'),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Container(
+                                        width: 180.0,
+                                        height: 160.0,
+                                        child: Lottie.network(
+                                            'https://assets6.lottiefiles.com/packages/lf20_fxvz0c.json')),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'All appointments booked.',
+                                            style: TextStyle(
+                                                color: HexColor('32313a'),
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(
+                                            height: 4,
+                                          ),
+                                          Text(
+                                            'All appointments that you have to complete.',
+                                            style: TextStyle(
+                                                color: HexColor('32313a'),
+                                                fontSize: 13.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(
+                                            height: 12,
+                                          ),
+                                          MaterialButton(
+                                            onPressed: () {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (BuildContext
+                                                              context) =>
+                                                          ChatDoctorScreen()));
+                                            },
+                                            color: HexColor('ffe0f4'),
+                                            child: Text(
+                                              'Show!',
+                                              style: TextStyle(
+                                                  color: HexColor('8a86e2'),
+                                                  fontSize: 15.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
                         //الدكاترة عنوان
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('The patients',
-                                      style: TextStyle(
-                color: HexColor('32313a'),
-                 fontSize: 25.0,
-                fontWeight: FontWeight.bold)),
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  InkWell(
-                                      onTap: () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        Top_Patient()));
-                                      },
-                                      child: Text(
-                                        'See more',
-                                        style: TextStyle(
-                                            color: Colors.grey[500],
-                                            fontSize: 15.0,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        // الدكاترة
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.pinkAccent[100]!
-                                        .withOpacity(0.2),
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      Stack(
-                                        alignment:
-                                            AlignmentDirectional.bottomCenter,
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 65.0,
-                                            backgroundImage: AssetImage(
-                                                'asset/image/p1.jpg'),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        'Ziad mohamed',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 15.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        '20 years',
-                                        style: TextStyle(
-                                            color: Colors.grey[800],
-                                            fontSize: 10.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.pinkAccent[100]!
-                                        .withOpacity(0.2),
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      Stack(
-                                        alignment:
-                                            AlignmentDirectional.bottomCenter,
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 65.0,
-                                            backgroundImage: AssetImage(
-                                                'asset/image/p2.jpg'),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        'Ahmed Hussie',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 15.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        '30 years',
-                                        style: TextStyle(
-                                            color: Colors.grey[800],
-                                            fontSize: 10.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
                       ],
                     ),
                   ),

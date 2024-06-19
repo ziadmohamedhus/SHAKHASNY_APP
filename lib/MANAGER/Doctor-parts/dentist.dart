@@ -6,7 +6,6 @@ import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
 import 'package:hospital/MANAGER/profile_doctor.dart';
 
-import '../../components.dart';
 import '../../constant.dart';
 
 class teeth extends StatelessWidget {
@@ -17,8 +16,10 @@ class teeth extends StatelessWidget {
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) => ConditionalBuilder(
-          fallback: (context) => CircularProgressIndicator(
-            color: Colors.deepPurple,
+          fallback: (context) => Center(
+            child: CircularProgressIndicator(
+              color: Colors.deepPurple,
+            ),
           ),
           condition: Dentistlist!.isNotEmpty,
           builder: (context) => ListView(
@@ -58,7 +59,7 @@ class teeth extends StatelessWidget {
               for (int i = 0; i < Dentistlist!.length; i++)
                 Dismissible(
                   key: Key(
-                    "${Dentistlist![i].firstName}",
+                    "${Dentistlist![i].id}",
                   ),
                   onDismissed: (direction) {
                     showDialog(
@@ -79,7 +80,7 @@ class teeth extends StatelessWidget {
                               content: Text('This doctor has been removed'),
                             ));
                     AppCubit.get(context)
-                        .deleteData_doctor(id: doctorlist_Dentist[i]["id"]);
+                        .deleteData_doctor(id: Dentistlist![i].id!);
                   },
                   child: Card(
                     color: HexColor('8a86e2'),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "24819287077",
+    "project_id": "shakhsni",
+    "storage_bucket": "shakhsni.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24819287077:android:b0e6125dfd0ea729b2abcc",
+        "android_client_info": {
+          "package_name": "com.example.my_doctor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS25FOj10m3BdHSF_nOke2_O4xL92MU2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

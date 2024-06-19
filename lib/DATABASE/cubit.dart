@@ -12,6 +12,7 @@ import '../PATIENTS/Acount.dart';
 import '../PATIENTS/Home.dart';
 import '../PATIENTS/Pharmacy.dart';
 import '../components.dart';
+import '../work_hour/data/timedoctor.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -419,9 +420,9 @@ class AppCubit extends Cubit<AppStates> {
     DioHelper.postData(
             url: 'https://abdelrahman.in/api/doctor/working/hours/${id}',
             data: {
-              'day': day,
-              'start_date': start_date,
-              'end_date': end_date,
+              'day_name': day,
+              'start_time': start_date,
+              'end_time': end_date,
             },
             token: token)
         .then((value) {
@@ -445,30 +446,23 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  void deletedoctor({required int id}) async {
+  void deletedoctor({
+    required String id,
+  }) {
     emit(DeleteDoctorLoadingState());
-    await DioHelper.deleteData(
-      url: 'https://abdelrahman.in/api/destroy/$id',
+    DioHelper.postData(
+      url: 'https://abdelrahman.in/api/doctor/destroy/"${id}',
+      data: {},
       token: token,
     ).then((value) {
-      if (value.statusCode! >= 200 && value.statusCode! < 300) {
-        print(value.data["message"]);
-        getalldoctor();
-        emit(DeleteDoctorSuccessState(message: value.data["message"]));
-      } else {
-        if (value.statusCode == 401) {
-          emit(DeleteDoctorFauilreState(error: value.data["message"]));
-          print(value.data["message"]);
-          print(value.data);
-        } else {
-          emit(DeleteDoctorFauilreState(error: value.data["message"]));
-          print(value.data["message"]);
-          print(value.data);
-        }
-      }
+      print("value ${value.data}");
+      print("status ${value.statusCode}");
+      emit(DeleteDoctorSuccessState(message: value.data['data']));
+    }).catchError((error) {
+      print("error $error");
+      emit(DeleteDoctorFauilreState(error: error.toString()));
     });
   }
-
 
   void MakeAppointment({
     required String doctor_id,
@@ -478,14 +472,14 @@ class AppCubit extends Cubit<AppStates> {
   }) {
     emit(MakeAppointmentLoadingState());
     DioHelper.postData(
-        url: 'https://abdelrahman.in/api/doctor/working/hours/appointments',
-        data: {
-          'doctor_id': doctor_id,
-          'date': date,
-          'time': time,
-          'reason': reason,
-        },
-        token: token)
+            url: 'https://abdelrahman.in/api/appointments',
+            data: {
+              'doctor_id': doctor_id,
+              'day_name': date,
+              'time': time,
+              'reason': reason,
+            },
+            token: token)
         .then((value) {
       if (value.statusCode! >= 200 && value.statusCode! < 300) {
         emit(MakeAppointmentSuccessState(message: value.data["message"]));
@@ -506,4 +500,20 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  Time_Doc? time_doc;
+
+  void gettimedoctor({required String id, required String day}) async {
+    emit(GettimedoctorLoadingState());
+    await DioHelper.getData(
+      url: 'https://abdelrahman.in/api/available-slots/${id}?day_name=${day}',
+      token: token,
+    ).then((value) {
+      print(value.data);
+      time_doc = Time_Doc.fromJson(value.data);
+      print(time_doc!.data!.length);
+      emit(GettimedoctorSuccessState());
+    }).catchError((error) {
+      emit(GettimedoctorFauilreState(error: error.toString()));
+    });
+  }
 }

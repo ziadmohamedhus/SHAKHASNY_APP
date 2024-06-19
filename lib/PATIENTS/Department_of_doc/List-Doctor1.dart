@@ -4,10 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
-import 'package:hospital/components.dart';
 
 import '../../constant.dart';
-import '../View-doctor.dart';
 
 class Dentist extends StatelessWidget {
   @override
@@ -20,7 +18,6 @@ class Dentist extends StatelessWidget {
             body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: ConditionalBuilder(
-
             fallback: (context) => Center(
               child: CircularProgressIndicator(
                 color: Colors.deepPurple,
@@ -93,16 +90,15 @@ class Dentist extends StatelessWidget {
                       //الصورة في الاول
                       leading: CircleAvatar(
                         backgroundColor: Colors.grey[400],
-                        backgroundImage: AssetImage(
-                            'asset/image/1.jpg'),
+                        backgroundImage: AssetImage('asset/image/1.jpg'),
                         radius: 25.0,
                       ),
                       //ايقونة في الاخر
                       trailing: Icon(Icons.more_horiz_outlined),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                View_doctor(doctorlist_Dentist[i])));
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (BuildContext context) =>
+                        //         View_doctor(doctorlist_Dentist[i])));
                       },
                     ),
                   ),

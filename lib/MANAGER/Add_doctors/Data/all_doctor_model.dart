@@ -185,27 +185,27 @@ class Image {
 
 class WorkingHours {
   int? id;
-  String? day;
-  String? startDate;
-  String? endDate;
+  String? dayName;
+  String? startTime;
+  String? endTime;
   int? doctorId;
   String? createdAt;
   String? updatedAt;
 
   WorkingHours(
       {this.id,
-      this.day,
-      this.startDate,
-      this.endDate,
+      this.dayName,
+      this.startTime,
+      this.endTime,
       this.doctorId,
       this.createdAt,
       this.updatedAt});
 
   WorkingHours.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    day = json['day'];
-    startDate = json['start_date'];
-    endDate = json['end_date'];
+    dayName = json['day_name'];
+    startTime = json['start_time'];
+    endTime = json['end_time'];
     doctorId = json['doctor_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -214,9 +214,9 @@ class WorkingHours {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['day'] = this.day;
-    data['start_date'] = this.startDate;
-    data['end_date'] = this.endDate;
+    data['day_name'] = this.dayName;
+    data['start_time'] = this.startTime;
+    data['end_time'] = this.endTime;
     data['doctor_id'] = this.doctorId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;

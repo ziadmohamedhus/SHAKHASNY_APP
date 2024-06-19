@@ -5,6 +5,7 @@ import 'package:hospital/COMPONENTS/components/default_bottom.dart';
 import 'package:hospital/COMPONENTS/styles/custom_flutter_toast.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
+import 'package:hospital/MANAGER/Home-M.dart';
 
 import '../../MANAGER/Add_doctors/Data/all_doctor_model.dart';
 
@@ -22,7 +23,8 @@ class WorkHourScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is GetworkDoctorSuccessState) {
           showToast(text: state.message, state: ToastStates.SUCCESS);
-          Navigator.pop(context);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => HomeManager()));
         } else if (state is GetworkDoctorFauilreState) {
           showToast(text: state.error, state: ToastStates.ERROR);
         }
