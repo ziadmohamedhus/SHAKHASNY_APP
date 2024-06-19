@@ -79,7 +79,12 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 70,
-                      backgroundImage: AssetImage("asset/image/1.jpg"),
+                      backgroundImage: doc.image !=
+                          null
+                          ? NetworkImage(
+                          "${imagebase}${doc.image!.path}")
+                          : NetworkImage(
+                          "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
                     ),
                     const SizedBox(height: 20),
                     itemProfile("DR :", '${doc.firstName} ${doc.lastName}',

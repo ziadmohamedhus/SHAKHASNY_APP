@@ -14,8 +14,5 @@ List<DataDoctor>? Neproistlist = [];
 List<DataDoctor>? Ortholist = [];
 List<DataDoctor>? Dentistlist = [];
 List<DataDoctor>? eyeslist = [];
-//Cardiologist
-//Orthopedic
-//Nephrologist
-
-//Ophthalmologist
+String imagebase = "https://abdelrahman.in/storage/";
+String copyimage = "https://cdn-icons-png.freepik.com/512/8459/8459373.png";

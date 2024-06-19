@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             themeMode: ThemeMode.light,
-            home: Animation1(),
+            home: ChatBot(),
           );
         },
       ),

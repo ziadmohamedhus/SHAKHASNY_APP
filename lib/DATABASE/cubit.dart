@@ -1,9 +1,13 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hospital/DATABASE/states.dart';
 import 'package:hospital/constant.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../Api/api_service.dart';
@@ -324,54 +328,55 @@ class AppCubit extends Cubit<AppStates> {
 
   //==============================================
 
-  void Add_doctor({
-    required String email,
-    required String password,
-    required String password_confirmation,
-    required String phone,
-    required String first_name,
-    required String last_name,
-    required String birth_date,
-    required String specialization,
-    required String fees,
-  }) {
-    emit(AddDoctorLoadingState());
-    DioHelper.postData(
-      url: 'https://abdelrahman.in/api/doctor/store',
-      data: {
-        'first_name': first_name,
-        'last_name': last_name,
-        'email': email,
-        'password': password,
-        'password_confirmation': password_confirmation,
-        'phone': phone,
-        'birth_date': birth_date,
-        'specialization': specialization,
-        'department_id': "1",
-        "fee": fees
-      },
-      token: token,
-    ).then((value) {
-      if (value.statusCode! >= 200 && value.statusCode! < 300) {
-        print(value.data["message"]);
-        getalldoctor();
-        emit(AddDoctorSuccessState(message: value.data["message"]));
-      } else {
-        if (value.statusCode == 401) {
-          emit(AddDoctorFauilreState(error: value.data["message"]));
-          print(value.data["message"]);
-          print(value.data);
-        } else {
-          emit(AddDoctorFauilreState(error: value.data["message"]));
-          print(value.data["message"]);
-          print(value.data);
-        }
-      }
-    }).catchError((error) {
-      //log(error.toString());
-      emit(AddDoctorFauilreState(error: error));
-    });
-  }
+  // void Add_doctor(
+  //     {required String email,
+  //     required String password,
+  //     required String password_confirmation,
+  //     required String phone,
+  //     required String first_name,
+  //     required String last_name,
+  //     required String birth_date,
+  //     required String specialization,
+  //     required String fees,
+  //     required String image}) {
+  //   emit(AddDoctorLoadingState());
+  //   DioHelper.postData(
+  //     url: 'https://abdelrahman.in/api/doctor/store',
+  //     data: {
+  //       'first_name': first_name,
+  //       'last_name': last_name,
+  //       'email': email,
+  //       'password': password,
+  //       'password_confirmation': password_confirmation,
+  //       'phone': phone,
+  //       'birth_date': birth_date,
+  //       'specialization': specialization,
+  //       'department_id': "1",
+  //       "fee": fees,
+  //       "image": image,
+  //     },
+  //     token: token,
+  //   ).then((value) {
+  //     if (value.statusCode! >= 200 && value.statusCode! < 300) {
+  //       print(value.data["message"]);
+  //       getalldoctor();
+  //       emit(AddDoctorSuccessState(message: value.data["message"]));
+  //     } else {
+  //       if (value.statusCode == 401) {
+  //         emit(AddDoctorFauilreState(error: value.data["message"]));
+  //         print(value.data["message"]);
+  //         print(value.data);
+  //       } else {
+  //         emit(AddDoctorFauilreState(error: value.data["message"]));
+  //         print(value.data["message"]);
+  //         print(value.data);
+  //       }
+  //     }
+  //   }).catchError((error) {
+  //     //log(error.toString());
+  //     emit(AddDoctorFauilreState(error: error));
+  //   });
+  // }
 
   void getalldoctor() async {
     emit(GetAllDoctorLoadingState());
@@ -411,6 +416,91 @@ class AppCubit extends Cubit<AppStates> {
       print("fal  token:${token}");
       emit(GetAllDoctorFauilreState(error: error.toString()));
     });
+  }
+
+  String? image;
+  final ImagePicker picker = ImagePicker();
+  void openGallery(BuildContext context) async {
+    try {
+      final XFile? pickedImage =
+          await picker.pickImage(source: ImageSource.gallery);
+      if (pickedImage != null) {
+        File imageFile = File(pickedImage.path);
+        image = pickedImage.path;
+      }
+    } catch (e) {
+      print('Error picking image: $e');
+    }
+  }
+
+  void ADD_Doctor({
+    required String email,
+    required String password,
+    required String password_confirmation,
+    required String phone,
+    required String first_name,
+    required String last_name,
+    required String birth_date,
+    required String specialization,
+    required String fees,
+  }) async {
+    emit(AddDoctorLoadingState());
+    print(image);
+    try {
+      Map<String, String> headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'lang': "en",
+        'Authorization': token ?? '',
+      };
+
+      Map<String, String> map = {
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': email,
+        'password': password,
+        'password_confirmation': password_confirmation,
+        'phone': phone,
+        'birth_date': birth_date,
+        'specialization': specialization,
+        'department_id': "1",
+        "fee": fees,
+      };
+
+      Uri uri = Uri.parse("https://abdelrahman.in/api/doctor/store");
+      var request = http.MultipartRequest('POST', uri);
+      request.headers.addAll(headers);
+      request.fields.addAll(map);
+
+      if (image != null && image!.isNotEmpty) {
+        request.files.add(await http.MultipartFile.fromPath('image', image!));
+      }
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+      print('Response body: ${response.body}'); // Print the raw response body
+      print('Response status: ${response.statusCode}'); // Print the status code
+
+      var result;
+      try {
+        result = jsonDecode(response.body);
+      } catch (e) {
+        throw FormatException('Failed to decode JSON response');
+      }
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        print(result["message"]);
+        getalldoctor();
+        emit(AddDoctorSuccessState(message: result["message"]));
+      } else {
+        emit(AddDoctorFauilreState(error: result["message"]));
+        print(result["message"]);
+        print(result);
+      }
+    } catch (e) {
+      print('Error: ${e.toString()}');
+      emit(AddDoctorFauilreState(error: e.toString()));
+    }
   }
 
   void workhourdoctor({
@@ -460,7 +550,7 @@ class AppCubit extends Cubit<AppStates> {
     ).then((value) {
       print("value ${value.data}");
       print("status ${value.statusCode}");
-      emit(DeleteDoctorSuccessState(message: value.data['data']));
+      emit(DeleteDoctorSuccessState(message: value.data['message']));
     }).catchError((error) {
       print("error $error");
       emit(DeleteDoctorFauilreState(error: error.toString()));
@@ -546,7 +636,7 @@ class AppCubit extends Cubit<AppStates> {
   }) {
     emit(BuyMoneyLoadingState());
     DioHelper.postData(
-            url: 'https://abdelrahman.in/api/stripe/checkout/${id}',
+            url: 'https://abdelrahman.in/api/appointments/${id}/pay',
             data: {
               'card_name': card_name,
               'card_number': card_number,

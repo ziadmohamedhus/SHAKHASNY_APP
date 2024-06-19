@@ -6,6 +6,7 @@ import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
 
 import '../components.dart';
+import '../constant.dart';
 
 
 
@@ -41,7 +42,12 @@ class Top_Patient extends StatelessWidget {
                         ),
                         CircleAvatar(
                           backgroundColor: Colors.grey[400],
-                          backgroundImage: AssetImage('asset/image/1.jpg'),
+                          backgroundImage: patient_model!.data!.image !=
+                              null
+                              ? NetworkImage(
+                              "${imagebase}${patient_model!.data!.image?.path}")
+                              : NetworkImage(
+                              "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
                           radius: 25.0,
                         )
                       ],

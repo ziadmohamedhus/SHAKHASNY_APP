@@ -48,6 +48,7 @@ class Data {
   String? birthDate;
   String? createdAt;
   String? updatedAt;
+  Image? image;
 
   Data(
       {this.id,
@@ -59,7 +60,8 @@ class Data {
       this.phone,
       this.birthDate,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.image});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -72,6 +74,7 @@ class Data {
     birthDate = json['birth_date'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    image = json['image'] != null ? new Image.fromJson(json['image']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -84,6 +87,46 @@ class Data {
     data['email_verified_at'] = this.emailVerifiedAt;
     data['phone'] = this.phone;
     data['birth_date'] = this.birthDate;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    if (this.image != null) {
+      data['image'] = this.image!.toJson();
+    }
+    return data;
+  }
+}
+
+class Image {
+  int? id;
+  String? path;
+  String? imageableType;
+  int? imageableId;
+  String? createdAt;
+  String? updatedAt;
+
+  Image(
+      {this.id,
+      this.path,
+      this.imageableType,
+      this.imageableId,
+      this.createdAt,
+      this.updatedAt});
+
+  Image.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    path = json['path'];
+    imageableType = json['imageable_type'];
+    imageableId = json['imageable_id'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['path'] = this.path;
+    data['imageable_type'] = this.imageableType;
+    data['imageable_id'] = this.imageableId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;

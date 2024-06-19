@@ -283,23 +283,12 @@ class Add_doctor extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                            child: TextFormField(
-                              controller: a8,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'please enter your Serial image';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                  labelText: 'Serial image',
-                                  hintText: 'Enter The Serial image',
-                                  prefixIcon: Icon(Icons.image),
-                                  border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(30.0))),
-                            ),
-                          ),
+                              child: IconButton(
+                            onPressed: () {
+                              AppCubit.get(context).openGallery(context);
+                            },
+                            icon: Icon(Icons.image),
+                          )),
                           Expanded(
                             child: TextFormField(
                               keyboardType: TextInputType.number,
@@ -327,7 +316,7 @@ class Add_doctor extends StatelessWidget {
                       MaterialButton(
                         onPressed: () {
                           if (Register_Key.currentState!.validate()) {
-                            AppCubit.get(context).Add_doctor(
+                            AppCubit.get(context).ADD_Doctor(
                                 fees: fees.text,
                                 password_confirmation:
                                     password_confirmation.text,

@@ -5,6 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
 
+import '../../MANAGER/profile_doctor.dart';
 import '../../constant.dart';
 
 class Cardiologist extends StatelessWidget {
@@ -88,15 +89,20 @@ class Cardiologist extends StatelessWidget {
                       //الصورة في الاول
                       leading: CircleAvatar(
                         backgroundColor: Colors.grey[400],
-                        backgroundImage: AssetImage('asset/image/1.jpg'),
+                        backgroundImage: Cardiologistlist![i].image !=
+                            null
+                            ? NetworkImage(
+                            "${imagebase}${Cardiologistlist![i].image!.path}")
+                            : NetworkImage(
+                            "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
                         radius: 25.0,
                       ),
                       //ايقونة في الاخر
                       trailing: Icon(Icons.more_horiz_outlined),
                       onTap: () {
-                        // Navigator.of(context).push(MaterialPageRoute(
-                        //     builder: (BuildContext context) =>
-                        //         View_doctor(doctorlist_Dentist[i])));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                ProfileScreen(doc: Cardiologistlist![i],)));
                       },
                     ),
                   ),

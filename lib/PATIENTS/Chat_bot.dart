@@ -10,7 +10,18 @@ class ChatBot extends StatefulWidget {
 
 class _ChatBotState extends State<ChatBot> {
   List<Map> chat = [];
+  int age=22;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    chat = [];
+    // callModel(msg: "ok");
+    //  callModel(msg: "ziad");
+    // callModel(msg: 22);
+
+  }
   TextEditingController message = TextEditingController();
 
   @override
@@ -135,27 +146,31 @@ class _ChatBotState extends State<ChatBot> {
             width: 7.0,
           ),
           Container(
-            decoration: BoxDecoration(
-              color: HexColor('8a86e2').withOpacity(0.5),
-              borderRadius: BorderRadiusDirectional.only(
-                bottomEnd: Radius.circular(
-                  20.0,
-                ),
-                topStart: Radius.circular(
-                  20.0,
-                ),
-                topEnd: Radius.circular(
-                  20.0,
+            //height: 100,
+              decoration: BoxDecoration(
+                color: HexColor('8a86e2').withOpacity(0.5),
+                borderRadius: BorderRadiusDirectional.only(
+                  bottomEnd: Radius.circular(
+                    20.0,
+                  ),
+                  topStart: Radius.circular(
+                    20.0,
+                  ),
+                  topEnd: Radius.circular(
+                    20.0,
+                  ),
                 ),
               ),
-            ),
-            padding: EdgeInsets.symmetric(
-              vertical: 15.0,
-              horizontal: 20.0,
-            ),
-            child: Text(
-              s, style: TextStyle(fontSize: 17,),
-            ),
+              padding: EdgeInsets.symmetric(
+                vertical: 15.0,
+                horizontal: 20.0,
+              ),
+              child: Text(
+                s,
+                style: TextStyle(fontSize: 13),
+                maxLines: 2,
+                overflow: TextOverflow.visible, // You can use TextOverflow.fade or TextOverflow.clip as well
+              )
           ),
         ],
       ),
@@ -171,27 +186,30 @@ class _ChatBotState extends State<ChatBot> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            decoration: BoxDecoration(
-              color: HexColor('ffe0f4').withOpacity(.9,),
-              borderRadius: BorderRadiusDirectional.only(
-                bottomStart: Radius.circular(
-                  20.0,
-                ),
-                topStart: Radius.circular(
-                  20.0,
-                ),
-                topEnd: Radius.circular(
-                  20.0,
+              decoration: BoxDecoration(
+                color: HexColor('ffe0f4').withOpacity(.9,),
+                borderRadius: BorderRadiusDirectional.only(
+                  bottomStart: Radius.circular(
+                    20.0,
+                  ),
+                  topStart: Radius.circular(
+                    20.0,
+                  ),
+                  topEnd: Radius.circular(
+                    20.0,
+                  ),
                 ),
               ),
-            ),
-            padding: EdgeInsets.symmetric(
-              vertical: 15.0,
-              horizontal: 20.0,
-            ),
-            child: Text(
-              s, style: TextStyle(fontSize: 17,),
-            ),
+              padding: EdgeInsets.symmetric(
+                vertical: 15.0,
+                horizontal: 20.0,
+              ),
+              child: Text(
+                s,
+                style: TextStyle(fontSize: 17),
+                maxLines: 2,
+                overflow: TextOverflow.visible, // You can use TextOverflow.fade or TextOverflow.clip as well
+              )
           ),
           SizedBox(
             width: 7.0,
@@ -207,10 +225,10 @@ class _ChatBotState extends State<ChatBot> {
     ),
   );
 
-  void callModel({required String msg}) {
+  void callModel({required dynamic msg}) {
     print(msg);
     DioHelper.postData(
-      url: 'http://127.0.0.1:5000/get',
+      url: 'https://7a1e-197-36-164-79.ngrok-free.app/get',
       data: {
         "msg": msg
       },
@@ -226,6 +244,7 @@ class _ChatBotState extends State<ChatBot> {
     }).catchError((error) {
       print("error $error");
       setState(() {});
-    });
-  }
+      });
+    }
+
 }
