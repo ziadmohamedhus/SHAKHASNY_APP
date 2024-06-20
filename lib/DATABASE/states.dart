@@ -140,7 +140,6 @@ class BuyMoneyFauilreState extends AppStates {
   BuyMoneyFauilreState({required this.error});
 }
 
-
 class AppointmentsDoctorLoadingState extends AppStates {}
 
 class AppointmentsDoctorSuccessState extends AppStates {
@@ -169,7 +168,6 @@ class AcceptAppointmentsDoctorFauilreState extends AppStates {
   AcceptAppointmentsDoctorFauilreState({required this.error});
 }
 
-
 class RejectAppointmentsDoctorLoadingState extends AppStates {}
 
 class RejectAppointmentsDoctorSuccessState extends AppStates {
@@ -182,4 +180,14 @@ class RejectAppointmentsDoctorFauilreState extends AppStates {
   final String error;
 
   RejectAppointmentsDoctorFauilreState({required this.error});
+}
+
+class GetMedicinesLoadingState extends AppStates {}
+
+class GetMedicinesSuccessState extends AppStates {}
+
+class GetMedicinesFauilreState extends AppStates {
+  final String error;
+
+  GetMedicinesFauilreState({required this.error});
 }

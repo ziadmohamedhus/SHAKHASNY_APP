@@ -18,6 +18,7 @@ import '../PATIENTS/Home.dart';
 import '../PATIENTS/Pharmacy.dart';
 import '../PATIENTS/all_appointment/data/appointment_model.dart';
 import '../components.dart';
+import '../pharmacy/data/pharmacy_model.dart';
 import '../work_hour/data/timedoctor.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -745,6 +746,21 @@ class AppCubit extends Cubit<AppStates> {
     }).catchError((error) {
       print("error $error");
       emit(RejectAppointmentsDoctorFauilreState(error: error.toString()));
+    });
+  }
+
+  Pharmacy_Model? pharmacy_model;
+  void GetMedicines() async {
+    emit(GetMedicinesLoadingState());
+    await DioHelper.getData(
+      url: 'https://abdelrahman.in/api/medicines',
+      token: token,
+    ).then((value) {
+      print(value.data);
+      pharmacy_model = Pharmacy_Model.fromJson(value.data);
+      emit(GetMedicinesSuccessState());
+    }).catchError((error) {
+      emit(GetMedicinesFauilreState(error: error.toString()));
     });
   }
 }
