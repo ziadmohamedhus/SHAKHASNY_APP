@@ -53,6 +53,9 @@ dependencies:
   auto_direction: ^0.0.6
   http: ^1.2.1
   image_picker: ^1.1.2
+  google_maps_flutter: ^2.7.0
+  flutter_inappwebview: ^6.0.0
+  location:
   dio_cookie_manager:
   cookie_jar:
 

@@ -6,6 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
 
+import '../MAPS/custom_google_maps.dart';
 import '../START/Animation.dart';
 import '../constant.dart';
 import 'About-us.dart';
@@ -468,6 +469,72 @@ class Home extends StatelessWidget {
                                         'Join us now!',
                                         style: TextStyle(
                                             color: HexColor('8a86e2'),
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: HexColor('ffe0f4'),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Image.asset(
+                                'asset/icon/2.png',
+                                height: 160,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Calculate Your BMI:',
+                                      style: TextStyle(
+                                          color: HexColor('32313a'),
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      'fill the form now!!',
+                                      style: TextStyle(
+                                          color: HexColor('32313a'),
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
+                                    MaterialButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => custom_google_map()));
+                                      },
+                                      color: HexColor('8a86e2'),
+                                      child: Text(
+                                        'GET STARTED!',
+                                        style: TextStyle(
+                                            color: HexColor('ffe0f4'),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold),
                                       ),

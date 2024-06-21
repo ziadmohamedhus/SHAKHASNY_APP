@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart' as intl;
 
 class ChatBubble extends StatelessWidget {
@@ -18,12 +19,18 @@ class ChatBubble extends StatelessWidget {
           padding:
               const EdgeInsets.only(top: 32, bottom: 32, right: 32, left: 16),
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(32),
-              topRight: Radius.circular(32),
-              bottomLeft: Radius.circular(32),
+            color: HexColor('ffe0f4').withOpacity(.9,),
+            borderRadius: BorderRadiusDirectional.only(
+              bottomStart: Radius.circular(
+                20.0,
+              ),
+              topStart: Radius.circular(
+                20.0,
+              ),
+              topEnd: Radius.circular(
+                20.0,
+              ),
             ),
-            color: Colors.blue,
           ),
           child: Text(
             message,
@@ -92,18 +99,25 @@ class ChatBubbleForBot extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           padding:
               const EdgeInsets.only(top: 32, bottom: 32, right: 32, left: 16),
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(32),
-                topRight: Radius.circular(32),
-                bottomRight: Radius.circular(32),
+          decoration: BoxDecoration(
+            color: HexColor('8a86e2').withOpacity(0.5),
+            borderRadius: BorderRadiusDirectional.only(
+              bottomEnd: Radius.circular(
+                20.0,
               ),
-              color: Colors.green),
+              topStart: Radius.circular(
+                20.0,
+              ),
+              topEnd: Radius.circular(
+                20.0,
+              ),
+            ),
+          ),
           child: Text(
             message,
             textDirection:
                 isRTL(message) ? TextDirection.rtl : TextDirection.ltr,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.black),
           )),
     );
   }
