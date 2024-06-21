@@ -9,7 +9,7 @@ import 'package:lottie/lottie.dart';
 
 import '../PATIENTS/Department_of_doc/List-Doctor6.dart';
 import '../constant.dart';
-import 'Accounts.dart';
+import '../pharmacy/views/Accounts_Medicine.dart';
 import 'Add_doctors/add_doctor.dart';
 import 'Doctors.dart';
 import 'all_patient.dart';
@@ -225,7 +225,7 @@ class HomeManager extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                all_patient()));
+                                                Pharmacy_Manager()));
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(5.0),
@@ -244,7 +244,7 @@ class HomeManager extends StatelessWidget {
                                           height: 5.0,
                                         ),
                                         Text(
-                                          'all patients',
+                                          'Pharmacy',
                                           style: TextStyle(
                                               color: HexColor('32313a'),
                                               fontSize: 20.0,
@@ -262,7 +262,7 @@ class HomeManager extends StatelessWidget {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (BuildContext context) =>
-                                                Accounts()));
+                                                AccountMedicines()));
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(5.0),
@@ -281,7 +281,7 @@ class HomeManager extends StatelessWidget {
                                           height: 5.0,
                                         ),
                                         Text(
-                                          'the accounts',
+                                          'Orders',
                                           style: TextStyle(
                                               color: HexColor('32313a'),
                                               fontSize: 20.0,
@@ -360,8 +360,12 @@ class HomeManager extends StatelessWidget {
                                       children: [
                                         CircleAvatar(
                                           radius: 65.0,
-                                          backgroundImage:
-                                              AssetImage('asset/image/2.jpg'),
+                                          backgroundImage: all_doctor_model!
+                                                      .data![0].image !=
+                                                  null
+                                              ? NetworkImage(
+                                                  "${imagebase}${all_doctor_model!.data![0].image!.path}")
+                                              : NetworkImage("${copyimage}"),
                                         ),
                                       ],
                                     ),
@@ -398,8 +402,12 @@ class HomeManager extends StatelessWidget {
                                       children: [
                                         CircleAvatar(
                                           radius: 65.0,
-                                          backgroundImage:
-                                              AssetImage('asset/image/3.jpg'),
+                                          backgroundImage: all_doctor_model!
+                                                      .data![1].image !=
+                                                  null
+                                              ? NetworkImage(
+                                                  "${imagebase}${all_doctor_model!.data![1].image!.path}")
+                                              : NetworkImage("${copyimage}"),
                                         ),
                                       ],
                                     ),

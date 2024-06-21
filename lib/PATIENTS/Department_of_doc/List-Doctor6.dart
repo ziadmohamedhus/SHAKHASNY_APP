@@ -1,77 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/MANAGER/Add_doctors/Data/all_doctor_model.dart';
+import 'package:hospital/constant.dart';
 
 import '../../MANAGER/profile_doctor.dart';
 
 class All_doctor extends StatelessWidget {
   final All_Doctor_Model model;
-  List All_doctor_data = [
-    {
-      'name': 'DR.Ahmed Mohamed',
-      'specialty': 'Nephrologist',
-      'years': '5 years experience',
-      'money': 5000,
-      'image': 'asset/image/2.jpg',
-      'rate': 4.5
-    },
-    {
-      'name': 'DR.Sara Hussein',
-      'specialty': 'Ophthalmologist',
-      'years': '3 years experience',
-      'money': 500,
-      'image': 'asset/image/29.jpg',
-      'rate': 4.8
-    },
-    {
-      'name': 'DR.Aya Samy',
-      'specialty': 'Orthopedic',
-      'years': '8 years experience',
-      'money': 600,
-      'image': 'asset/image/22.jpg',
-      'rate': 3.5
-    },
-    {
-      'name': 'DR.Eman Mohamed',
-      'specialty': 'Cardiologist',
-      'years': '13 years experience',
-      'money': 500,
-      'image': 'asset/image/18.jpg',
-      'rate': 3.9
-    },
-    {
-      'name': 'DR.Naglaa Khaled',
-      'specialty': 'Nephrologist',
-      'years': '9 years experience',
-      'money': 200,
-      'image': 'asset/image/23.jpg',
-      'rate': 2.7
-    },
-    {
-      'name': 'DR.Wafaa Mohamed',
-      'specialty': 'Dentist',
-      'years': '5 years experience',
-      'money': 500,
-      'image': 'asset/image/4.jpg',
-      'rate': 3.6
-    },
-    {
-      'name': 'DR.Yousef Ezzat',
-      'specialty': 'Dentist',
-      'years': '8 years experience',
-      'money': 600,
-      'image': 'asset/image/6.jpg',
-      'rate': 5.0
-    },
-    {
-      'name': 'DR.Assel Ziad',
-      'specialty': 'Orthopedic',
-      'years': '7 years experience',
-      'money': 370,
-      'image': 'asset/image/14.jpg',
-      'rate': 2.1
-    },
-  ];
 
   All_doctor({Key? key, required this.model}) : super(key: key);
   @override
@@ -109,7 +44,7 @@ class All_doctor extends StatelessWidget {
                 ),
                 CircleAvatar(
                   backgroundColor: Colors.grey[400],
-                  backgroundImage: AssetImage('asset/image/1.jpg'),
+                  backgroundImage: AssetImage("asset/image/1.jpg"),
                   radius: 25.0,
                 )
               ],
@@ -158,9 +93,10 @@ class All_doctor extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         backgroundColor: Colors.grey[400],
-                        backgroundImage: AssetImage(
-                          All_doctor_data[0]['image'],
-                        ),
+                        backgroundImage: model.data![i].image != null
+                            ? NetworkImage(
+                                "${imagebase}${model.data![i].image!.path}")
+                            : NetworkImage("${copyimage}"),
                         radius: 25.0,
                       ),
                     ],

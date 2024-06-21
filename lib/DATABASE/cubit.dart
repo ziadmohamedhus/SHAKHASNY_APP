@@ -18,7 +18,9 @@ import '../PATIENTS/Home.dart';
 import '../PATIENTS/Pharmacy.dart';
 import '../PATIENTS/all_appointment/data/appointment_model.dart';
 import '../components.dart';
+import '../pharmacy/data/accounts_model.dart';
 import '../pharmacy/data/pharmacy_model.dart';
+import '../pharmacy/data/solid_medicine_model.dart';
 import '../work_hour/data/timedoctor.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -762,5 +764,247 @@ class AppCubit extends Cubit<AppStates> {
     }).catchError((error) {
       emit(GetMedicinesFauilreState(error: error.toString()));
     });
+  }
+
+  void BuyMedicine({
+    required String card_name,
+    required String card_number,
+    required String exp_month,
+    required String exp_year,
+    required String id,
+    required String cvc,
+    required String quantity,
+  }) {
+    emit(BuyMoneyLoadingState());
+    DioHelper.postData(
+            url: 'https://abdelrahman.in/api/medicines/${id}/pay',
+            data: {
+              'card_name': card_name,
+              'card_number': card_number,
+              'exp_month': exp_month,
+              'exp_year': exp_year,
+              'cvc': cvc,
+              'quantity': quantity,
+            },
+            token: token)
+        .then((value) {
+      if (value.statusCode! >= 200 && value.statusCode! < 300) {
+        emit(BuyMoneySuccessState(message: value.data["message"]));
+      } else {
+        if (value.statusCode == 401) {
+          emit(BuyMoneyFauilreState(error: value.data["message"]));
+          print(value.data["message"]);
+          print(value.data);
+        } else {
+          emit(BuyMoneyFauilreState(error: value.data["message"]));
+          print(value.data["message"]);
+          print(value.data);
+        }
+      }
+    }).catchError((error) {
+      log(error.toString());
+      emit(BuyMoneyFauilreState(error: error));
+    });
+  }
+
+  Solid_Medicine_Model? solid_medicine_model;
+  void GetSolidMedicines() async {
+    emit(GetMedicinesLoadingState());
+    await DioHelper.getData(
+      url: 'https://abdelrahman.in/api/medicine-payments/patient',
+      token: token,
+    ).then((value) {
+      print(value.data);
+      solid_medicine_model = Solid_Medicine_Model.fromJson(value.data);
+      emit(GetMedicinesSuccessState());
+    }).catchError((error) {
+      emit(GetMedicinesFauilreState(error: error.toString()));
+    });
+  }
+
+  void ADD_Medicines({
+    required String name,
+    required String price,
+    required String quantity,
+    required String expiry_date,
+  }) async {
+    emit(AddDoctorLoadingState());
+    print(image);
+    try {
+      Map<String, String> headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'lang': "en",
+        'Authorization': token ?? '',
+      };
+
+      Map<String, String> map = {
+        'name': name,
+        'price': price,
+        'quantity': quantity,
+        'expiry_date': expiry_date,
+      };
+
+      Uri uri = Uri.parse("https://abdelrahman.in/api/medicines");
+      var request = http.MultipartRequest('POST', uri);
+      request.headers.addAll(headers);
+      request.fields.addAll(map);
+
+      if (image != null && image!.isNotEmpty) {
+        request.files.add(await http.MultipartFile.fromPath('image', image!));
+      }
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+      print('Response body: ${response.body}'); // Print the raw response body
+      print('Response status: ${response.statusCode}'); // Print the status code
+
+      var result;
+      try {
+        result = jsonDecode(response.body);
+      } catch (e) {
+        throw FormatException('Failed to decode JSON response');
+      }
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        print(result["message"]);
+        getalldoctor();
+        emit(AddDoctorSuccessState(message: result["message"]));
+      } else {
+        emit(AddDoctorFauilreState(error: result["message"]));
+        print(result["message"]);
+        print(result);
+      }
+    } catch (e) {
+      print('Error: ${e.toString()}');
+      emit(AddDoctorFauilreState(error: e.toString()));
+    }
+  }
+
+  Accounts_Model? accounts_model;
+  void GetAccoutantsMedicines() async {
+    emit(GetMedicinesLoadingState());
+    await DioHelper.getData(
+      url: 'https://abdelrahman.in/api/medicine-payments',
+      token: token,
+    ).then((value) {
+      print(value.data);
+      accounts_model = Accounts_Model.fromJson(value.data);
+      emit(GetMedicinesSuccessState());
+    }).catchError((error) {
+      emit(GetMedicinesFauilreState(error: error.toString()));
+    });
+  }
+
+  void Update_Medicines({
+    required String name,
+    required String price,
+    required String quantity,
+    required String expiry_date,
+    required String id,
+  }) async {
+    emit(AddDoctorLoadingState());
+    print(image);
+    try {
+      Map<String, String> headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'lang': "en",
+        'Authorization': token ?? '',
+      };
+
+      Map<String, String> map = {
+        'name': name,
+        'price': price,
+        'quantity': quantity,
+        'expiry_date': expiry_date,
+        "_method": "PUT"
+      };
+
+      Uri uri = Uri.parse("https://abdelrahman.in/api/medicines/${id}");
+      var request = http.MultipartRequest('POST', uri);
+      request.headers.addAll(headers);
+      request.fields.addAll(map);
+
+      if (image != null && image!.isNotEmpty) {
+        request.files.add(await http.MultipartFile.fromPath('image', image!));
+      }
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+      print('Response body: ${response.body}'); // Print the raw response body
+      print('Response status: ${response.statusCode}'); // Print the status code
+
+      var result;
+      try {
+        result = jsonDecode(response.body);
+      } catch (e) {
+        throw FormatException('Failed to decode JSON response');
+      }
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        print(result["message"]);
+        getalldoctor();
+        emit(AddDoctorSuccessState(message: result["message"]));
+      } else {
+        emit(AddDoctorFauilreState(error: result["message"]));
+        print(result["message"]);
+        print(result);
+      }
+    } catch (e) {
+      print('Error: ${e.toString()}');
+      emit(AddDoctorFauilreState(error: e.toString()));
+    }
+  }
+
+  void Delete_Medicines({
+    required String id,
+  }) async {
+    emit(AddDoctorLoadingState());
+    print(image);
+    try {
+      Map<String, String> headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'lang': "en",
+        'Authorization': token ?? '',
+      };
+
+      Map<String, String> map = {};
+
+      Uri uri = Uri.parse("https://abdelrahman.in/api/medicines/${id}");
+      var request = http.MultipartRequest('DELETE', uri);
+      request.headers.addAll(headers);
+      request.fields.addAll(map);
+
+      if (image != null && image!.isNotEmpty) {
+        request.files.add(await http.MultipartFile.fromPath('image', image!));
+      }
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+      print('Response body: ${response.body}'); // Print the raw response body
+      print('Response status: ${response.statusCode}'); // Print the status code
+
+      var result;
+      try {
+        result = jsonDecode(response.body);
+      } catch (e) {
+        throw FormatException('Failed to decode JSON response');
+      }
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        print(result["message"]);
+        getalldoctor();
+        emit(AddDoctorSuccessState(message: result["message"]));
+      } else {
+        emit(AddDoctorFauilreState(error: result["message"]));
+        print(result["message"]);
+        print(result);
+      }
+    } catch (e) {
+      print('Error: ${e.toString()}');
+      emit(AddDoctorFauilreState(error: e.toString()));
+    }
   }
 }

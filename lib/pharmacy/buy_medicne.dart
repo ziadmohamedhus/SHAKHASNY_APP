@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hospital/COMPONENTS/styles/custom_flutter_toast.dart';
 import 'package:hospital/pharmacy/data/pharmacy_model.dart';
 
-import '../PATIENTS/Buy-done.dart';
 import '../constant.dart';
+import '../payment/views/payment_medicine.dart';
 
 class View_medicene extends StatefulWidget {
   final DataPharmacy data;
@@ -159,14 +160,21 @@ class _View_mediceneState extends State<View_medicene> {
             Container(
               color: Colors.pink[200],
               child: MaterialButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => Buy_done(
-                            n: widget.data.name!,
-                            num: x,
-                            m: t,
-                          )));
-                },
+                onPressed: widget.data.quantity! > x
+                    ? () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (BuildContext context) => PaymentMedicine(
+                                  data: widget.data,
+                                  total: x,
+                                  price: x * double.parse(widget.data.price!),
+                                )));
+                      }
+                    : () {
+                        showToast(
+                            text:
+                                "There is no quantity of this medicine: It Found ${widget.data.quantity}",
+                            state: ToastStates.ERROR);
+                      },
                 child: Text(
                   'BUY',
                   style: TextStyle(

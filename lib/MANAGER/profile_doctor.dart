@@ -44,14 +44,6 @@ class ProfileScreen extends StatelessWidget {
                             icon: Icon(Icons.add),
                             color: Colors.deepPurple,
                           ),
-                          IconButton(
-                            onPressed: () {
-                              AppCubit.get(context)
-                                  .deletedoctor(id: doc.id.toString()!);
-                            },
-                            icon: Icon(Icons.delete),
-                            color: Colors.deepPurple,
-                          ),
                         ],
                       )
                     : Row(
@@ -79,12 +71,10 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 70,
-                      backgroundImage: doc.image !=
-                          null
-                          ? NetworkImage(
-                          "${imagebase}${doc.image!.path}")
+                      backgroundImage: doc.image != null
+                          ? NetworkImage("${imagebase}${doc.image!.path}")
                           : NetworkImage(
-                          "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
+                              "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
                     ),
                     const SizedBox(height: 20),
                     itemProfile("DR :", '${doc.firstName} ${doc.lastName}',

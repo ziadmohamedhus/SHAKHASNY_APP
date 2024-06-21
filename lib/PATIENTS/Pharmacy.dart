@@ -2,88 +2,16 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hospital/COMPONENTS/styles/custom_flutter_toast.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
 import 'package:hospital/pharmacy/data/pharmacy_model.dart';
 
 import '../constant.dart';
 import '../pharmacy/buy_medicne.dart';
+import '../pharmacy/views/Solid_Medicine.dart';
 
 class Pharmacy extends StatelessWidget {
-  List Pharmacy_data = [
-    {
-      'name': 'Panadol',
-      'money': 50,
-      'years': 'Temporary pain reliever',
-      'image': 'asset/image/m1.jpeg'
-    },
-    {
-      'name': 'Panadol +',
-      'years': 'Temporary pain reliever',
-      'money': 37,
-      'image': 'asset/image/m2.jpeg'
-    },
-    {
-      'name': 'Panadol Extra',
-      'years': 'Temporary pain reliever',
-      'money': 60,
-      'image': 'asset/image/m3.jpg'
-    },
-    {
-      'name': 'Panadol Night',
-      'years': 'Temporary pain reliever',
-      'money': 20,
-      'image': 'asset/image/m4.jpg'
-    },
-    {
-      'name': 'Panadol Advance',
-      'years': 'Temporary pain reliever',
-      'money': 40,
-      'image': 'asset/image/m5.jpg'
-    },
-    {
-      'name': 'Panadol Actifast',
-      'years': 'Temporary pain reliever',
-      'money': 50,
-      'image': 'asset/image/m6.jpg'
-    },
-    {
-      'name': 'Panadol A',
-      'years': 'Temporary pain reliever',
-      'money': 30,
-      'image': 'asset/image/m7.jpg'
-    },
-    {
-      'name': 'Panadol B',
-      'years': 'Temporary pain reliever',
-      'money': 54,
-      'image': 'asset/image/m8.jpg'
-    },
-    {
-      'name': 'Panadol C',
-      'years': 'Temporary pain reliever',
-      'money': 43,
-      'image': 'asset/image/m1.jpeg'
-    },
-    {
-      'name': 'Panadol D',
-      'years': 'Temporary pain reliever',
-      'money': 50,
-      'image': 'asset/image/m3.jpg'
-    },
-  ];
-  List<String> content = <String>[
-    'panadol',
-    'panadol +',
-    'panadol extra',
-    'panadol night',
-    'panadol advance',
-    'panadol actifast',
-    'panadol a',
-    'panadol b',
-    'panadol c',
-    'panadol d'
-  ];
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -127,32 +55,24 @@ class Pharmacy extends StatelessWidget {
                                     fontWeight: FontWeight.bold)),
                           ],
                         ),
-                        CircleAvatar(
-                          backgroundColor: Colors.grey[400],
-                          backgroundImage: AssetImage('asset/image/1.jpg'),
-                          radius: 25.0,
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SoildMedicine()));
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Colors.grey[400],
+                            backgroundImage: AssetImage('asset/icon/9.png'),
+                            radius: 30.0,
+                          ),
                         )
                       ],
                     ),
                   ),
                   SizedBox(
                     height: 20.0,
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.search),
-                      Text('Search for:'),
-                    ],
-                  ),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        color: HexColor('ffe0f4').withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Colors.deepPurple, width: 2)),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    ),
                   ),
                   SizedBox(
                     height: 20.0,
@@ -161,14 +81,30 @@ class Pharmacy extends StatelessWidget {
                       i < AppCubit.get(context).pharmacy_model!.data!.length;
                       i++)
                     InkWell(
-                      onTap: () {
-                        DataPharmacy name =
-                            AppCubit.get(context).pharmacy_model!.data![i];
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => View_medicene(
-                                  data: name,
-                                )));
-                      },
+                      onTap: AppCubit.get(context)
+                                  .pharmacy_model!
+                                  .data![i]
+                                  .quantity! >
+                              0
+                          ? () {
+                              print(AppCubit.get(context)
+                                  .pharmacy_model!
+                                  .data![i]
+                                  .quantity);
+                              DataPharmacy name = AppCubit.get(context)
+                                  .pharmacy_model!
+                                  .data![i];
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      View_medicene(
+                                        data: name,
+                                      )));
+                            }
+                          : () {
+                              showToast(
+                                  text: "There is no quantity of this medicine",
+                                  state: ToastStates.ERROR);
+                            },
                       child: Card(
                         color: HexColor('8a86e2'),
                         shape: RoundedRectangleBorder(

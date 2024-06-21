@@ -191,3 +191,13 @@ class GetMedicinesFauilreState extends AppStates {
 
   GetMedicinesFauilreState({required this.error});
 }
+
+class GetSolidMedicinesLoadingState extends AppStates {}
+
+class GetSolidMedicinesSuccessState extends AppStates {}
+
+class GetSolidMedicinesFauilreState extends AppStates {
+  final String error;
+
+  GetSolidMedicinesFauilreState({required this.error});
+}
