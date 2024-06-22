@@ -63,20 +63,18 @@ class Login_Doctor extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('FILL OUT,',
-                                    style:
-                                        TextStyle(
-                color: HexColor('32313a'),
-                 fontSize: 15.0,
-                fontWeight: FontWeight.bold)),
+                                    style: TextStyle(
+                                        color: HexColor('32313a'),
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold)),
                                 SizedBox(
                                   height: 5.0,
                                 ),
                                 Text('Login Form',
-                                    style:
-                                        TextStyle(
-                color: HexColor('32313a'),
-                 fontSize: 15.0,
-                fontWeight: FontWeight.bold)),
+                                    style: TextStyle(
+                                        color: HexColor('32313a'),
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold)),
                               ],
                             ),
                             Icon(
@@ -112,11 +110,19 @@ class Login_Doctor extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: a2,
+                        obscureText: !LoginManCubit.get(context).obsecure,
                         validator: (value) {
                           if (value!.isEmpty)
                             return 'You have to enter the Password';
                         },
                         decoration: InputDecoration(
+                            suffixIcon: InkWell(
+                                onTap: () {
+                                  LoginManCubit.get(context).cahngeicon();
+                                },
+                                child: LoginManCubit.get(context).obsecure
+                                    ? Icon(Icons.visibility_off)
+                                    : Icon(Icons.visibility)),
                             labelText: 'PASSWORD',
                             hintText: 'Enter your Password',
                             prefixIcon: Icon(Icons.lock),

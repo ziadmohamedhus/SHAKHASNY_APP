@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
+import 'package:hospital/START/Start.dart';
 import 'package:hospital/constant.dart';
 import 'package:lottie/lottie.dart';
 
@@ -62,7 +63,18 @@ class HomeDoctor extends StatelessWidget {
                                     : NetworkImage(
                                         "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
                                 radius: 25.0,
-                              )
+                              ),
+                              SizedBox(
+                                width: 1,
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Start()));
+                                  },
+                                  icon: Icon(Icons.logout))
                             ],
                           ),
                         ),
