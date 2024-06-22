@@ -495,29 +495,22 @@ class Home extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Image.asset(
-                                'asset/icon/2.png',
-                                height: 160,
+                              Image.network(
+                                'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Google_Maps_Logo_2020.svg/512px-Google_Maps_Logo_2020.svg.png',
+                                height: 140,
+                              ),
+                              const SizedBox(
+                                width: 6,
                               ),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Calculate Your BMI:',
+                                      'Determine the nearest hospital to you ',
                                       style: TextStyle(
                                           color: HexColor('32313a'),
                                           fontSize: 20.0,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      height: 4,
-                                    ),
-                                    Text(
-                                      'fill the form now!!',
-                                      style: TextStyle(
-                                          color: HexColor('32313a'),
-                                          fontSize: 15.0,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     const SizedBox(
@@ -838,8 +831,14 @@ class Home extends StatelessWidget {
                                     children: [
                                       CircleAvatar(
                                         radius: 65.0,
-                                        backgroundImage:
-                                            AssetImage('asset/image/2.jpg'),
+                                        backgroundImage: AppCubit.get(context)
+                                                    .all_doctor_model!
+                                                    .data![0]
+                                                    .image !=
+                                                null
+                                            ? NetworkImage(
+                                                "${imagebase}${AppCubit.get(context).all_doctor_model!.data![0].image!.path}")
+                                            : NetworkImage("${copyimage}"),
                                       ),
                                     ],
                                   ),
@@ -875,8 +874,14 @@ class Home extends StatelessWidget {
                                     children: [
                                       CircleAvatar(
                                         radius: 65.0,
-                                        backgroundImage:
-                                            AssetImage('asset/image/3.jpg'),
+                                        backgroundImage: AppCubit.get(context)
+                                                    .all_doctor_model!
+                                                    .data![1]
+                                                    .image !=
+                                                null
+                                            ? NetworkImage(
+                                                "${imagebase}${AppCubit.get(context).all_doctor_model!.data![1].image!.path}")
+                                            : NetworkImage("${copyimage}"),
                                       ),
                                     ],
                                   ),

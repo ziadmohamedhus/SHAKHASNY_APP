@@ -27,7 +27,7 @@ class Take_apointment extends StatelessWidget {
     day.text = day_work;
     return BlocProvider(
         create: (context) =>
-        AppCubit()..gettimedoctor(id: doc.id.toString(), day: day.text),
+            AppCubit()..gettimedoctor(id: doc.id.toString(), day: day.text),
         child: BlocConsumer<AppCubit, AppStates>(
           listener: (context, state) {
             if (state is MakeAppointmentSuccessState) {
@@ -38,11 +38,11 @@ class Take_apointment extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => Appointment_done(
-                        doc: doc,
-                        time: time.text,
-                        date: day.text,
-                        reason: country.text,
-                      )));
+                            doc: doc,
+                            time: time.text,
+                            date: day.text,
+                            reason: country.text,
+                          )));
             } else if (state is MakeAppointmentFauilreState) {
               showToast(text: state.error, state: ToastStates.ERROR);
             }
@@ -76,7 +76,7 @@ class Take_apointment extends StatelessWidget {
                                   SizedBox(
                                     height: 5.0,
                                   ),
-                                  Text('Patient Form',
+                                  Text('Take Appointment',
                                       style: TextStyle(
                                           color: HexColor('32313a'),
                                           fontSize: 25.0,
@@ -104,7 +104,7 @@ class Take_apointment extends StatelessWidget {
                               itemBuilder: (context, index) => timeofdoctor(
                                   AppCubit.get(context).time_doc!.data![index]),
                               itemCount:
-                              AppCubit.get(context).time_doc!.data?.length,
+                                  AppCubit.get(context).time_doc!.data?.length,
                               scrollDirection: Axis.horizontal,
                             ),
                           ),
@@ -200,21 +200,21 @@ class Take_apointment extends StatelessWidget {
 
   Widget timeofdoctor(String time2) {
     return InkWell(
-        onTap: () {
-          time.text = time2.substring(0, time2.length - 3);
-        },
-        child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                color: Colors.lightGreenAccent,
-              ),
-              width: 80,
-              height: 40,
-              child: Center(child: Text(time2)),
-            ),
-            ),
-        );
-    }
+      onTap: () {
+        time.text = time2.substring(0, time2.length - 3);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            color: Colors.pinkAccent[100]!.withOpacity(0.5),
+          ),
+          width: 80,
+          height: 40,
+          child: Center(child: Text(time2)),
+        ),
+      ),
+    );
+  }
 }

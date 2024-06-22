@@ -65,7 +65,7 @@ class UpdateMedicne extends StatelessWidget {
                                 SizedBox(
                                   height: 5.0,
                                 ),
-                                Text('Medicine Form',
+                                Text('Update Medicine',
                                     style: TextStyle(
                                         color: HexColor('32313a'),
                                         fontSize: 15.0,

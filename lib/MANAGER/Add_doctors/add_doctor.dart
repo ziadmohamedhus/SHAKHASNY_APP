@@ -64,7 +64,7 @@ class Add_doctor extends StatelessWidget {
                                 SizedBox(
                                   height: 5.0,
                                 ),
-                                Text('Login Form',
+                                Text('Add Doctor',
                                     style: TextStyle(
                                         color: HexColor('32313a'),
                                         fontSize: 15.0,

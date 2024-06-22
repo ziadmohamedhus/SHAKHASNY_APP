@@ -4,7 +4,7 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:hospital/COMPONENTS/styles/custom_flutter_toast.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
-import 'package:hospital/PATIENTS/Home.dart';
+import 'package:hospital/PATIENTS/Home-bage.dart';
 
 import '../../COMPONENTS/components/default_bottom.dart';
 
@@ -33,7 +33,7 @@ class _CustomCreditCardState extends State<CustomCreditCard> {
           if (state is BuyMoneySuccessState) {
             showToast(text: state.message, state: ToastStates.SUCCESS);
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => Home()));
+                context, MaterialPageRoute(builder: (context) => Home_bage()));
           } else if (state is BuyMoneyFauilreState) {
             showToast(text: state.error, state: ToastStates.ERROR);
           }

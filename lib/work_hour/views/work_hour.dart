@@ -8,6 +8,7 @@ import 'package:hospital/DATABASE/states.dart';
 import 'package:hospital/MANAGER/Home-M.dart';
 
 import '../../MANAGER/Add_doctors/Data/all_doctor_model.dart';
+import '../../constant.dart';
 
 class WorkHourScreen extends StatelessWidget {
   WorkHourScreen({Key? key, required this.doc}) : super(key: key);
@@ -63,9 +64,10 @@ class WorkHourScreen extends StatelessWidget {
                           ],
                         ),
                         CircleAvatar(
-                          backgroundColor: Colors.grey[400],
-                          backgroundImage: AssetImage('asset/image/1.jpg'),
-                          radius: 25.0,
+                          radius: 30.0,
+                          backgroundImage: doc.image != null
+                              ? NetworkImage("${imagebase}${doc.image!.path}")
+                              : NetworkImage("${copyimage}"),
                         ),
                       ],
                     ),

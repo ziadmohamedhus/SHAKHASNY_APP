@@ -196,8 +196,14 @@ class GetSolidMedicinesLoadingState extends AppStates {}
 
 class GetSolidMedicinesSuccessState extends AppStates {}
 
+class GetMedicineswLoadingState extends AppStates {}
+
+class GetMedicineswSuccessState extends AppStates {}
+
 class GetSolidMedicinesFauilreState extends AppStates {
   final String error;
 
   GetSolidMedicinesFauilreState({required this.error});
 }
+
+class SearshFilter extends AppStates {}

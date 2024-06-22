@@ -1058,4 +1058,31 @@ class AppCubit extends Cubit<AppStates> {
       emit(AddDoctorFauilreState(error: e.toString()));
     }
   }
+
+  List<DataPharmacy> filteredMedicines = [];
+
+  void filterMedicines(String query) {
+    if (query.isEmpty) {
+      filteredMedicines = pharmacy_model!.data!;
+    } else {
+      filteredMedicines = pharmacy_model!.data!
+          .where((medicine) =>
+              medicine.name!.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+    emit(SearshFilter());
+  }
+
+  @override
+  void Get_Medicines() {
+    emit(GetMedicineswLoadingState());
+
+    // قم بجلب البيانات من قاعدة البيانات أو API
+    // على سبيل المثال:
+    // pharmacy_model = await PharmacyRepository().getMedicines();
+
+    // بعد جلب البيانات، قم بتحديث filteredMedicines وإرسال الحالة
+    filteredMedicines = pharmacy_model!.data!;
+    emit(GetMedicineswSuccessState());
+  }
 }

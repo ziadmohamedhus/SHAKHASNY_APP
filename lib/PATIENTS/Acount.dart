@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:hospital/PATIENTS/Update-acount.dart';
 
 import '../constant.dart';
 
@@ -120,13 +119,6 @@ class Acount extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => update_acount()));
-        },
-        child: Icon(Icons.edit),
       ),
     );
   }
