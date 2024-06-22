@@ -336,7 +336,7 @@ class HomeDoctor extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'All appointments booked.',
+                                            'CHAT.',
                                             style: TextStyle(
                                                 color: HexColor('32313a'),
                                                 fontSize: 20.0,
@@ -346,7 +346,7 @@ class HomeDoctor extends StatelessWidget {
                                             height: 4,
                                           ),
                                           Text(
-                                            'All appointments that you have to complete.',
+                                            'Chat with patient here.',
                                             style: TextStyle(
                                                 color: HexColor('32313a'),
                                                 fontSize: 13.0,

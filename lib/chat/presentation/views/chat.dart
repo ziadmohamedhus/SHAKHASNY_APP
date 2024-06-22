@@ -2,6 +2,7 @@ import 'package:auto_direction/auto_direction.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/chat/presentation/view_models/cubit/chat_cubit.dart';
 import 'package:hospital/chat/presentation/views/widgets/chat_bubble.dart';
 import 'package:hospital/constant.dart';
@@ -128,34 +129,52 @@ class ChatScreen extends StatelessWidget {
                               },
                             ),
                           ),
-                          Container(
-                            color: Colors.blue,
-                            padding: const EdgeInsets.all(16.0),
-                            child: AutoDirection(
-                              text: ChatCubit.get(context).text ?? "",
-                              child: TextField(
-                                controller: controller,
-                                onChanged: (value) {
-                                  ChatCubit.get(context).updateText(value);
-                                },
-                                // keyboardType: TextInputType.multiline,
-                                // minLines: 1,
-                                // maxLines: 2,
-                                style: const TextStyle(color: Colors.white),
-                                onSubmitted: (value) {
-                                  FocusManager.instance.primaryFocus?.unfocus();
-                                },
-                                decoration: InputDecoration(
-                                    hintText: 'send message....',
-                                    hintStyle: const TextStyle(
-                                      color: Colors.white,
-                                      // fontFamily:
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: const Icon(
-                                        Icons.send,
-                                        color: Colors.white,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.grey.shade500,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  15.0,
+                                ),
+                              ),
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0,
                                       ),
+                                      child: AutoDirection(
+                                        text: ChatCubit.get(context).text ?? "",
+                                        child: TextFormField(
+                                          onChanged: (value) {
+                                            ChatCubit.get(context).updateText(value);
+                                          },
+
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return 'please enter message';
+                                            }
+                                            return null;
+                                          },
+                                          controller: controller,
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: 'type your message here ...',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 50.0,
+                                    color: HexColor('8a86e2'),
+                                    child: MaterialButton(
                                       onPressed: () async {
                                         // Add message to pharmacy's chat
                                         sendMessage(controller.text);
@@ -165,25 +184,18 @@ class ChatScreen extends StatelessWidget {
                                             scrollController
                                                 .position.maxScrollExtent,
                                             duration:
-                                                const Duration(seconds: 1),
+                                            const Duration(seconds: 1),
                                             curve: Curves.fastOutSlowIn);
                                       },
+                                      minWidth: 1.0,
+                                      child: Icon(
+                                        Icons.send,
+                                        size: 16.0,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(16),
-                                        borderSide: const BorderSide(
-                                          color: Colors.white,
-                                        )),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(16),
-                                        borderSide: const BorderSide(
-                                          color: Colors.white,
-                                        )),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(16),
-                                        borderSide: const BorderSide(
-                                          color: Colors.white,
-                                        ))),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
