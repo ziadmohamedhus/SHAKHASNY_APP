@@ -228,7 +228,7 @@ class _ChatBotState extends State<ChatBot> {
   void callModel({required dynamic msg}) {
     print(msg);
     DioHelper.postData(
-      url: 'https://7a1e-197-36-164-79.ngrok-free.app/get',
+      url: 'https://110a-41-46-16-21.ngrok-free.app/get',
       data: {
         "msg": msg
       },

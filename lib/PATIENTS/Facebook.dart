@@ -13,7 +13,7 @@ class facebook extends StatelessWidget {
         centerTitle: true,
       ),
       body: WebView(
-        initialUrl: 'https://www.facebook.com/57357Egypt?mibextid=ZbWKwLedy',
+        initialUrl: 'https://2bea-41-46-16-21.ngrok-free.app/',
         javascriptMode: JavascriptMode.unrestricted,
       ),
     );

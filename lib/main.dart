@@ -6,6 +6,8 @@ import 'package:hospital/Api/api_service.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
 
+import 'PATIENTS/Chat_bot.dart';
+import 'PATIENTS/Facebook.dart';
 import 'START/Animation.dart';
 
 void main() async {
@@ -61,7 +63,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             themeMode: ThemeMode.light,
-            home: Animation1(),
+            home: facebook(),
           );
         },
       ),
