@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hospital/DATABASE/cubit.dart';
 import 'package:hospital/DATABASE/states.dart';
+import 'package:hospital/PATIENTS/testing.dart';
+import 'package:hospital/PATIENTS/testing2.dart';
 
 import '../MAPS/custom_google_maps.dart';
 import '../START/Animation.dart';
@@ -23,6 +25,7 @@ import 'Facebook.dart';
 import 'Pharmacy.dart';
 import 'Youtube.dart';
 import 'all_appointment/views/all_appointment.dart';
+import 'chat_bot2.dart';
 
 class Home extends StatelessWidget {
   List<Widget> addvertsment_images = [
@@ -156,15 +159,15 @@ class Home extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20)),
                     shadowColor: Colors.black,
                     child: ListTile(
-                      title: Text('YouTube channel',
+                      title: Text('Anime Test',
                           style: TextStyle(
                               color: HexColor('32313a'),
                               fontSize: 15.0,
                               fontWeight: FontWeight.bold)),
-                      trailing: const Icon(Icons.ondemand_video_outlined),
+                      trailing: const Icon(Icons.accessible),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => youtube()));
+                            builder: (BuildContext context) => Testing()));
                       },
                     ),
                   ),
@@ -174,15 +177,15 @@ class Home extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20)),
                     shadowColor: Colors.black,
                     child: ListTile(
-                      title: Text('Facebook page',
+                      title: Text('Diabetes Test',
                           style: TextStyle(
                               color: HexColor('32313a'),
                               fontSize: 15.0,
                               fontWeight: FontWeight.bold)),
-                      trailing: const Icon(Icons.facebook_outlined),
+                      trailing: const Icon(Icons.accessible),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => facebook()));
+                            builder: (BuildContext context) => Testing_2()));
                       },
                     ),
                   ),
@@ -462,7 +465,7 @@ class Home extends StatelessWidget {
                                             (context),
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ChatBot()));
+                                                    ChatBot2()));
                                       },
                                       color: HexColor('ffe0f4'),
                                       child: Text(
@@ -495,8 +498,8 @@ class Home extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Image.network(
-                                'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Google_Maps_Logo_2020.svg/512px-Google_Maps_Logo_2020.svg.png',
+                              Image.asset(
+                                'asset/icon/map.png',
                                 height: 140,
                               ),
                               const SizedBox(

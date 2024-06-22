@@ -137,7 +137,7 @@ class _custom_google_mapState extends State<custom_google_map> {
     location.onLocationChanged.listen((event) {
       my_lati=event.latitude;
       my_lang=event.longitude;
-      var cameraPosition =CameraPosition(target: LatLng(event.latitude!, event.longitude!),zoom: 15);
+      var cameraPosition =CameraPosition(target: LatLng(event.latitude!, event.longitude!),zoom: 17);
       var my_location_marker=Marker(markerId: MarkerId("my_location_marker"),position: LatLng(event.latitude!, event.longitude!));
       markers.add(my_location_marker);
       z=find_nearest_hos(my_lati!, my_lang!);

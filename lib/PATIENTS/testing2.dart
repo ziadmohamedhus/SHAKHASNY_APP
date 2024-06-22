@@ -4,30 +4,23 @@ import 'package:hexcolor/hexcolor.dart';
 
 import '../Api/api_service.dart';
 
-class Testing extends StatefulWidget {
+class Testing_2 extends StatefulWidget {
 
   @override
-  State<Testing> createState() => _TestingState();
+  State<Testing_2> createState() => _TestingState();
 }
 
-class _TestingState extends State<Testing> {
-  TextEditingController rbc = TextEditingController();
+class _TestingState extends State<Testing_2> {
+  TextEditingController gender = TextEditingController();
+  TextEditingController age = TextEditingController();
+  TextEditingController hypertension = TextEditingController();
+  TextEditingController heart_disease = TextEditingController();
+  TextEditingController smoking_history = TextEditingController();
+  TextEditingController bmi = TextEditingController();
+  TextEditingController HbA1c_level = TextEditingController();
+  TextEditingController blood_glucose_level = TextEditingController();
 
-  TextEditingController pcv = TextEditingController();
 
-  TextEditingController mcv = TextEditingController();
-
-  TextEditingController mch = TextEditingController();
-
-  TextEditingController mchc = TextEditingController();
-
-  TextEditingController rdw = TextEditingController();
-
-  TextEditingController tlc = TextEditingController();
-
-  TextEditingController plt = TextEditingController();
-
-  TextEditingController hgb = TextEditingController();
 
   var form_key = GlobalKey<FormState>();
 
@@ -41,6 +34,7 @@ class _TestingState extends State<Testing> {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(children: [
+              SizedBox(height: 30,),
               //الشريط الاعلي
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -76,21 +70,29 @@ class _TestingState extends State<Testing> {
               SizedBox(
                 height: 15,
               ),
-              TextFormField(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'please enter the data';
-                  }
-                  return null;
+              DropdownButtonFormField(
+                items: [
+                  DropdownMenuItem(
+                    value: "0",
+                    child: Text("Female"),
+                  ),
+                  DropdownMenuItem(
+                    value: "1",
+                    child: Text("Male"),
+                  ),
+
+                ], //Ophthalmologist
+                onChanged: (value) {
+                  gender.text = value.toString();
+                  print(gender.text);
                 },
-                keyboardType: TextInputType.phone,
-                controller: rbc,
                 decoration: InputDecoration(
-                    labelText: 'RBC',
-                    hintText: 'Enter RBC',
-                    prefixIcon: Icon(Icons.text_snippet_outlined),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0))),
+                  prefixIcon: Icon(Icons.text_snippet_outlined),
+                  labelText: "gender",
+                  hintText: "gender",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                ),
               ),
 
 
@@ -100,15 +102,15 @@ class _TestingState extends State<Testing> {
               TextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'please enter pcv';
+                    return 'please enter age';
                   }
                   return null;
                 },
                 keyboardType: TextInputType.phone,
-                controller: pcv,
+                controller: age,
                 decoration: InputDecoration(
-                    labelText: 'PCV',
-                    hintText: 'Enter pcv',
+                    labelText: 'age',
+                    hintText: 'Enter age',
                     prefixIcon: Icon(Icons.text_snippet_outlined),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30.0))),
@@ -118,22 +120,94 @@ class _TestingState extends State<Testing> {
               SizedBox(
                 height: 15,
               ),
-              TextFormField(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'please enter mcv';
-                  }
-                  return null;
+              DropdownButtonFormField(
+                items: [
+                  DropdownMenuItem(
+                    value: "0",
+                    child: Text("LOW"),
+                  ),
+                  DropdownMenuItem(
+                    value: "1",
+                    child: Text("HIGH"),
+                  ),
+
+                ], //Ophthalmologist
+                onChanged: (value) {
+                  hypertension.text = value.toString();
+                  print(hypertension.text);
                 },
-                keyboardType: TextInputType.phone,
-                controller: mcv,
                 decoration: InputDecoration(
-                    labelText: 'MCV',
-                    hintText: 'Enter mcv',
-                    prefixIcon: Icon(Icons.text_snippet_outlined),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0))),
+                  prefixIcon: Icon(Icons.text_snippet_outlined),
+                  labelText: "hypertension",
+                  hintText: "hypertension",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                ),
               ),
+
+
+              SizedBox(
+                height: 15,
+              ),
+              DropdownButtonFormField(
+                items: [
+                  DropdownMenuItem(
+                    value: "0",
+                    child: Text("NO"),
+                  ),
+                  DropdownMenuItem(
+                    value: "1",
+                    child: Text("YES"),
+                  ),
+
+                ], //Ophthalmologist
+                onChanged: (value) {
+                  heart_disease.text = value.toString();
+                  print(heart_disease.text);
+                },
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.text_snippet_outlined),
+                  labelText: "heart disease",
+                  hintText: "heart disease",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                ),
+              ),
+
+
+              SizedBox(
+                height: 15,
+              ),
+              DropdownButtonFormField(
+                items: [
+
+                  DropdownMenuItem(
+                    value: "1",
+                    child: Text("Current"),
+                  ),
+                  DropdownMenuItem(
+                    value: "3",
+                    child: Text("former"),
+                  ),
+                  DropdownMenuItem(
+                    value: "4",
+                    child: Text("Never"),
+                  ),
+
+                ], //Ophthalmologist
+                onChanged: (value) {
+                  smoking_history.text = value.toString();
+                  print(smoking_history.text);
+                },
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.text_snippet_outlined),
+                  labelText: "smoking_history",
+                  hintText: "smoking_history",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                ),
+              ),
+
 
 
               SizedBox(
@@ -142,94 +216,15 @@ class _TestingState extends State<Testing> {
               TextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'please enter mch';
+                    return 'please enter bmi';
                   }
                   return null;
                 },
                 keyboardType: TextInputType.phone,
-                controller: mch,
+                controller: bmi,
                 decoration: InputDecoration(
-                    labelText: 'MCH',
-                    hintText: 'Enter mch',
-                    prefixIcon: Icon(Icons.text_snippet_outlined),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0))),
-              ),
-
-
-              SizedBox(
-                height: 15,
-              ),
-              TextFormField(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'please enter mchc';
-                  }
-                  return null;
-                },
-                keyboardType: TextInputType.phone,
-                controller: mchc,
-                decoration: InputDecoration(
-                    labelText: 'MCHC',
-                    hintText: 'Enter mchc',
-                    prefixIcon: Icon(Icons.text_snippet_outlined),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0))),
-              ),
-
-              SizedBox(
-                height: 15,
-              ),
-              TextFormField(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'please enter rdw';
-                  }
-                  return null;
-                },
-                keyboardType: TextInputType.phone,
-                controller: rdw,
-                decoration: InputDecoration(
-                    labelText: 'RDW',
-                    hintText: 'Enter rdw',
-                    prefixIcon: Icon(Icons.text_snippet_outlined),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0))),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              TextFormField(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'please enter tlc';
-                  }
-                  return null;
-                },
-                keyboardType: TextInputType.phone,
-                controller: tlc,
-                decoration: InputDecoration(
-                    labelText: 'TLC',
-                    hintText: 'Enter tlc',
-                    prefixIcon: Icon(Icons.text_snippet_outlined),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0))),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              TextFormField(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'please enter plt';
-                  }
-                  return null;
-                },
-                keyboardType: TextInputType.phone,
-                controller: plt,
-                decoration: InputDecoration(
-                    labelText: 'PLT',
-                    hintText: 'Enter plt',
+                    labelText: 'bmi',
+                    hintText: 'Enter bmi',
                     prefixIcon: Icon(Icons.text_snippet_outlined),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30.0))),
@@ -240,26 +235,46 @@ class _TestingState extends State<Testing> {
               TextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'please enter hgb';
+                    return 'please enter HbA1c_level';
                   }
                   return null;
                 },
                 keyboardType: TextInputType.phone,
-                controller: hgb,
+                controller: HbA1c_level,
                 decoration: InputDecoration(
-                    labelText: 'HGB',
-                    hintText: 'Enter hgb',
+                    labelText: 'HbA1c_level',
+                    hintText: 'Enter HbA1c_level',
                     prefixIcon: Icon(Icons.text_snippet_outlined),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30.0))),
               ),
+              SizedBox(
+                height: 15,
+              ),
+              TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'please enter blood_glucose_level';
+                  }
+                  return null;
+                },
+                keyboardType: TextInputType.phone,
+                controller: blood_glucose_level,
+                decoration: InputDecoration(
+                    labelText: 'blood_glucose_level',
+                    hintText: 'Enter blood_glucose_level',
+                    prefixIcon: Icon(Icons.text_snippet_outlined),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0))),
+              ),
+
               SizedBox(
                 height: 20,
               ),
               MaterialButton(
                 onPressed: () {
                   if (form_key.currentState!.validate()) {
-                    callModel(hgb: hgb.text,mch: mch.text,mchc: mchc.text,mcv: mcv.text,pcv: pcv.text,plt: plt.text,rbc: rbc.text,rdw: rdw.text,tlc: tlc.text);
+                    callModel(age: age.text,blood_glucose_level: blood_glucose_level.text,bmi: bmi.text,gender: gender.text,HbA1c_level: HbA1c_level.text,heart_disease: heart_disease.text,hypertension: hypertension.text,smoking_history: smoking_history.text);
                   }
                 },
                 child: Text(
@@ -279,36 +294,35 @@ class _TestingState extends State<Testing> {
 
 
   void callModel({
-    required dynamic rbc,
-    required dynamic pcv,
-    required dynamic mcv,
-    required dynamic mch,
-    required dynamic mchc,
-    required dynamic rdw,
-    required dynamic tlc,
-    required dynamic plt,
-    required dynamic hgb,
+    required dynamic gender,
+    required dynamic age,
+    required dynamic hypertension,
+    required dynamic heart_disease,
+    required dynamic smoking_history,
+    required dynamic bmi,
+    required dynamic HbA1c_level,
+    required dynamic blood_glucose_level,
+
   }) {
 
     DioHelper.postData(
-      url: 'https://d297-41-46-11-49.ngrok-free.app/predict',
+      url: 'https://7637-41-46-11-49.ngrok-free.app/predict',
       data: {
-        "RBC": rbc,
-        "PCV": pcv,
-        "MCV": mcv,
-        "MCH": mch,
-        "MCHC": mchc,
-        "RDW": rdw,
-        "TLC": tlc,
-        "PLT": plt,
-        "HGB": hgb,
+        "gender": gender,
+        "age": age,
+        "hypertension": hypertension,
+        "heart_disease": heart_disease,
+        "smoking_history": smoking_history,
+        "bmi": bmi,
+        "HbA1c_level": HbA1c_level,
+        "blood_glucose_level": blood_glucose_level,
       },
     ).then((value) {
       print(value.statusCode);
       print(value.statusMessage);
       print(value.data);
 
-      print(value.data["message"]);
+      print(value.data["prediction"]);
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -324,7 +338,7 @@ class _TestingState extends State<Testing> {
             ],
             title: Text('the result is'),
             contentPadding: EdgeInsets.all(20),
-            content: Text('${value.data["message"]}'),
+            content: Text('${value.data["prediction"]}'),
           ));
 
       setState(() {
