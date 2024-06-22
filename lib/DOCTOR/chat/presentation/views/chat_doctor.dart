@@ -43,7 +43,6 @@ class ChatDoctorScreen extends StatelessWidget {
                   "Chats",
                   style: TextStyle(
                     fontSize: 17,
-                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -104,12 +103,12 @@ class ChatDoctorScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 10.0),
                     padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
-                      color: Colors.green,
+                      color: Colors.pink[200],
                       borderRadius: BorderRadius.circular(16.0),
                       gradient: LinearGradient(
                         colors: [
                           Colors.white,
-                          Colors.green,
+                          Colors.pinkAccent
                         ], // Define your gradient colors here
                         begin: Alignment.bottomLeft,
                         end: Alignment.topRight,
