@@ -10,6 +10,7 @@ import 'package:lottie/lottie.dart';
 import '../PATIENTS/Department_of_doc/List-Doctor6.dart';
 import '../constant.dart';
 import '../pharmacy/views/Accounts_Medicine.dart';
+import 'Add_doctors/Data/all_doctor_model.dart';
 import 'Add_doctors/add_doctor.dart';
 import 'Doctors.dart';
 import 'all_patient.dart';
@@ -318,11 +319,13 @@ class HomeManager extends StatelessWidget {
                             children: [
                               InkWell(
                                   onTap: () {
+                                    All_Doctor_Model model =
+                                        AppCubit.get(context).all_doctor_model!;
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (BuildContext context) =>
                                                 All_doctor(
-                                                  model: all_doctor_model!,
+                                                  model: model,
                                                 )));
                                   },
                                   child: Text(
@@ -339,7 +342,7 @@ class HomeManager extends StatelessWidget {
                     ),
                     // الدكاترة
                     ConditionalBuilder(
-                      condition: all_doctor_model != null,
+                      condition: AppCubit.get(context).all_doctor_model != null,
                       builder: (context) => Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Row(
@@ -360,24 +363,26 @@ class HomeManager extends StatelessWidget {
                                       children: [
                                         CircleAvatar(
                                           radius: 65.0,
-                                          backgroundImage: all_doctor_model!
-                                                      .data![0].image !=
+                                          backgroundImage: AppCubit.get(context)
+                                                      .all_doctor_model!
+                                                      .data![0]
+                                                      .image !=
                                                   null
                                               ? NetworkImage(
-                                                  "${imagebase}${all_doctor_model!.data![0].image!.path}")
+                                                  "${imagebase}${AppCubit.get(context).all_doctor_model!.data![0].image!.path}")
                                               : NetworkImage("${copyimage}"),
                                         ),
                                       ],
                                     ),
                                     Text(
-                                      'DR.${all_doctor_model!.data![0].firstName} ${all_doctor_model!.data![0].lastName}',
+                                      'DR.${AppCubit.get(context).all_doctor_model!.data![0].firstName} ${AppCubit.get(context).all_doctor_model!.data![0].lastName}',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 15.0,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      '${all_doctor_model!.data![0].doctor!.specialization}',
+                                      '${AppCubit.get(context).all_doctor_model!.data![0].doctor!.specialization}',
                                       style: TextStyle(
                                           color: Colors.grey[800],
                                           fontSize: 10.0,
@@ -402,24 +407,26 @@ class HomeManager extends StatelessWidget {
                                       children: [
                                         CircleAvatar(
                                           radius: 65.0,
-                                          backgroundImage: all_doctor_model!
-                                                      .data![1].image !=
+                                          backgroundImage: AppCubit.get(context)
+                                                      .all_doctor_model!
+                                                      .data![1]
+                                                      .image !=
                                                   null
                                               ? NetworkImage(
-                                                  "${imagebase}${all_doctor_model!.data![1].image!.path}")
+                                                  "${imagebase}${AppCubit.get(context).all_doctor_model!.data![1].image!.path}")
                                               : NetworkImage("${copyimage}"),
                                         ),
                                       ],
                                     ),
                                     Text(
-                                      'DR.${all_doctor_model!.data![1].firstName} ${all_doctor_model!.data![1].lastName}',
+                                      'DR.${AppCubit.get(context).all_doctor_model!.data![1].firstName} ${AppCubit.get(context).all_doctor_model!.data![1].lastName}',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 15.0,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      '${all_doctor_model!.data![1].doctor!.specialization}',
+                                      '${AppCubit.get(context).all_doctor_model!.data![1].doctor!.specialization}',
                                       style: TextStyle(
                                           color: Colors.grey[800],
                                           fontSize: 10.0,

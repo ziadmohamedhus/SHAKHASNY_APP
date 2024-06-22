@@ -8,7 +8,6 @@ Color Kprimarycolor = Colors.deepOrange;
 dynamic? OnBoarding;
 String? token;
 Login_model? patient_model;
-All_Doctor_Model? all_doctor_model;
 List<DataDoctor>? Cardiologistlist = [];
 List<DataDoctor>? Neproistlist = [];
 List<DataDoctor>? Ortholist = [];

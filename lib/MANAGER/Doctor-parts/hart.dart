@@ -5,8 +5,8 @@ import 'package:hexcolor/hexcolor.dart';
 
 import '../../DATABASE/cubit.dart';
 import '../../DATABASE/states.dart';
-import '../../components.dart';
 import '../../constant.dart';
+import '../Home-M.dart';
 import '../profile_doctor.dart';
 
 class hart extends StatelessWidget {
@@ -61,7 +61,7 @@ class hart extends StatelessWidget {
                 for (int i = 0; i < Cardiologistlist!.length; i++)
                   Dismissible(
                     key: Key(
-                      "${Cardiologistlist![i].firstName}",
+                      "${Cardiologistlist![i]}",
                     ),
                     onDismissed: (direction) {
                       showDialog(
@@ -70,7 +70,11 @@ class hart extends StatelessWidget {
                                 actions: [
                                   TextButton(
                                       onPressed: () {
-                                        Navigator.of(context).pop();
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomeManager()));
                                       },
                                       child: Text(
                                         'OK',
@@ -81,8 +85,8 @@ class hart extends StatelessWidget {
                                 contentPadding: EdgeInsets.all(20),
                                 content: Text('This doctor has been removed'),
                               ));
-                      AppCubit.get(context)
-                          .deleteData_doctor(id: doctorlist_Cardiolo[i]["id"]);
+                      AppCubit.get(context).Delete_Doctor(
+                          id: Cardiologistlist![i].id.toString());
                     },
                     child: Card(
                       color: HexColor('8a86e2'),
@@ -110,12 +114,11 @@ class hart extends StatelessWidget {
                         //الصورة في الاول
                         leading: CircleAvatar(
                           backgroundColor: Colors.grey[400],
-                          backgroundImage: Cardiologistlist![i].image !=
-                              null
+                          backgroundImage: Cardiologistlist![i].image != null
                               ? NetworkImage(
-                              "${imagebase}${Cardiologistlist![i].image!.path}")
+                                  "${imagebase}${Cardiologistlist![i].image!.path}")
                               : NetworkImage(
-                              "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
+                                  "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
                           radius: 25.0,
                         ),
                         //ايقونة في الاخر

@@ -7,6 +7,7 @@ import 'package:hospital/DATABASE/states.dart';
 import 'package:hospital/MANAGER/profile_doctor.dart';
 
 import '../../constant.dart';
+import '../Home-M.dart';
 
 class teeth extends StatelessWidget {
   @override
@@ -59,7 +60,7 @@ class teeth extends StatelessWidget {
               for (int i = 0; i < Dentistlist!.length; i++)
                 Dismissible(
                   key: Key(
-                    "${Dentistlist![i].id}",
+                    "${Dentistlist![i]}",
                   ),
                   onDismissed: (direction) {
                     showDialog(
@@ -68,7 +69,11 @@ class teeth extends StatelessWidget {
                               actions: [
                                 TextButton(
                                     onPressed: () {
-                                      Navigator.of(context).pop();
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomeManager()));
                                     },
                                     child: Text(
                                       'OK',
@@ -80,7 +85,7 @@ class teeth extends StatelessWidget {
                               content: Text('This doctor has been removed'),
                             ));
                     AppCubit.get(context)
-                        .deleteData_doctor(id: Dentistlist![i].id!);
+                        .Delete_Doctor(id: Dentistlist![i].id.toString());
                   },
                   child: Card(
                     color: HexColor('8a86e2'),
@@ -110,12 +115,11 @@ class teeth extends StatelessWidget {
                         tag: 'name',
                         child: CircleAvatar(
                           backgroundColor: Colors.grey[400],
-                          backgroundImage: Dentistlist![i].image !=
-                              null
+                          backgroundImage: Dentistlist![i].image != null
                               ? NetworkImage(
-                              "${imagebase}${Dentistlist![i].image!.path}")
+                                  "${imagebase}${Dentistlist![i].image!.path}")
                               : NetworkImage(
-                              "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
+                                  "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
                           radius: 25.0,
                         ),
                       ),

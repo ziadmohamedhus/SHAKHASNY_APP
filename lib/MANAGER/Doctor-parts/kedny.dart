@@ -6,8 +6,8 @@ import 'package:hospital/MANAGER/profile_doctor.dart';
 
 import '../../DATABASE/cubit.dart';
 import '../../DATABASE/states.dart';
-import '../../components.dart';
 import '../../constant.dart';
+import '../Home-M.dart';
 
 class kedny extends StatelessWidget {
   @override
@@ -60,7 +60,7 @@ class kedny extends StatelessWidget {
               for (int i = 0; i < Neproistlist!.length; i++)
                 Dismissible(
                   key: Key(
-                    Neproistlist![i].firstName!,
+                    "${Neproistlist![i]}",
                   ),
                   onDismissed: (direction) {
                     showDialog(
@@ -69,7 +69,11 @@ class kedny extends StatelessWidget {
                               actions: [
                                 TextButton(
                                     onPressed: () {
-                                      Navigator.of(context).pop();
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomeManager()));
                                     },
                                     child: Text(
                                       'OK',
@@ -80,8 +84,8 @@ class kedny extends StatelessWidget {
                               contentPadding: EdgeInsets.all(20),
                               content: Text('This doctor has been removed'),
                             ));
-                    AppCubit.get(context).deleteData_doctor(
-                        id: doctorlist_Nephrologist[i]["id"]);
+                    AppCubit.get(context)
+                        .Delete_Doctor(id: Neproistlist![i].id.toString());
                   },
                   child: Card(
                     color: HexColor('8a86e2'),
@@ -109,12 +113,11 @@ class kedny extends StatelessWidget {
                       //الصورة في الاول
                       leading: CircleAvatar(
                         backgroundColor: Colors.grey[400],
-                        backgroundImage: Neproistlist![i].image !=
-                            null
+                        backgroundImage: Neproistlist![i].image != null
                             ? NetworkImage(
-                            "${imagebase}${Neproistlist![i].image!.path}")
+                                "${imagebase}${Neproistlist![i].image!.path}")
                             : NetworkImage(
-                            "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
+                                "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
                         radius: 25.0,
                       ),
                       //ايقونة في الاخر

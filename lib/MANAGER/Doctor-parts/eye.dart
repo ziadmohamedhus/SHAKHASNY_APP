@@ -6,8 +6,8 @@ import 'package:hospital/MANAGER/profile_doctor.dart';
 
 import '../../DATABASE/cubit.dart';
 import '../../DATABASE/states.dart';
-import '../../components.dart';
 import '../../constant.dart';
+import '../Home-M.dart';
 
 class eye extends StatelessWidget {
   @override
@@ -58,7 +58,7 @@ class eye extends StatelessWidget {
                 ),
                 for (int i = 0; i < eyeslist!.length; i++)
                   Dismissible(
-                    key: Key("${eyeslist![i].firstName!}"),
+                    key: Key("${eyeslist![i]!}"),
                     onDismissed: (direction) {
                       showDialog(
                           context: context,
@@ -66,9 +66,11 @@ class eye extends StatelessWidget {
                                 actions: [
                                   TextButton(
                                       onPressed: () {
-                                        AppCubit.get(context).deleteData_doctor(
-                                            id: eyeslist![i].id!);
-                                        Navigator.of(context).pop();
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomeManager()));
                                       },
                                       child: Text(
                                         'OK',
@@ -79,8 +81,8 @@ class eye extends StatelessWidget {
                                 contentPadding: EdgeInsets.all(20),
                                 content: Text('This doctor has been removed'),
                               ));
-                      AppCubit.get(context).deleteData_doctor(
-                          id: doctorlist_Ophthalmologist[i]["id"]);
+                      AppCubit.get(context)
+                          .Delete_Doctor(id: eyeslist![i].id.toString());
                     },
                     child: Card(
                       color: HexColor('8a86e2'),
@@ -108,12 +110,11 @@ class eye extends StatelessWidget {
                         //الصورة في الاول
                         leading: CircleAvatar(
                           backgroundColor: Colors.grey[400],
-                          backgroundImage: eyeslist![i].image !=
-                              null
+                          backgroundImage: eyeslist![i].image != null
                               ? NetworkImage(
-                              "${imagebase}${eyeslist![i].image!.path}")
+                                  "${imagebase}${eyeslist![i].image!.path}")
                               : NetworkImage(
-                              "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
+                                  "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
                           radius: 25.0,
                         ),
                         //ايقونة في الاخر

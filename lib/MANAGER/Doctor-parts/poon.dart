@@ -2,11 +2,11 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hospital/MANAGER/Home-M.dart';
 import 'package:hospital/MANAGER/profile_doctor.dart';
 
 import '../../DATABASE/cubit.dart';
 import '../../DATABASE/states.dart';
-import '../../components.dart';
 import '../../constant.dart';
 
 class poon extends StatelessWidget {
@@ -60,7 +60,7 @@ class poon extends StatelessWidget {
               for (int i = 0; i < Ortholist!.length; i++)
                 Dismissible(
                   key: Key(
-                    "${Ortholist![i].firstName}",
+                    "${Ortholist![i]}",
                   ),
                   onDismissed: (direction) {
                     showDialog(
@@ -69,7 +69,11 @@ class poon extends StatelessWidget {
                               actions: [
                                 TextButton(
                                     onPressed: () {
-                                      Navigator.of(context).pop();
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomeManager()));
                                     },
                                     child: Text(
                                       'OK',
@@ -81,7 +85,7 @@ class poon extends StatelessWidget {
                               content: Text('This doctor has been removed'),
                             ));
                     AppCubit.get(context)
-                        .deleteData_doctor(id: doctorlist_Orthopedi[i]["id"]);
+                        .Delete_Doctor(id: Ortholist![i].id.toString());
                   },
                   child: Card(
                     color: HexColor('8a86e2'),
@@ -109,12 +113,11 @@ class poon extends StatelessWidget {
                       //الصورة في الاول
                       leading: CircleAvatar(
                         backgroundColor: Colors.grey[400],
-                        backgroundImage: Ortholist![i].image !=
-                            null
+                        backgroundImage: Ortholist![i].image != null
                             ? NetworkImage(
-                            "${imagebase}${Ortholist![i].image!.path}")
+                                "${imagebase}${Ortholist![i].image!.path}")
                             : NetworkImage(
-                            "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
+                                "https://cdn-icons-png.freepik.com/512/8459/8459373.png"),
                         radius: 25.0,
                       ),
                       //ايقونة في الاخر

@@ -528,7 +528,8 @@ class Home extends StatelessWidget {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => custom_google_map()));
+                                                builder: (context) =>
+                                                    custom_google_map()));
                                       },
                                       color: HexColor('8a86e2'),
                                       child: Text(
@@ -558,7 +559,10 @@ class Home extends StatelessWidget {
                           padding: const EdgeInsets.all(10.0),
                           child: InkWell(
                             onTap: () {
-                              print(all_doctor_model!.data![0].firstName);
+                              print(AppCubit.get(context)
+                                  .all_doctor_model!
+                                  .data![0]
+                                  .firstName);
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (BuildContext context) =>
                                       Dentist()));
@@ -601,7 +605,7 @@ class Home extends StatelessWidget {
                           padding: const EdgeInsets.all(10.0),
                           child: InkWell(
                             onTap: () {
-                              print(all_doctor_model);
+                              print(AppCubit.get(context).all_doctor_model!);
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (BuildContext context) =>
                                       Cardiologist()));
@@ -791,11 +795,12 @@ class Home extends StatelessWidget {
                           children: [
                             InkWell(
                                 onTap: () {
-                                  AppCubit.get(context).getalldoctor();
+                                  var model =
+                                      AppCubit.get(context).all_doctor_model!;
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                           All_doctor(
-                                            model: all_doctor_model!,
+                                            model: model,
                                           )));
                                 },
                                 child: Text(
@@ -813,7 +818,7 @@ class Home extends StatelessWidget {
 
                   // الدكاترة
                   ConditionalBuilder(
-                    condition: all_doctor_model != null,
+                    condition: AppCubit.get(context).all_doctor_model != null,
                     builder: (context) => Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Row(
@@ -839,14 +844,14 @@ class Home extends StatelessWidget {
                                     ],
                                   ),
                                   Text(
-                                    'DR.${all_doctor_model!.data![0].firstName} ${all_doctor_model!.data![0].lastName}',
+                                    'DR.${AppCubit.get(context).all_doctor_model!.data![0].firstName} ${AppCubit.get(context).all_doctor_model!.data![0].lastName}',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 15.0,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    '${all_doctor_model!.data![0].doctor!.specialization}',
+                                    '${AppCubit.get(context).all_doctor_model!.data![0].doctor!.specialization}',
                                     style: TextStyle(
                                         color: Colors.grey[800],
                                         fontSize: 10.0,
@@ -876,14 +881,14 @@ class Home extends StatelessWidget {
                                     ],
                                   ),
                                   Text(
-                                    'DR.${all_doctor_model!.data![1].firstName} ${all_doctor_model!.data![1].lastName}',
+                                    'DR.${AppCubit.get(context).all_doctor_model!.data![1].firstName} ${AppCubit.get(context).all_doctor_model!.data![1].lastName}',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 15.0,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    '${all_doctor_model!.data![1].doctor!.specialization}',
+                                    '${AppCubit.get(context).all_doctor_model!.data![1].doctor!.specialization}',
                                     style: TextStyle(
                                         color: Colors.grey[800],
                                         fontSize: 10.0,

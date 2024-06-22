@@ -380,7 +380,7 @@ class AppCubit extends Cubit<AppStates> {
   //     emit(AddDoctorFauilreState(error: error));
   //   });
   // }
-
+  All_Doctor_Model? all_doctor_model;
   void getalldoctor() async {
     emit(GetAllDoctorLoadingState());
     await DioHelper.getData(
@@ -974,6 +974,57 @@ class AppCubit extends Cubit<AppStates> {
 
       Uri uri = Uri.parse("https://abdelrahman.in/api/medicines/${id}");
       var request = http.MultipartRequest('DELETE', uri);
+      request.headers.addAll(headers);
+      request.fields.addAll(map);
+
+      if (image != null && image!.isNotEmpty) {
+        request.files.add(await http.MultipartFile.fromPath('image', image!));
+      }
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+      print('Response body: ${response.body}'); // Print the raw response body
+      print('Response status: ${response.statusCode}'); // Print the status code
+
+      var result;
+      try {
+        result = jsonDecode(response.body);
+      } catch (e) {
+        throw FormatException('Failed to decode JSON response');
+      }
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        print(result["message"]);
+        getalldoctor();
+        emit(AddDoctorSuccessState(message: result["message"]));
+      } else {
+        emit(AddDoctorFauilreState(error: result["message"]));
+        print(result["message"]);
+        print(result);
+      }
+    } catch (e) {
+      print('Error: ${e.toString()}');
+      emit(AddDoctorFauilreState(error: e.toString()));
+    }
+  }
+
+  void Delete_Doctor({
+    required String id,
+  }) async {
+    emit(AddDoctorLoadingState());
+    print(image);
+    try {
+      Map<String, String> headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'lang': "en",
+        'Authorization': token ?? '',
+      };
+
+      Map<String, String> map = {};
+
+      Uri uri = Uri.parse("https://abdelrahman.in/api/doctor/destroy/${id}");
+      var request = http.MultipartRequest('POST', uri);
       request.headers.addAll(headers);
       request.fields.addAll(map);
 
