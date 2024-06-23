@@ -14,31 +14,36 @@ class ChatBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
-      child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          padding:
-              const EdgeInsets.only(top: 32, bottom: 32, right: 32, left: 16),
-          decoration: BoxDecoration(
-            color: HexColor('ffe0f4').withOpacity(.9,),
-            borderRadius: BorderRadiusDirectional.only(
-              bottomStart: Radius.circular(
-                20.0,
-              ),
-              topStart: Radius.circular(
-                20.0,
-              ),
-              topEnd: Radius.circular(
-                20.0,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+            //margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: EdgeInsets.symmetric(
+              vertical: 15.0,
+              horizontal: 20.0,
+            ),
+            decoration: BoxDecoration(
+              color: HexColor('ffe0f4').withOpacity(.9,),
+              borderRadius: BorderRadiusDirectional.only(
+                bottomStart: Radius.circular(
+                  20.0,
+                ),
+                topStart: Radius.circular(
+                  20.0,
+                ),
+                topEnd: Radius.circular(
+                  20.0,
+                ),
               ),
             ),
-          ),
-          child: Text(
-            message,
-            textDirection:
-                isRTL(message) ? TextDirection.rtl : TextDirection.ltr,
-            style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w500),
-          )),
+            child: Text(
+              message,
+              textDirection:
+                  isRTL(message) ? TextDirection.rtl : TextDirection.ltr,
+              style: const TextStyle(
+                  color: Colors.black, fontWeight: FontWeight.w500),
+            )),
+      ),
     );
   }
 }
@@ -95,30 +100,36 @@ class ChatBubbleForBot extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerLeft,
-      child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          padding:
-              const EdgeInsets.only(top: 32, bottom: 32, right: 32, left: 16),
-          decoration: BoxDecoration(
-            color: HexColor('8a86e2').withOpacity(0.5),
-            borderRadius: BorderRadiusDirectional.only(
-              bottomEnd: Radius.circular(
-                20.0,
-              ),
-              topStart: Radius.circular(
-                20.0,
-              ),
-              topEnd: Radius.circular(
-                20.0,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+
+            //margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: EdgeInsets.symmetric(
+              vertical: 15.0,
+              horizontal: 20.0,
+            ),
+            decoration: BoxDecoration(
+              color: HexColor('8a86e2').withOpacity(0.5),
+              borderRadius: BorderRadiusDirectional.only(
+                bottomEnd: Radius.circular(
+                  20.0,
+                ),
+                topStart: Radius.circular(
+                  20.0,
+                ),
+                topEnd: Radius.circular(
+                  20.0,
+                ),
               ),
             ),
-          ),
-          child: Text(
-            message,
-            textDirection:
-                isRTL(message) ? TextDirection.rtl : TextDirection.ltr,
-            style: const TextStyle(color: Colors.black),
-          )),
+            child: Text(
+              message,
+              textDirection:
+                  isRTL(message) ? TextDirection.rtl : TextDirection.ltr,
+              style: const TextStyle(color: Colors.black),
+            )),
+      ),
     );
   }
 }
